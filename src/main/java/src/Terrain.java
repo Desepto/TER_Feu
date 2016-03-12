@@ -9,6 +9,11 @@ package src;
 
 public abstract class Terrain {
 
-	String nom;
+	protected String nom; // Complètement inutile. Permet de faire marcher mes
+							// tests. Vous
+	// pouvez vous en servir si besoin.
 
+	public String getNom() {
+		return nom;
+	}
 }

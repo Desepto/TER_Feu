@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Carte {
 
 	private Terrain[][] tabHexagones;
-	private int tailleCarte;
+	private final int tailleCarte; // Taille carrée, comme on l'a dit.
 
 	public Carte(int tailleCarte) {
 		this.tailleCarte = tailleCarte;
@@ -33,10 +33,6 @@ public class Carte {
 
 	public int getTailleCarte() {
 		return tailleCarte;
-	}
-
-	public void setTailleCarte(int tailleCarte) {
-		this.tailleCarte = tailleCarte;
 	}
 
 	/**
@@ -203,7 +199,7 @@ public class Carte {
 	/**
 	 * La VRAIE fonction pour avoir un voisin à partir de coordonnées et d'une
 	 * direction. Travaille avec des coordonnées réelles.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @param maDirection

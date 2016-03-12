@@ -57,17 +57,17 @@ public class CarteTest {
 										// afficher le tableau.
 		for (int Y = 0; Y < 30; Y++) {
 			for (int X = 0; X < 31; X++) {
-				test += maCarte.getTabHexagones()[X][Y].nom;
+				test += maCarte.getTabHexagones()[X][Y].getNom();
 				if (X == 30 && Y % 2 == 0) {
-					if (maCarte.getTabHexagones()[X][Y].nom != "Kloulita")
+					if (maCarte.getTabHexagones()[X][Y].getNom() != "Kloulita")
 						fail("Pas de kloulita là où il en faut ! AU BUCHER !");
 				}
 
 				else if (X == 0 && Y % 2 != 0) {
-					if (maCarte.getTabHexagones()[X][Y].nom != "Kloulita")
+					if (maCarte.getTabHexagones()[X][Y].getNom() != "Kloulita")
 						fail("Pas de kloulita là où il en faut ! AU BUCHER !");
 				} else {
-					if (maCarte.getTabHexagones()[X][Y].nom == "Kloulita")
+					if (maCarte.getTabHexagones()[X][Y].getNom() == "Kloulita")
 						fail("Un kloulita là où il en faut pas ! AU BUCHER !");
 				}
 				if (maCarte.getTabHexagones()[X][Y] == null)
@@ -181,7 +181,7 @@ public class CarteTest {
 
 		theorie = maCarte.voisin(0, 0, Direction.G);
 		assertTrue(theorie instanceof TerrainVide);
-		System.out.println("C'est normal, bug volontaire pour les tests.");
+		System.out.println("C'est normal, 3 syso de bugs volontaires pour les tests.");
 
 		theorie = maCarte.voisin(29, 2, Direction.BG);
 		assertTrue(theorie instanceof Rocher);
@@ -222,6 +222,11 @@ public class CarteTest {
 		assertTrue(theorie.get(5) instanceof Rocher);
 	}
 
+	/**
+	 * On teste superVoisin. Rien de bien spécial à raconter. Du coup j'aurais
+	 * dû me taire et ne pas taper cette phrase de merde, mais de loin ça fait
+	 * tellement pro que j'ai pas résisté.
+	 */
 	@Test
 	public void superVoisin() {
 		Terrain theorie = new TerrainVide();
