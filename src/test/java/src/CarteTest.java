@@ -57,17 +57,17 @@ public class CarteTest {
 										// afficher le tableau.
 		for (int Y = 0; Y < 30; Y++) {
 			for (int X = 0; X < 31; X++) {
-				test += maCarte.getTabHexagones()[X][Y].nature;
+				test += maCarte.getTabHexagones()[X][Y].nom;
 				if (X == 30 && Y % 2 == 0) {
-					if (maCarte.getTabHexagones()[X][Y].nature != "Kloulita")
+					if (maCarte.getTabHexagones()[X][Y].nom != "Kloulita")
 						fail("Pas de kloulita là où il en faut ! AU BUCHER !");
 				}
 
 				else if (X == 0 && Y % 2 != 0) {
-					if (maCarte.getTabHexagones()[X][Y].nature != "Kloulita")
+					if (maCarte.getTabHexagones()[X][Y].nom != "Kloulita")
 						fail("Pas de kloulita là où il en faut ! AU BUCHER !");
 				} else {
-					if (maCarte.getTabHexagones()[X][Y].nature == "Kloulita")
+					if (maCarte.getTabHexagones()[X][Y].nom == "Kloulita")
 						fail("Un kloulita là où il en faut pas ! AU BUCHER !");
 				}
 				if (maCarte.getTabHexagones()[X][Y] == null)
@@ -80,12 +80,19 @@ public class CarteTest {
 	}
 
 	/**
+	 * On se contente de modifier un Terrain de la carte, et de vérifier que la
+	 * modif a bien été prise en compte.
+	 *
 	 * Test method for
 	 * {@link src.Carte#transformeTerrain(src.Terrain, int, int)}.
 	 */
 	@Test
 	public void testTransformeTerrain() {
 
+		assertTrue(maCarte.getTerrain(12, 12) instanceof Rocher);
+		Lac flaqueDeau = new Lac();
+		maCarte.transformeTerrain(flaqueDeau, 12, 12);
+		assertTrue(maCarte.getTerrain(12, 12) instanceof Lac);
 	}
 
 	/**

@@ -9,6 +9,6 @@ package src;
 
 public abstract class Terrain {
 
-	String nature;
+	String nom;
 
 }

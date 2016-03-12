@@ -9,7 +9,7 @@ package src;
 public class TerrainVide extends Terrain {
 
 	public TerrainVide(String nature) {
-		this.nature = nature;
+		this.nom = nature;
 	}
 
 	public TerrainVide() {
