@@ -6,4 +6,8 @@ public class Rocher extends Terrain {
 		this.nature = nature;
 	}
 
+	public Rocher() {
+
+	}
+
 }

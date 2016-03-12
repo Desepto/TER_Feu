@@ -1,5 +1,6 @@
 package src;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 /**
@@ -78,7 +79,9 @@ public class Carte {
 	}
 
 	/**
-	 * Renvoie une liste chaînée contenant les 6 voisins d'une case donnée.
+	 * Renvoie une liste chaînée contenant les 6 voisins d'une case donnée. On
+	 * fait appel à convertador pour convertir les coordonnées en réelles pour
+	 * qu'elles soient exploitables dans le tableau.
 	 *
 	 * @param X
 	 * @param Y
@@ -140,22 +143,76 @@ public class Carte {
 		switch (maDirection) {
 		case HG:
 			monTerrain = voisinage(X, Y).get(0);
+			break;
 		case HD:
 			monTerrain = voisinage(X, Y).get(1);
+			break;
 		case D:
 			monTerrain = voisinage(X, Y).get(2);
+			break;
 		case BD:
 			monTerrain = voisinage(X, Y).get(3);
+			break;
 		case BG:
 			monTerrain = voisinage(X, Y).get(4);
+			break;
 		case G:
 			monTerrain = voisinage(X, Y).get(5);
+			break;
 		}
 
 		if (monTerrain instanceof TerrainVide) {
 			System.out.println("Ce Terrain ne figure pas dans la carte. Au Bucheeeeer !!!");
-			return new TerrainVide();
 		}
 		return monTerrain;
+	}
+
+	/**
+	 * Convertit des coordonnées abstraites en coordonnées réelles. Cf google
+	 * Doc.
+	 *
+	 * @param X
+	 * @param Y
+	 * @return
+	 */
+	public Point ElConvertador(int X, int Y) {
+
+		if (Y % 2 != 0) {
+			X++;
+		}
+		return new Point(X, Y);
+	}
+
+	/**
+	 * La VRAIE fonction de voisinage. Qui travaille avec des coordonnées
+	 * abstraites, celle avec laquelle on travaillera pour le reste du
+	 * programme.
+	 *
+	 * @param X
+	 * @param Y
+	 * @return
+	 */
+	public ArrayList<Terrain> superVoisinage(int X, int Y) {
+
+		X = ElConvertador(X, Y).x;
+		Y = ElConvertador(X, Y).y;
+
+		return voisinage(X, Y);
+	}
+
+	/**
+	 * La VRAIE fonction pour avoir un voisin à partir de coordonnées et d'une
+	 * direction. Travaille avec des coordonnées réelles.
+	 * 
+	 * @param X
+	 * @param Y
+	 * @param maDirection
+	 * @return
+	 */
+	public Terrain superVoisin(int X, int Y, Direction maDirection) {
+		X = ElConvertador(X, Y).x;
+		Y = ElConvertador(X, Y).y;
+
+		return voisin(X, Y, maDirection);
 	}
 }
