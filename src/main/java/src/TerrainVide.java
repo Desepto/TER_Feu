@@ -8,8 +8,7 @@ package src;
  */
 public class TerrainVide extends Terrain {
 
-	public TerrainVide(int monId, String nature) {
-		this.identifiant = monId;
+	public TerrainVide(String nature) {
 		this.nature = nature;
 	}
 

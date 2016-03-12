@@ -33,14 +33,14 @@ public class CarteTest {
 
 				if (Y % 2 == 0) {
 					if (X == 30) {
-						maCarte.getTabHexagones()[X][Y] = new TerrainVide(2, "Kloulita");
+						maCarte.getTabHexagones()[X][Y] = new TerrainVide("Kloulita");
 						continue;
 					}
 				}
 
 				if (Y % 2 != 0) {
 					if (X == 0) {
-						maCarte.getTabHexagones()[X][Y] = new TerrainVide(1, "Kloulita");
+						maCarte.getTabHexagones()[X][Y] = new TerrainVide("Kloulita");
 						continue;
 					}
 				}
