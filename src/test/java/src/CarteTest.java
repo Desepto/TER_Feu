@@ -91,8 +91,14 @@ public class CarteTest {
 
 		assertTrue(maCarte.getTerrain(12, 12) instanceof Rocher);
 		Lac flaqueDeau = new Lac();
-		maCarte.transformeTerrain(flaqueDeau, 12, 12);
+		maCarte.transformeTerrain(12, 12, flaqueDeau);
 		assertTrue(maCarte.getTerrain(12, 12) instanceof Lac);
+
+		maCarte.transformeTerrain(0, 1, flaqueDeau);
+		assertTrue(maCarte.getTerrain(0, 1) instanceof Lac);
+
+		// maCarte.transformeTerrain(666, 2, flaqueDeau); Génère un syso de bug
+		// normal.
 	}
 
 	/**

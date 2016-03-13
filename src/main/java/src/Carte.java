@@ -44,8 +44,19 @@ public class Carte {
 	 *            Les coordonnées du terrain à modifer.
 	 * @param Y
 	 */
-	public void transformeTerrain(Terrain monTerrain, int X, int Y) {
-		this.tabHexagones[X][Y] = monTerrain;
+	public void transformeTerrain(int X, int Y, Terrain nouveau) {
+		if (X > 29 || Y > 29 || X < 0 || Y < 0) {
+			System.out.println("Ce Terrain n'est même pas sur la carte, pff, tu veux transformer quoi ? Anouar ?");
+			return;
+		}
+		X = ElConvertador(X, Y).x;
+		Y = ElConvertador(X, Y).y;
+
+		if (getTerrain(X, Y) instanceof TerrainVide) {
+			System.out.println("Ce Terrain n'est même pas sur la carte, pff, tu veux transformer quoi ? Anouar ?");
+			return;
+		}
+		this.tabHexagones[X][Y] = nouveau;
 	}
 
 	/**
@@ -56,6 +67,10 @@ public class Carte {
 	 * @return Le terrain associé à la position X,Y
 	 */
 	public Terrain getTerrain(int X, int Y) {
+
+		X = ElConvertador(X, Y).x;
+		Y = ElConvertador(X, Y).y;
+
 		return this.tabHexagones[X][Y];
 	}
 
@@ -82,8 +97,6 @@ public class Carte {
 	 * @param X
 	 * @param Y
 	 * @return
-	 * @throws TerrainKloulitaException
-	 *             si la case passée en paramètre n'existe pas.
 	 */
 	public ArrayList<Terrain> voisinage(int X, int Y) {
 
