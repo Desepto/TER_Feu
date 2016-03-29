@@ -33,19 +33,19 @@ public class CarteTest {
 
 				if (Y % 2 == 0) {
 					if (X == 30) {
-						maCarte.getTabHexagones()[X][Y] = new TerrainVide("Kloulita");
+						maCarte.getTabHexagones()[X][Y] = new TerrainVide();
 						continue;
 					}
 				}
 
 				if (Y % 2 != 0) {
 					if (X == 0) {
-						maCarte.getTabHexagones()[X][Y] = new TerrainVide("Kloulita");
+						maCarte.getTabHexagones()[X][Y] = new TerrainVide();
 						continue;
 					}
 				}
 
-				maCarte.getTabHexagones()[X][Y] = new Rocher("Cailloux!");
+				maCarte.getTabHexagones()[X][Y] = new Rocher();
 			}
 		}
 		// Et maintenant on checke que tout est à la bonne place :
@@ -57,17 +57,21 @@ public class CarteTest {
 										// afficher le tableau.
 		for (int Y = 0; Y < 30; Y++) {
 			for (int X = 0; X < 31; X++) {
-				test += maCarte.getTabHexagones()[X][Y].getNom();
+				if (maCarte.getTabHexagones()[X][Y] instanceof Rocher)
+					test += "Cailloux !";
+				else {
+					test += "Vide";
+				}
 				if (X == 30 && Y % 2 == 0) {
-					if (maCarte.getTabHexagones()[X][Y].getNom() != "Kloulita")
+					if (!(maCarte.getTabHexagones()[X][Y] instanceof TerrainVide))
 						fail("Pas de kloulita là où il en faut ! AU BUCHER !");
 				}
 
 				else if (X == 0 && Y % 2 != 0) {
-					if (maCarte.getTabHexagones()[X][Y].getNom() != "Kloulita")
+					if (!(maCarte.getTabHexagones()[X][Y] instanceof TerrainVide))
 						fail("Pas de kloulita là où il en faut ! AU BUCHER !");
 				} else {
-					if (maCarte.getTabHexagones()[X][Y].getNom() == "Kloulita")
+					if (maCarte.getTabHexagones()[X][Y] instanceof TerrainVide)
 						fail("Un kloulita là où il en faut pas ! AU BUCHER !");
 				}
 				if (maCarte.getTabHexagones()[X][Y] == null)

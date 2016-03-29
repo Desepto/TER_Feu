@@ -1,13 +1,19 @@
 package src;
 
+/**
+ * Un caillou !
+ *
+ * @author Nicolas
+ *
+ */
 public class Rocher extends Terrain {
 
-	public Rocher(String nature) {
-		this.nom = nature;
-	}
-
+	/**
+	 * Constructeur par défaut à modifier.
+	 */
 	public Rocher() {
-
+		super(false); // On rend le rocher non inflammable.
+		this.densite = NiveauDensite.un;
 	}
 
 }

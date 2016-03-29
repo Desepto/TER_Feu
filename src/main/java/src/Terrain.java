@@ -5,24 +5,36 @@ import java.util.ArrayList;
 /**
  * Classe mère de tous les types de terrains
  *
- * @author Thomas
+ * @author Nicolas
  *
  */
 
 public abstract class Terrain {
 
-	protected String nom; // Complètement inutile. Permet de faire marcher mes
-							// tests. Vous
-	// pouvez vous en servir si besoin.
-
+	protected final boolean inflammable;
+	protected NiveauDensite densite;
 	protected ArrayList<Acteur> sesActeurs;
+
+	// El Constrouctor
+	public Terrain(boolean inflammable) {
+		this.inflammable = inflammable;
+		sesActeurs = new ArrayList<Acteur>();
+	}
+
+	public NiveauDensite getDensite() {
+		return densite;
+	}
+
+	public final boolean isInflammable() {
+		return inflammable;
+	}
+
+	public void setDensite(NiveauDensite densite) {
+		this.densite = densite;
+	}
 
 	public ArrayList<Acteur> getSesActeurs() {
 		return sesActeurs;
-	}
-
-	public Terrain() {
-		sesActeurs = new ArrayList<Acteur>();
 	}
 
 	public void ajoutActeur(Acteur nouveau) {
@@ -34,7 +46,4 @@ public abstract class Terrain {
 		sesActeurs.remove(ancien);
 	}
 
-	public String getNom() {
-		return nom;
-	}
 }

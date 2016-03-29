@@ -14,15 +14,44 @@ public class Carte {
 	private Terrain[][] tabHexagones;
 	private final int tailleCarte; // Taille carrée, comme on l'a dit.
 
+	// El Constrouctador !
 	public Carte(int tailleCarte) {
 		this.tailleCarte = tailleCarte;
 		this.tabHexagones = new Terrain[tailleCarte + 1][tailleCarte];
 	}
 
+	/**
+	 * NE PAS UTILISER, utiliser getTerrain() à la place. Ne travaille pas avec
+	 * les coordonnées abstraites. ACHTUNG Seul HER GENERAL peut utiliser ceci.
+	 *
+	 * @param x
+	 * @param y
+	 * @return Terrain
+	 */
 	public Terrain getTabHexagones(int x, int y) {
 		return tabHexagones[x][y];
 	}
 
+	/**
+	 * Retourne le terrain figurant aux coordonnées passées en paramètre.
+	 *
+	 * @param X
+	 * @param Y
+	 * @return Le terrain associé à la position X,Y
+	 */
+	public Terrain getTerrain(int X, int Y) {
+
+		X = ElConvertador(X, Y).x;
+		Y = ElConvertador(X, Y).y;
+
+		return this.tabHexagones[X][Y];
+	}
+
+	/**
+	 * Accesseur peu utile.
+	 *
+	 * @return Terrain[][]
+	 */
 	public Terrain[][] getTabHexagones() {
 		return tabHexagones;
 	}
@@ -38,7 +67,7 @@ public class Carte {
 	/**
 	 * Transforme un terrain de la carte en un autre, passé en paramètre.
 	 *
-	 * @param monTerrain
+	 * @param nouveau
 	 *            Le nouveau terrain
 	 * @param X
 	 *            Les coordonnées du terrain à modifer.
@@ -57,21 +86,6 @@ public class Carte {
 			return;
 		}
 		this.tabHexagones[X][Y] = nouveau;
-	}
-
-	/**
-	 * Retourne le terrain figurant aux coordonnées passées en paramètre.
-	 *
-	 * @param X
-	 * @param Y
-	 * @return Le terrain associé à la position X,Y
-	 */
-	public Terrain getTerrain(int X, int Y) {
-
-		X = ElConvertador(X, Y).x;
-		Y = ElConvertador(X, Y).y;
-
-		return this.tabHexagones[X][Y];
 	}
 
 	/**
@@ -96,7 +110,7 @@ public class Carte {
 	 *
 	 * @param X
 	 * @param Y
-	 * @return
+	 * @return la liste de voisins
 	 */
 	public ArrayList<Terrain> voisinage(int X, int Y) {
 
@@ -145,7 +159,6 @@ public class Carte {
 	 * @param Y
 	 * @param maDirection
 	 * @return
-	 * @throws TerrainKloulitaException
 	 */
 	public Terrain voisin(int X, int Y, Direction maDirection) {
 		Terrain monTerrain = new TerrainVide();
@@ -182,7 +195,7 @@ public class Carte {
 	 *
 	 * @param X
 	 * @param Y
-	 * @return
+	 * @return Un point contenant les nouvelles coordonnées.
 	 */
 	public Point ElConvertador(int X, int Y) {
 
@@ -199,7 +212,7 @@ public class Carte {
 	 *
 	 * @param X
 	 * @param Y
-	 * @return
+	 * @return la liste de voisins.
 	 */
 	public ArrayList<Terrain> superVoisinage(int X, int Y) {
 
@@ -216,7 +229,7 @@ public class Carte {
 	 * @param X
 	 * @param Y
 	 * @param maDirection
-	 * @return
+	 * @return Un terrain qui est le voisin recherché.
 	 */
 	public Terrain superVoisin(int X, int Y, Direction maDirection) {
 		X = ElConvertador(X, Y).x;

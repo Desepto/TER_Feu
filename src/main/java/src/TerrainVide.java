@@ -1,19 +1,18 @@
 package src;
 
 /**
- * Terrain Kloulita ne figurant pas sur la carte.
+ * Terrain inexistant ne figurant pas sur la carte.
  *
  * @author Nicolas
  *
  */
 public class TerrainVide extends Terrain {
 
-	public TerrainVide(String nature) {
-		this.nom = nature;
-	}
-
+	/**
+	 * Constructeur par défaut.
+	 */
 	public TerrainVide() {
-
+		super(false);
 	}
 
 }
