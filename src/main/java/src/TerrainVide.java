@@ -12,7 +12,8 @@ public class TerrainVide extends Terrain {
 	 * Constructeur par défaut.
 	 */
 	public TerrainVide() {
-		super(false);
+		super(false); // Un terrain qui n'existe pas est à priori
+						// ininflammable... Bref.
 	}
 
 }

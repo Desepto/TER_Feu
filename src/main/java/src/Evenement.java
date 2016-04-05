@@ -1,32 +1,44 @@
 package src;
 
+import java.util.ArrayList;
+
 /**
- * Décrit l'apparition d'un acteur sur la carte. A compléter. Un évènement c'est
- * l'apparition d'un Acteur sur une case donnée.
- * 
+ * Un ensemble d'acteurs qui vont apparaitre sur la carte avec leurs coordonnées
+ * respectives.
+ *
  * @author Nicolas
  *
  */
 public class Evenement {
 
-	private int X, Y; // Là où l'acteur va apparaitre sur la map.
-	Acteur sonActeur; // L'acteur en question.
+	private ArrayList<Acteur> acteurs;
 
-	public Evenement(int x, int y) {
-		X = x;
-		Y = y;
+	/**
+	 * Déclencher un évènement, c'est ajouter tous les acteurs de cet évènement
+	 * à ceux de la Carte.
+	 *
+	 * @param maCarte
+	 * @return maCarte
+	 */
+	public Carte declenche(Carte maCarte) {
+
+		for (Acteur acteurCourant : acteurs) {
+			maCarte.ajoutActeur(acteurCourant);
+		}
+		return maCarte;
 	}
 
-	public void declenche(Carte maCarte) {
-		maCarte.getTabHexagones(X, Y).ajoutActeur(sonActeur);
+	/**
+	 * El Constrouctivoush
+	 *
+	 * @param acteurs
+	 */
+	public Evenement(ArrayList<Acteur> acteurs) {
+		this.acteurs = acteurs;
 	}
 
-	public int getX() {
-		return X;
-	}
-
-	public int getY() {
-		return Y;
+	public Acteur getActeurs(int indice) {
+		return acteurs.get(indice);
 	}
 
 }

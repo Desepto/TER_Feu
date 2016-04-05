@@ -13,11 +13,9 @@ import java.util.ArrayList;
 public class Gestionnaire {
 
 	private ArrayList<Evenement> mesEvents;
-	private Carte laCarte;
 
-	public Gestionnaire(Carte maCarte) {
+	public Gestionnaire() {
 		mesEvents = new ArrayList<Evenement>();
-		laCarte = maCarte;
 	}
 
 	public Evenement getUnEvent(int indice) {
@@ -30,16 +28,7 @@ public class Gestionnaire {
 	}
 
 	public void supprUnEvent(int indice) {
-		mesEvents.get(0).declenche(laCarte);
-		mesEvents.remove(indice);
-	}
-
-	/**
-	 * Envoit un top d'horloge. Déclence un évènement (le supprime de la liste).
-	 */
-	public void top() {
-		mesEvents.get(0).declenche(laCarte);
-		supprUnEvent(0);
+		this.mesEvents.remove(indice);
 	}
 
 }

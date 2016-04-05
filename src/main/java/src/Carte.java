@@ -13,11 +13,13 @@ public class Carte {
 
 	private Terrain[][] tabHexagones;
 	private final int tailleCarte; // Taille carrée, comme on l'a dit.
+	private ArrayList<Acteur> sesActeurs; // Fonctions de manip tout en bas.
 
 	// El Constrouctador !
 	public Carte(int tailleCarte) {
 		this.tailleCarte = tailleCarte;
 		this.tabHexagones = new Terrain[tailleCarte + 1][tailleCarte];
+		sesActeurs = new ArrayList<Acteur>();
 	}
 
 	/**
@@ -237,4 +239,17 @@ public class Carte {
 
 		return voisin(X, Y, maDirection);
 	}
+
+	public ArrayList<Acteur> getSesActeurs() {
+		return sesActeurs;
+	}
+
+	public void ajoutActeur(Acteur monActeur) {
+		this.sesActeurs.add(monActeur);
+	}
+
+	public void supprActeur(int indice) {
+		this.sesActeurs.remove(indice);
+	}
+
 }
