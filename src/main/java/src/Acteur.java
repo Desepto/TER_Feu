@@ -10,8 +10,17 @@ package src;
 
 public abstract class Acteur {
 
-	private int X, Y; // Ses coordonnées sur la carte.0
+	protected int X, Y; // Ses coordonnées sur la carte.0
 
+	/**
+	 * Méthode abstraite redéfinie pour tous les acteurs. Pour chaque acteur de
+	 * la carte, l'évolueur devra appeler sa méthode agi Pour un pompier, c'est
+	 * une tentative d'extinction de feu. Pour un canadaire, le largage de son
+	 * réservoir d'eau. Pour de la pluie, l'humidification de la case et ses
+	 * voisins. Pour du feu, la carbonisation totale.
+	 *
+	 * @param maCarte
+	 */
 	public abstract void agi(Carte maCarte);
 
 	/**

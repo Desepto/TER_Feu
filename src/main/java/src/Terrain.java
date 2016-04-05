@@ -11,6 +11,7 @@ public abstract class Terrain {
 
 	protected final boolean inflammable;
 	protected NiveauDensite densite;
+	protected int humidite = 0;
 
 	// El Constrouctor
 	public Terrain(boolean inflammable) {
