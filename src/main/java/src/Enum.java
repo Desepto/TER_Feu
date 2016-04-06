@@ -12,15 +12,11 @@ enum Direction {
 	HG, HD, D, G, BG, BD;
 }
 
-// Ces trois là sont des attributs de Terrain.
-enum Duree {
-	basse, moyenne, haute;
-}
-
-enum Transmission {
-	basse, moyenne, haute;
-}
-
 enum NiveauDensite {
 	un, deux;
+}
+
+// Force du vent
+enum Force {
+	faible, moyen, fort;
 }

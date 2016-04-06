@@ -10,21 +10,36 @@ package src;
 public class Pluie extends Acteur {
 
 	// Correspond à l'augmentation de l'humidité sur la case où il pleut et ses
-	// voisines.
-	private final int intensitePluie = 15;
-	private int duree = 20;
+	// voisines (moitié moins pour les voisines).
+	private final int intensitePluie = 6;
+
+	private int duree = 4; // Nombre de tocs pendant lesquels il pleut.
+
+	private boolean apparition = true;
+	// Pour savoir si c'est la première fois que cet acteur agi sur sa case.
 
 	/**
-	 * Fait pleuvoir (augmentation de l'humidite de la case ainsi que celle de
-	 * ses voisines d'un taux équivalent à intensitePluie. Décrémente la durée
-	 * pendant laquelle il pleut.
+	 * Fait pleuvoir : augmentation de l'humidite de la case ainsi que celles de
+	 * ses voisines d'un taux équivalent à intensitePluie pendant une duree.
 	 */
 	@Override
 	public void agi(Carte maCarte) {
-		for (Terrain courant : maCarte.superVoisinage(X, Y)) {
-			courant.humidite += intensitePluie;
+		if (duree != 0) {
+
+			if (apparition) {
+				maCarte.getTerrain(X, Y).arrose(intensitePluie * 2);
+				// 12% d'humidité en plus au début sur la case centrale.
+				apparition = false;
+			} else {
+				maCarte.getTerrain(X, Y).arrose(intensitePluie);
+				// 6% d'humidité en plus ensuite sur la case centrale.
+			}
+			for (Terrain courant : maCarte.superVoisinage(X, Y)) {
+				courant.arrose(intensitePluie / 2);
+				// +3% d'humidité au début et ensuite sur les cases voisines.
+			}
+			this.duree--;
 		}
-		this.duree--;
 	}
 
 	/**

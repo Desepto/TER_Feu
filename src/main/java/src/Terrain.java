@@ -11,7 +11,11 @@ public abstract class Terrain {
 
 	protected final boolean inflammable;
 	protected NiveauDensite densite;
-	protected int humidite = 0;
+	protected int humidite = 10; // Humidité par défaut.
+	protected int PV = 1;
+	// Seuls les terrains inflammables verront leur PV calculés dans leurs
+	// constructeurs respectifs.
+	protected int trans; // Capacité d'un terrain à propager son feu.
 
 	// El Constrouctor
 	public Terrain(boolean inflammable) {
@@ -28,6 +32,26 @@ public abstract class Terrain {
 
 	public void setDensite(NiveauDensite densite) {
 		this.densite = densite;
+	}
+
+	// Setter personnalisé : Ajoute l'humidite d'un acteur à celle du terrain.
+	public void arrose(int monHumidite) {
+		this.humidite += monHumidite;
+	}
+
+	// Setter personnalisé : Enlève l'humidite d'un acteur à celle du terrain.
+	public void asseche(int monHumidite) {
+		this.humidite -= monHumidite;
+	}
+
+	public int getPV() {
+		return PV;
+	}
+
+	// Setter personnalisé : Diminue les PV du terrain d'un montant égal à
+	// degats.
+	public void brule(int degats) {
+		PV -= degats;
 	}
 
 }

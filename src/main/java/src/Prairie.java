@@ -2,17 +2,17 @@ package src;
 
 public class Prairie extends Terrain {
 
-	protected Duree duree;
-	protected Transmission trans;
+	private final int duree = 4;
 
 	/**
 	 * Constructeur par défaut à modifier.
 	 */
 	public Prairie() {
 		super(true); // On rend la prairie non inflammable.
-		duree = Duree.basse;
-		trans = Transmission.haute;
 		this.densite = NiveauDensite.un;
+		this.trans = 5;
+		this.PV = duree;
+
 	}
 
 	/**
@@ -22,8 +22,11 @@ public class Prairie extends Terrain {
 	 */
 	public Prairie(NiveauDensite maDensite) {
 		super(true);
-		duree = Duree.basse;
-		trans = Transmission.haute;
+		this.trans = 5;
 		this.densite = maDensite;
+		if (densite == NiveauDensite.un)
+			this.PV = duree;
+		else
+			this.PV = duree * 2;
 	}
 }

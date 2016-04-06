@@ -8,17 +8,16 @@ package src;
  */
 public class Foret extends Terrain {
 
-	protected Duree duree;
-	protected Transmission trans;
+	private final int duree = 6;
 
 	/**
 	 * Constructeur par défaut à modifier.
 	 */
 	public Foret() {
 		super(true); // On rend la foret inflammable.
-		duree = Duree.haute;
-		trans = Transmission.moyenne;
 		this.densite = NiveauDensite.un;
+		this.trans = 5;
+		this.PV = duree;
 	}
 
 	/**
@@ -28,8 +27,11 @@ public class Foret extends Terrain {
 	 */
 	public Foret(NiveauDensite maDensite) {
 		super(true);
-		duree = Duree.haute;
-		trans = Transmission.moyenne;
 		this.densite = maDensite;
+		this.trans = 5;
+		if (densite == NiveauDensite.un)
+			this.PV = duree;
+		else
+			this.PV = duree * 2;
 	}
 }

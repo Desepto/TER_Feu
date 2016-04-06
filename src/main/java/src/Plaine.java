@@ -8,17 +8,16 @@ package src;
  */
 public class Plaine extends Terrain {
 
-	protected Duree duree;
-	protected Transmission trans;
+	private final int duree = 5;
 
 	/**
 	 * Constructeur par défaut à modifier.
 	 */
 	public Plaine() {
 		super(true); // On rend la plaine non inflammable.
-		duree = Duree.moyenne;
-		trans = Transmission.moyenne;
 		this.densite = NiveauDensite.un;
+		this.PV = duree;
+		this.trans = 5;
 	}
 
 	/**
@@ -28,8 +27,11 @@ public class Plaine extends Terrain {
 	 */
 	public Plaine(NiveauDensite maDensite) {
 		super(true);
-		duree = Duree.moyenne;
-		trans = Transmission.moyenne;
 		this.densite = maDensite;
+		this.trans = 5;
+		if (densite == NiveauDensite.un)
+			this.PV = duree;
+		else
+			this.PV = duree * 2;
 	}
 }
