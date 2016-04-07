@@ -28,6 +28,7 @@ public class Pompier extends Acteur {
 						// Suppression du pompier.
 						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
 						maCarte.getSesActeurs().remove(i + 1);
+						maCarte.purifieActeurs();
 						return;
 					}
 				}

@@ -273,4 +273,15 @@ public class Carte {
 		return forceVent;
 	}
 
+	/**
+	 * Enlève les Anouar de la carte.
+	 */
+	public void purifieActeurs() {
+		for (int i = 0; i < this.getSesActeurs().size(); i++) {
+			if (this.sesActeurs.get(i) instanceof Anouar) {
+				this.sesActeurs.remove(i);
+				i--;
+			}
+		}
+	}
 }

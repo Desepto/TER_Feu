@@ -36,8 +36,7 @@ public class FeuTest {
 		for (int i = maCarte.getTerrain(12, 12).getPV(); i > -1; i--)
 			maCarte.getSesActeurs().get(0).agi(maCarte);
 
-		assertTrue(maCarte.getSesActeurs().get(0) instanceof Anouar);
-		assertTrue(maCarte.getSesActeurs().size() == 1);
+		assertTrue(maCarte.getSesActeurs().size() == 0);
 		assertTrue(maCarte.getTerrain(12, 12).PV == 0);
 
 		int humidite = maCarte.getTerrain(15, 15).humidite - monFeu.getAssechement();

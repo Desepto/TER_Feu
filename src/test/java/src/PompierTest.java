@@ -15,7 +15,7 @@ public class PompierTest {
 
 	/**
 	 * On teste la classe pompier. Tout est détaillé.
-	 * 
+	 *
 	 * Test method for {@link src.Pompier#agi(src.Carte)}.
 	 */
 	@Test
@@ -31,7 +31,7 @@ public class PompierTest {
 
 		maCarte.getSesActeurs().get(0).agi(maCarte);
 		// Il balance sa flotte. Mais meurt.
-		assertTrue(maCarte.getSesActeurs().get(0) instanceof Anouar);
+		assertTrue(maCarte.getSesActeurs().size() == 0);
 		// On checke qu'il est bien au paradis et pas dans la carte.
 		monPompier.setProbaMort(-1);
 		// On le rend immortel.
@@ -44,6 +44,7 @@ public class PompierTest {
 		assertTrue(maCarte.getTerrain(12, 12).humidite == maCarte.getTerrain(19, 19).humidite
 				+ monPompier.getEfficacitePompier());
 		// On checke qu'il a bien arrosé son terrain.
+
 	}
 
 }

@@ -48,6 +48,7 @@ public class Feu extends Acteur {
 						// Suppression du feu.
 						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
 						maCarte.getSesActeurs().remove(i + 1);
+						maCarte.purifieActeurs();
 						return;
 					}
 				}
@@ -66,6 +67,8 @@ public class Feu extends Acteur {
 			if (maCarte.getTerrain(X, Y).getPV() != 0)
 				maCarte.getTerrain(X, Y).brule(1);
 			// On décrémente les PV du terrain de 1.
+			propage();
+			// On lance un dé pour tenter de propager le feu à ses voisins.
 		}
 
 	}
@@ -93,5 +96,9 @@ public class Feu extends Acteur {
 	 *
 	 * @return vrai si le Terrain propageur met le feu au Terrain propage.
 	 */
+
+	private void propage() {
+
+	}
 
 }

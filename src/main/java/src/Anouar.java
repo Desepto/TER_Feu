@@ -6,6 +6,10 @@ package src;
 /**
  * @author Nicolas
  *
+ *         "Je n'ai pas fait l'implémentation, mais j'ai participé aux recherches"
+ *
+ *         Quand un acteur est supprimé, il est remplacé par un acteur Anouar.
+ *         Règle une infinité de problèmes.
  */
 public class Anouar extends Acteur {
 
@@ -15,6 +19,7 @@ public class Anouar extends Acteur {
 	 */
 	public Anouar(int X, int Y) {
 		super(X, Y);
+		recherches();
 	}
 
 	/*
@@ -27,4 +32,10 @@ public class Anouar extends Acteur {
 
 	}
 
+	/**
+	 * DaaAaar TD2 TD2 TD2
+	 */
+	private void recherches() {
+		return;
+	}
 }

@@ -65,9 +65,8 @@ public class PluieTest {
 			maPluie3.agi(maCarte2);
 		}
 
-		assertTrue(maCarte.getSesActeurs().size() == 2);
-		assertTrue(maCarte.getSesActeurs().get(0) instanceof Anouar);
-		assertTrue(maCarte.getSesActeurs().get(1) instanceof Anouar);
+		assertTrue(maCarte.getSesActeurs().size() == 1);
+		assertTrue(maCarte.getSesActeurs().get(0) instanceof Pluie);
 
 	}
 }
