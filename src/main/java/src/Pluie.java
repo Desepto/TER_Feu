@@ -38,8 +38,23 @@ public class Pluie extends Acteur {
 				courant.arrose(intensitePluie / 2);
 				// +3% d'humidité au début et ensuite sur les cases voisines.
 			}
+
 			this.duree--;
+			if (this.duree == 0) {
+				for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
+					if (maCarte.getSesActeurs().get(i) instanceof Pluie) {
+						if (maCarte.getSesActeurs().get(i).X == X && maCarte.getSesActeurs().get(i).Y == Y) {
+							// Suppression de la pluie.
+							maCarte.getSesActeurs().add(i, new Anouar(X, Y));
+							maCarte.getSesActeurs().remove(i + 1);
+							return;
+						}
+					}
+				}
+			}
+
 		}
+
 	}
 
 	/**
@@ -51,6 +66,14 @@ public class Pluie extends Acteur {
 	public Pluie(int X, int Y) {
 		super(X, Y);
 
+	}
+
+	public int getDuree() {
+		return duree;
+	}
+
+	public int getIntensitePluie() {
+		return intensitePluie;
 	}
 
 }

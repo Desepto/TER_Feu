@@ -4,8 +4,13 @@ import java.util.Random;
 
 public class Pompier extends Acteur {
 
-	// Probabilité de décès d'un pompier sur une case en feu, en pourcentage.
-	private final int probaMort = 2;
+	/**
+	 * Probabilité de décès d'un pompier sur une case en feu, en pourcentage.
+	 *
+	 * Cet attribut ne peut pas être final car on a besoin de rendre un pompier
+	 * immortel ou débile durant les tests.
+	 */
+	private int probaMort = 2;
 	private final int efficacitePompier = 20;
 	// Taux d'augmentation de l'humidité du terrain arrosé par le pompier.
 	// Correspond en moyenne à 3-5 tocs d'horloge pour éteindre une case en feu.
@@ -17,17 +22,18 @@ public class Pompier extends Acteur {
 	public void agi(Carte maCarte) {
 		// Le pompier décède.
 		if (!StillAlive()) {
-			int indice = 0;
-			for (Acteur courant : maCarte.getSesActeurs()) {
-				if (courant.X == this.X && courant.Y == this.Y && courant instanceof Pompier) {
-					maCarte.supprActeur(indice);
-					// On supprime le pompier de la carte.
-					return;
-					// On sort de la fonction après décès.
+			for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
+				if (maCarte.getSesActeurs().get(i) instanceof Pompier) {
+					if (maCarte.getSesActeurs().get(i).X == X && maCarte.getSesActeurs().get(i).Y == Y) {
+						// Suppression du pompier.
+						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
+						maCarte.getSesActeurs().remove(i + 1);
+						return;
+					}
 				}
-				indice++;
 			}
 		}
+
 		// Le pompier est toujours en vie.
 		maCarte.getTerrain(X, Y).arrose(efficacitePompier);
 	}
@@ -40,7 +46,6 @@ public class Pompier extends Acteur {
 	 */
 	public Pompier(int X, int Y) {
 		super(X, Y);
-
 	}
 
 	/**
@@ -57,4 +62,11 @@ public class Pompier extends Acteur {
 		return true;
 	}
 
+	public void setProbaMort(int probaMort) {
+		this.probaMort = probaMort;
+	}
+
+	public int getEfficacitePompier() {
+		return efficacitePompier;
+	}
 }

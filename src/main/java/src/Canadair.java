@@ -19,9 +19,13 @@ public class Canadair extends Acteur {
 	 */
 	@Override
 	public void agi(Carte maCarte) {
-		if (estCharge) {
-			maCarte.getTerrain(this.X, this.Y).arrose(efficaciteCanadaire);
-			this.estCharge = false;
+		for (Acteur courant : maCarte.getSesActeurs()) {
+			if (courant.X == this.X && courant.Y == this.Y && courant instanceof Feu) {
+				if (estCharge) {
+					maCarte.getTerrain(this.X, this.Y).arrose(efficaciteCanadaire);
+					this.estCharge = false;
+				}
+			}
 		}
 	}
 
@@ -37,4 +41,7 @@ public class Canadair extends Acteur {
 		this.estCharge = true;
 	}
 
+	public int getEfficaciteCanadaire() {
+		return efficaciteCanadaire;
+	}
 }

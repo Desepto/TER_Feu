@@ -48,10 +48,17 @@ public abstract class Terrain {
 		return PV;
 	}
 
+	public void setPV(int pV) {
+		PV = pV;
+	}
+
 	// Setter personnalisé : Diminue les PV du terrain d'un montant égal à
 	// degats.
 	public void brule(int degats) {
 		PV -= degats;
 	}
 
+	public void setHumidite(int humidite) {
+		this.humidite = humidite;
+	}
 }

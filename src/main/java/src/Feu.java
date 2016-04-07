@@ -42,21 +42,23 @@ public class Feu extends Acteur {
 		}
 
 		if (maCarte.getTerrain(X, Y).getPV() == 0) {
-			int indice = 0;
-			for (Acteur courant : maCarte.getSesActeurs()) {
-				if (courant.X == this.X && courant.Y == this.Y && courant instanceof Feu) {
-					maCarte.supprActeur(indice);
-					// On supprime le feu de la case.
-					return;
-					// On sort de la fonction après extinction du feu.
+			for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
+				if (maCarte.getSesActeurs().get(i) instanceof Feu) {
+					if (maCarte.getSesActeurs().get(i).X == X && maCarte.getSesActeurs().get(i).Y == Y) {
+						// Suppression du feu.
+						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
+						maCarte.getSesActeurs().remove(i + 1);
+						return;
+					}
 				}
-				indice++;
 			}
 		}
-
 		if (apparition) {
 			maCarte.getTerrain(X, Y).asseche(assechement);
 			// On baisse l'humidité d'un montant exceptionnel au début.
+			if (maCarte.getTerrain(X, Y).getPV() != 0)
+				maCarte.getTerrain(X, Y).brule(1);
+			// On décrémente les PV du terrain de 1.
 			apparition = false;
 		} else {
 			maCarte.getTerrain(X, Y).asseche(intensiteFeu);
@@ -77,30 +79,19 @@ public class Feu extends Acteur {
 
 	}
 
+	public int getIntensiteFeu() {
+		return intensiteFeu;
+	}
+
+	public int getAssechement() {
+		return assechement;
+	}
+
 	/**
 	 * La fameuse fonction à équilibrer. Une carte est nécessaire pour récupérer
 	 * force et direction du vent.
 	 *
 	 * @return vrai si le Terrain propageur met le feu au Terrain propage.
 	 */
-	/*
-	 * public boolean propage(Carte maCarte) { double vent, humidite, trans,
-	 * directionVent;
-	 * 
-	 * switch (maCarte.getForceVent()) { case faible: vent = 1; break; case
-	 * moyen: vent = 2; break; case fort: vent = 3; break; }
-	 * 
-	 * Terrain propageur = maCarte.getTerrain(X, Y); trans = propageur.trans;
-	 * Direction ventPropageur = maCarte.getDirectionVent(); int indice = 0;
-	 * 
-	 * for (Terrain courant : maCarte.superVoisinage(X, Y)) { humidite =
-	 * courant.humidite; switch (ventPropageur) { case DirectionVent.HG &&
-	 * indice == 1: vent = 1;
-	 * 
-	 * }
-	 * 
-	 * }
-	 * 
-	 * return true; }
-	 */
+
 }
