@@ -3,6 +3,9 @@
  */
 package src;
 
+import java.awt.Point;
+import java.util.ArrayList;
+
 /**
  * @author Nicolas Allumeeeeeeeeeeeeeeez, le feu ! Allumeeeeeeeeeeeeeez le
  *         feuuuu !
@@ -67,7 +70,7 @@ public class Feu extends Acteur {
 			if (maCarte.getTerrain(X, Y).getPV() != 0)
 				maCarte.getTerrain(X, Y).brule(1);
 			// On décrémente les PV du terrain de 1.
-			propage();
+			propage(maCarte);
 			// On lance un dé pour tenter de propager le feu à ses voisins.
 		}
 
@@ -97,8 +100,47 @@ public class Feu extends Acteur {
 	 * @return vrai si le Terrain propageur met le feu au Terrain propage.
 	 */
 
-	private void propage() {
+	private void propage(Carte maCarte) {
+		double transmission = maCarte.getTerrain(X, Y).trans;
+		// La transmission du terrain sur lequel y a le feu.
+		double humidite;
+		ArrayList<Point> mesVoisinsPoint = maCarte.superVoisinageCoord(X, Y);
+		// Les coordonnées des voisins.
+		ArrayList<Terrain> mesVoisins = maCarte.superVoisinage(X, Y);
+		// Les voisins, pour avoir leur transmissions.
+		ArrayList<Boolean> resultat = new ArrayList<Boolean>();
+		// La liste finale, vrai ou faux pour chaque voisin s'il crame ou pas.
+		ArrayList<Double> probas = new ArrayList<Double>();
+		// Un pourcentage de réussite, on va lancer un dé et comparer avec ce
+		// pourcentage, pour voir si ça crame.
+		// On fera ça pour les 6 voisins.
 
+		for (int i = 0; i < 6; i++) {
+			if (mesVoisinsPoint.get(i).x >= 0) { // Si on est bien dans la map.
+				if (mesVoisins.get(i).isInflammable()) {
+					humidite = mesVoisins.get(i).humidite;
+					if (humidite >= 100) {
+						resultat.add(false);
+						// Humidité trop élevée, no way que ça crame.
+					}
+					// la formule sans vent.
+					probas.add(1 / humidite * transmission);
+					// 100 - humidité + transmission;
+					// On glisse le résultat dans une liste probas.
+					resultat.add(true);
+					// Par défaut on remplit la liste finale.
+				} else {
+					resultat.add(false);
+					// Pas inflammable, on met directement un false au bon
+					// endroit dans resultat.
+
+				}
+			}
+			for (double courant : probas) {
+
+			}
+
+		}
 	}
 
 }

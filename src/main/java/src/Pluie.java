@@ -35,7 +35,9 @@ public class Pluie extends Acteur {
 				// 6% d'humidité en plus ensuite sur la case centrale.
 			}
 			for (Terrain courant : maCarte.superVoisinage(X, Y)) {
-				courant.arrose(intensitePluie / 2);
+				if (!(courant instanceof TerrainVide))
+					// On arrose pas n'importe quoi.
+					courant.arrose(intensitePluie / 2);
 				// +3% d'humidité au début et ensuite sur les cases voisines.
 			}
 

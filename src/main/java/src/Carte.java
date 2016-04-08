@@ -119,6 +119,22 @@ public class Carte {
 	}
 
 	/**
+	 * Fonction outil à ne pas utiliser. nécessaire Pour SuperVoisinageCoord().
+	 * vérifie que le voisin choisi existe bien dans le tableau. Si ce n'est pas
+	 * le cas, renvoie un TerrainVide. Permet de ne pas sortir du tableau
+	 * (OutOfBounds Exception).
+	 *
+	 * @param X
+	 * @param Y
+	 * @return
+	 */
+	private Point ajoutListeVoisinsCoord(int X, int Y) {
+		if (X < tailleCarte + 1 && Y < tailleCarte && X >= 0 && Y >= 0)
+			return new Point(X, Y);
+		return new Point(-1, -1);
+	}
+
+	/**
 	 * Renvoie une liste chaînée contenant les 6 voisins d'une case donnée. On
 	 * fait appel à convertador pour convertir les coordonnées en réelles pour
 	 * qu'elles soient exploitables dans le tableau.
@@ -274,7 +290,56 @@ public class Carte {
 	}
 
 	/**
+	 * Pareil que SuperVoisinage mais renvoie des coordonnées au lieu de
+	 * Terrain.
+	 *
+	 * @param X
+	 * @param Y
+	 * @return La liste des 6 points correspondant aux coordonnées des voisins.
+	 */
+	public ArrayList<Point> superVoisinageCoord(int X, int Y) {
+
+		if (X > tailleCarte + 1 || Y > tailleCarte) {
+			System.out.println("Mais quelle grosse cave, t'es sorti du tableau avec tes valeurs à la con !");
+			return null;
+		}
+
+		if (tabHexagones[X][Y] instanceof TerrainVide) {
+			System.out.println("Ce Terrain ne figure pas dans la carte. Au Bucheeeeer !!!");
+			return null;
+		} // Impossible d'afficher les voisins d'une case inexistante.
+
+		ArrayList<Point> mesVoisins = new ArrayList<Point>();
+
+		if (Y % 2 == 0) // Y pair
+		{
+			// On vérifie que le voisin est dans le tableau, et on l'ajoute. On
+			// ajoute un Terrain vide sinon. On répete l'opération pour les 6
+			// voisins.
+			mesVoisins.add(ajoutListeVoisinsCoord(X, Y - 1));
+			mesVoisins.add(ajoutListeVoisinsCoord(X + 1, Y - 1));
+			mesVoisins.add(ajoutListeVoisinsCoord(X + 1, Y));
+			mesVoisins.add(ajoutListeVoisinsCoord(X + 1, Y + 1));
+			mesVoisins.add(ajoutListeVoisinsCoord(X, Y + 1));
+			mesVoisins.add(ajoutListeVoisinsCoord(X - 1, Y));
+		}
+
+		else { // Y impair, même combat.
+
+			mesVoisins.add(ajoutListeVoisinsCoord(X - 1, Y - 1));
+			mesVoisins.add(ajoutListeVoisinsCoord(X, Y - 1));
+			mesVoisins.add(ajoutListeVoisinsCoord(X + 1, Y));
+			mesVoisins.add(ajoutListeVoisinsCoord(X, Y + 1));
+			mesVoisins.add(ajoutListeVoisinsCoord(X - 1, Y + 1));
+			mesVoisins.add(ajoutListeVoisinsCoord(X - 1, Y));
+		}
+		return mesVoisins;
+	}
+
+	/**
 	 * Enlève les Anouar de la carte.
+	 *
+	 * Ils font des recherches mais enfin quand même...
 	 */
 	public void purifieActeurs() {
 		for (int i = 0; i < this.getSesActeurs().size(); i++) {
