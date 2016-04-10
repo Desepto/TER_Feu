@@ -83,6 +83,18 @@ public class CarteTest {
 		// tableau.
 	}
 
+	///////////////////////////////////////////////////////////////////
+	@Test
+	public void testT() {
+
+		Carte maC = new Carte(30);
+		for (int X = 0; X < 30; X++) {
+			for (int Y = 0; Y < 30; Y++) {
+				maC.transformeTerrain(X, Y, new Lac());
+			}
+		}
+	}
+
 	/**
 	 * On se contente de modifier un Terrain de la carte, et de vérifier que la
 	 * modif a bien été prise en compte.

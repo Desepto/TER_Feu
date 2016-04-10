@@ -94,12 +94,12 @@ public class Carte {
 			return;
 		}
 		X = ElConvertador(X, Y).x;
-		Y = ElConvertador(X, Y).y;
-
-		if (getTerrain(X, Y) instanceof TerrainVide) {
-			System.out.println("Ce Terrain n'est même pas sur la carte, pff, tu veux transformer quoi ? Anouar ?");
-			return;
-		}
+		// Y = ElConvertador(X, Y).y;
+		/*
+		 * if (getTerrain(X, Y) instanceof TerrainVide) { System.out.println(
+		 * "Ce Terrain n'est même pas sur la carte, pff, tu veux transformer quoi ? Anouar ?"
+		 * ); return; }
+		 */
 		this.tabHexagones[X][Y] = nouveau;
 	}
 
