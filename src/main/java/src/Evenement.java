@@ -37,8 +37,7 @@ public class Evenement {
 		this.acteurs = acteurs;
 	}
 
-	public Acteur getActeurs(int indice) {
-		return acteurs.get(indice);
+	public ArrayList<Acteur> getActeurs() {
+		return acteurs;
 	}
-
 }

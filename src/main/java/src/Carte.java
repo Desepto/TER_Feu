@@ -16,6 +16,8 @@ public class Carte {
 	private ArrayList<Acteur> sesActeurs; // Fonctions de manip tout en bas.
 	private final Force forceVent;
 	private final Direction directionVent;
+	private ArrayList<Point> modifications;
+	// Contient toutes les coordonnées des cases qui ont été modifiées.
 
 	// El Constrouctador ! Ne pas toucher, utile pour les tests.
 	public Carte(int tailleCarte) {
@@ -94,12 +96,7 @@ public class Carte {
 			return;
 		}
 		X = ElConvertador(X, Y).x;
-		// Y = ElConvertador(X, Y).y;
-		/*
-		 * if (getTerrain(X, Y) instanceof TerrainVide) { System.out.println(
-		 * "Ce Terrain n'est même pas sur la carte, pff, tu veux transformer quoi ? Anouar ?"
-		 * ); return; }
-		 */
+
 		this.tabHexagones[X][Y] = nouveau;
 	}
 
@@ -348,5 +345,83 @@ public class Carte {
 				i--;
 			}
 		}
+	}
+
+	/**
+	 * Renvoie la liste des acteurs figurant sur une case donnée.
+	 *
+	 * @param X
+	 * @param Y
+	 * @return La liste des acteurs présents en X, Y.
+	 */
+	public ArrayList<Acteur> getSesActeurs(int X, int Y) {
+		ArrayList<Acteur> resultat = new ArrayList<Acteur>();
+		for (Acteur courant : sesActeurs) {
+			if (courant.X == X && courant.Y == Y)
+				resultat.add(courant);
+		}
+		return resultat;
+	}
+
+	public ArrayList<Point> getModifications() {
+		return modifications;
+	}
+
+	/**
+	 * Renvoie toutes les cases enflammées.
+	 *
+	 * @return une liste de Point correspondant à des cases dotées d'acteur Feu.
+	 */
+	public ArrayList<Point> getFeu() {
+		ArrayList<Point> resultat = new ArrayList<Point>();
+		for (Acteur courant : sesActeurs) {
+			if (courant instanceof Feu)
+				resultat.add(new Point(courant.X, courant.Y));
+		}
+		return resultat;
+	}
+
+	/**
+	 * Renvoie toutes les cases pluvieuses.
+	 *
+	 * @return une liste de Point correspondant à des cases dotées d'acteur
+	 *         Pluie.
+	 */
+	public ArrayList<Point> getPluie() {
+		ArrayList<Point> resultat = new ArrayList<Point>();
+		for (Acteur courant : sesActeurs) {
+			if (courant instanceof Pluie)
+				resultat.add(new Point(courant.X, courant.Y));
+		}
+		return resultat;
+	}
+
+	/**
+	 * Renvoie toutes les cases Canadairées.
+	 *
+	 * @return une liste de Point correspondant à des cases dotées d'acteur
+	 *         Canadair.
+	 */
+	public ArrayList<Point> getCanadair() {
+		ArrayList<Point> resultat = new ArrayList<Point>();
+		for (Acteur courant : sesActeurs) {
+			if (courant instanceof Canadair)
+				resultat.add(new Point(courant.X, courant.Y));
+		}
+		return resultat;
+	}
+
+	/**
+	 * Renvoie toutes les cases Pompiérrées.
+	 *
+	 * @return une liste de Point correspondant à des cases dotées d'acteur Pompier.
+	 */
+	public ArrayList<Point> getPompier() {
+		ArrayList<Point> resultat = new ArrayList<Point>();
+		for (Acteur courant : sesActeurs) {
+			if (courant instanceof Pompier)
+				resultat.add(new Point(courant.X, courant.Y));
+		}
+		return resultat;
 	}
 }
