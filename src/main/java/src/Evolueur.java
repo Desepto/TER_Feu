@@ -1,7 +1,5 @@
 package src;
 
-import java.util.ArrayList;
-
 /**
  * Classe principale du bouzin, contient la méthode main, crée tous les trucs et
  * s'occupe de faire avancer le temps. Elle sera p'tet découpée en 2 (une partie
@@ -35,6 +33,7 @@ public class Evolueur {
 		// ICI IL FAUDRA CHANGER, METTRE UN GETTER QUI RENVOIE JUSTE LE
 		// FEU/PLUIE/POMPIER/CANADAIR
 		while (tic < 15 || this.presenceFeu()) {
+			// vider la liste des modifiés
 			for (Acteur a : this.c.getSesActeurs())
 				if (a instanceof Feu)
 					a.agi(this.c);
@@ -45,18 +44,16 @@ public class Evolueur {
 			// this.c.ajoutActeur(a);
 			// }
 			// Ecrivain.ecrireJeSaisPasQuoi();
+			tic++;
 		}
 		// Ecrivain.ecritureFinale
 	}
 
 	// Il serait intelligent de mettre cette méthode dans Carte
 	public boolean presenceFeu() {
-		ArrayList<Acteur> a = c.getSesActeurs();
-		for (int i = 0; i < (c.getSesActeurs()).size(); i++) {
-			if (a.get(i) instanceof Feu) {
+		for (Acteur a : this.c.getSesActeurs())
+			if (a instanceof Feu)
 				return true;
-			}
-		}
 		return false;
 	}
 
