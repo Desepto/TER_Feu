@@ -1,0 +1,34 @@
+package terrains;
+
+import enumerations.NiveauDensite;
+
+public class Prairie extends Terrain {
+
+	private final int duree = 4;
+
+	/**
+	 * Constructeur par défaut à modifier.
+	 */
+	public Prairie() {
+		super(true); // On rend la prairie non inflammable.
+		this.densite = NiveauDensite.un;
+		this.setTrans(5);
+		this.PV = duree;
+
+	}
+
+	/**
+	 * El Constrouctor !
+	 *
+	 * @param maDuree
+	 */
+	public Prairie(NiveauDensite maDensite) {
+		super(true);
+		this.setTrans(5);
+		this.densite = maDensite;
+		if (densite == NiveauDensite.un)
+			this.PV = duree;
+		else
+			this.PV = duree * 2;
+	}
+}
