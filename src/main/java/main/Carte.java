@@ -37,6 +37,7 @@ public class Carte {
 		sesActeurs = new ArrayList<Acteur>();
 		forceVent = Force.faible;
 		directionVent = Direction.BD;
+		this.modifications = new ArrayList<Point>();
 	}
 
 	// El Constrouctador !
@@ -46,6 +47,7 @@ public class Carte {
 		sesActeurs = new ArrayList<Acteur>();
 		this.forceVent = forceVent;
 		this.directionVent = directionVent;
+		this.modifications = new ArrayList<Point>();
 	}
 
 	/**
@@ -322,7 +324,7 @@ public class Carte {
 		if (Y % 2 == 0) // Y pair
 		{
 			// On vérifie que le voisin est dans le tableau, et on l'ajoute. On
-			// ajoute un Terrain vide sinon. On répete l'opération pour les 6
+			// ajoute un Point(-1,-1) sinon. On répete l'opération pour les 6
 			// voisins.
 			mesVoisins.add(ajoutListeVoisinsCoord(X, Y - 1));
 			mesVoisins.add(ajoutListeVoisinsCoord(X + 1, Y - 1));

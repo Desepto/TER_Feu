@@ -90,14 +90,17 @@ public class CarteTest {
 		// tableau.
 	}
 
-	///////////////////////////////////////////////////////////////////
+	/**
+	 * Le petit test d'André, parce que bon transformeterrain() yavait des zone
+	 * d'ombre.
+	 */
 	@Test
-	public void testT() {
+	public void TestTransformeTerrain() {
 
-		Carte maC = new Carte(30);
+		Carte mayk = new Carte(30);
 		for (int X = 0; X < 30; X++) {
 			for (int Y = 0; Y < 30; Y++) {
-				maC.transformeTerrain(X, Y, new Lac());
+				mayk.transformeTerrain(X, Y, new Lac());
 			}
 		}
 	}
