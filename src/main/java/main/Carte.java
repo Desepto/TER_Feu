@@ -385,11 +385,11 @@ public class Carte {
 	 *
 	 * @return une liste de Point correspondant à des cases dotées d'acteur Feu.
 	 */
-	public ArrayList<Point> getFeu() {
-		ArrayList<Point> resultat = new ArrayList<Point>();
+	public ArrayList<Acteur> getFeu() {
+		ArrayList<Acteur> resultat = new ArrayList<Acteur>();
 		for (Acteur courant : sesActeurs) {
 			if (courant instanceof Feu)
-				resultat.add(new Point(courant.getX(), courant.getY()));
+				resultat.add(courant);
 		}
 		return resultat;
 	}
@@ -400,11 +400,11 @@ public class Carte {
 	 * @return une liste de Point correspondant à des cases dotées d'acteur
 	 *         Pluie.
 	 */
-	public ArrayList<Point> getPluie() {
-		ArrayList<Point> resultat = new ArrayList<Point>();
+	public ArrayList<Acteur> getPluie() {
+		ArrayList<Acteur> resultat = new ArrayList<Acteur>();
 		for (Acteur courant : sesActeurs) {
 			if (courant instanceof Pluie)
-				resultat.add(new Point(courant.getX(), courant.getY()));
+				resultat.add(courant);
 		}
 		return resultat;
 	}
@@ -415,11 +415,11 @@ public class Carte {
 	 * @return une liste de Point correspondant à des cases dotées d'acteur
 	 *         Canadair.
 	 */
-	public ArrayList<Point> getCanadair() {
-		ArrayList<Point> resultat = new ArrayList<Point>();
+	public ArrayList<Acteur> getCanadair() {
+		ArrayList<Acteur> resultat = new ArrayList<Acteur>();
 		for (Acteur courant : sesActeurs) {
 			if (courant instanceof Canadair)
-				resultat.add(new Point(courant.getX(), courant.getY()));
+				resultat.add(courant);
 		}
 		return resultat;
 	}
@@ -430,11 +430,11 @@ public class Carte {
 	 * @return une liste de Point correspondant à des cases dotées d'acteur
 	 *         Pompier.
 	 */
-	public ArrayList<Point> getPompier() {
-		ArrayList<Point> resultat = new ArrayList<Point>();
+	public ArrayList<Acteur> getPompier() {
+		ArrayList<Acteur> resultat = new ArrayList<Acteur>();
 		for (Acteur courant : sesActeurs) {
 			if (courant instanceof Pompier)
-				resultat.add(new Point(courant.getX(), courant.getY()));
+				resultat.add(courant);
 		}
 		return resultat;
 	}
