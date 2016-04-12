@@ -31,7 +31,7 @@ public class Anouar extends Acteur {
 	 */
 	@Override
 	public void agi(Carte maCarte) {
-
+		recherches();
 	}
 
 	/**
