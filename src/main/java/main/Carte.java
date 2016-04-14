@@ -35,7 +35,7 @@ public class Carte {
 		this.tailleCarte = tailleCarte;
 		this.tabHexagones = new Terrain[tailleCarte + 1][tailleCarte];
 		sesActeurs = new ArrayList<Acteur>();
-		forceVent = Force.faible;
+		forceVent = Force.fort; // Fort pour visualiser la propagation du feu.
 		directionVent = Direction.BD;
 		this.modifications = new ArrayList<Point>();
 	}
@@ -58,7 +58,7 @@ public class Carte {
 	 * @param y
 	 * @return Terrain
 	 */
-	public Terrain getTabHexagones(int x, int y) {
+	private Terrain getTabHexagones(int x, int y) {
 		return tabHexagones[x][y];
 	}
 

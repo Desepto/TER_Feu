@@ -9,7 +9,6 @@ import java.awt.Point;
 
 import org.junit.Test;
 
-import acteurs.Acteur;
 import acteurs.Feu;
 import entreesSorties.Lecteur;
 import main.Carte;
@@ -78,10 +77,6 @@ public class FeuTest {
 		System.out.println("Nb ActeursFeu : " + maCarte.getFeu().size());
 		maCarte.getSesActeurs().get(0).agi(maCarte);
 		System.out.println("Nb ActeursFeu : " + maCarte.getFeu().size());
-
-		for (Acteur courant : maCarte.getSesActeurs()) {
-			System.out.println(courant.getX() + " ; " + courant.getY());
-		}
 
 		// On remet tout à zéro dans les modifs et dans la carte.
 		maCarte.getModifications().clear();

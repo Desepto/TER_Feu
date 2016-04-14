@@ -167,44 +167,50 @@ public class Feu extends Acteur {
 		// Un pourcentage de réussite, on va lancer un dé et comparer avec ce
 		// pourcentage, pour voir si ça crame.
 		// On fera ça pour les 6 voisins.
+		ArrayList<Double> vent = ventProba(maCarte);
+		// Contient les probas des 6 voisins inhérentes au vent.
+
+		for (int j = 0; j < 6; j++) {
+			resultat.add(true);
+			// Par défaut on remplit la liste finale.
+		}
 
 		for (int i = 0; i < 6; i++) {
 			if (mesVoisinsPoint.get(i).x >= 0) { // Si on est bien dans la map.
 				if (mesVoisins.get(i).isInflammable()) {
 					humidite = mesVoisins.get(i).getHumidite();
 					if (humidite >= 100) {
-						resultat.add(false);
+						resultat.set(i, false);
 						// Humidité trop élevée, no way que ça crame.
 					}
-					// la formule sans vent.
-					probas.add(100 - humidite + transmission);
+					// la formule avec vent.
+					probas.add(100 - humidite + transmission + vent.get(i));
 					// 100 - humidité + transmission;
 					// On glisse le résultat dans une liste probas.
-					resultat.add(true);
-					// Par défaut on remplit la liste finale.
+
 				} else {
 					probas.add(-666.666);
-					resultat.add(false);
+					resultat.set(i, false);
 					// Pas inflammable, on met directement un false au bon
 					// endroit dans resultat.
 
 				}
 			} else {
 				probas.add(-666.666);
-				resultat.add(false);
+				resultat.set(i, false);
 			}
 		}
 
 		for (int z = 0; z < 6; z++) {
 			if (resultat.get(z) == true) {
 				if (probaAlea() <= probas.get(z))
-					resultat.add(true);
+					resultat.set(z, true);
 				else
-					resultat.add(false);
+					resultat.set(z, false);
 			}
 		}
-		return resultat;
 
+		return resultat;
 	}
 
 	/**
@@ -216,6 +222,53 @@ public class Feu extends Acteur {
 		Random rand = new Random();
 		int tirage = rand.nextInt(100);
 		return tirage;
+	}
+
+	/**
+	 * Gère la force et la direction du vent, et renvoie une probas associée
+	 * pour chaque voisin.
+	 *
+	 * @return La liste de probas venant du vent à considérer pour la
+	 *         propagation.
+	 */
+	private static ArrayList<Double> ventProba(Carte maCarte) {
+
+		double vent = 35 + 5 * maCarte.getForceVent().ordinal();
+		// La force du vent. 35-40-45.
+
+		double ventDirection = maCarte.getDirectionVent().ordinal();
+		// La direction du vent global de la carte conveti en entier.
+		ArrayList<Double> probasVent = new ArrayList<Double>();
+		// La proba finale de chaque voisin qui sera renvoyée.
+
+		for (int z = 0; z < 6; z++) {
+			if (ventDirection == z) {
+				// Directions égales. Favorable.
+				probasVent.add(vent);
+				continue; // Inutile d'aller plus loin dans la boucle, les cas
+							// sont disjoints.
+			}
+
+			if (Math.abs(ventDirection - z) == 3) {
+				// Directions opposées. Défavorable.
+				probasVent.add(-vent);
+				continue; // Inutile d'aller plus loin dans la boucle, les cas
+				// sont disjoints.
+			}
+
+			if (Math.abs(ventDirection - z) == 1) {
+				// Directions presque opposées. Légèrement défavorable.
+				probasVent.add(-0.5 * vent);
+				continue; // Inutile d'aller plus loin dans la boucle, les cas
+				// sont disjoints.
+			}
+
+			if (Math.abs(ventDirection - z) == 2)
+				// Directions presque égales. Légèrement favorable.
+				probasVent.add(0.5 * vent);
+		}
+
+		return probasVent;
 	}
 
 }
