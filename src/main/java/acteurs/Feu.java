@@ -212,7 +212,7 @@ public class Feu extends Acteur {
 	 *
 	 * @return le nombre tiré.
 	 */
-	private int probaAlea() {
+	private static int probaAlea() {
 		Random rand = new Random();
 		int tirage = rand.nextInt(100);
 		return tirage;

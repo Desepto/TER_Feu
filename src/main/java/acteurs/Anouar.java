@@ -37,7 +37,7 @@ public class Anouar extends Acteur {
 	/**
 	 * DaaAaar TD2 TD2 TD2
 	 */
-	private void recherches() {
+	private static void recherches() {
 		return;
 	}
 }
