@@ -83,5 +83,35 @@ public class FeuTest {
 			System.out.println(courant.getX() + " ; " + courant.getY());
 		}
 
+		// On remet tout à zéro dans les modifs et dans la carte.
+		maCarte.getModifications().clear();
+		maCarte.getSesActeurs().clear();
+		maCarte.transformeTerrain(29, 29, new Prairie());
+
+		/**
+		 * On teste un feu sur un bord de map pour voir si les cases vides ne
+		 * sont pas modifiées.
+		 */
+		maCarte.transformeTerrain(0, 0, new Prairie());
+		Feu Feu5 = new Feu(0, 0);
+		maCarte.ajoutActeur(Feu5);
+		maCarte.getSesActeurs().get(0).agi(maCarte);
+
+		assertTrue(maCarte.getModifications().size() == 1);
+		maCarte.getSesActeurs().get(0).agi(maCarte);
+		assertTrue(maCarte.getModifications().size() == maCarte.getSesActeurs().size() + 1);
+
+		// On remet tout à zéro dans les modifs et dans la carte.
+		maCarte.getModifications().clear();
+		maCarte.getSesActeurs().clear();
+		Feu5 = new Feu(29, 29);
+		maCarte.ajoutActeur(Feu5);
+		maCarte.getSesActeurs().get(0).agi(maCarte);
+
+		assertTrue(maCarte.getModifications().size() == maCarte.getSesActeurs().size());
+		assertTrue(maCarte.getModifications().size() == 1);
+
+		maCarte.getSesActeurs().get(0).agi(maCarte);
+		assertTrue(maCarte.getModifications().size() == maCarte.getSesActeurs().size() + 1);
 	}
 }

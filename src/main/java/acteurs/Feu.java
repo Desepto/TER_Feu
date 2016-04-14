@@ -45,6 +45,13 @@ public class Feu extends Acteur {
 		}
 
 		/**
+		 * Que le feu ait tout brûlé (disparition donc) on non, il modifie sa
+		 * case dans tous les cas. On le note donc dans l'historique des modifs
+		 * de la carte.
+		 */
+		maCarte.getModifications().add(new Point(this.X, this.Y));
+
+		/**
 		 * On gère le cas où le feu a tout brûlé : On le supprime des acteurs.
 		 */
 		if (maCarte.getTerrain(X, Y).getPV() == 0) {
@@ -105,8 +112,15 @@ public class Feu extends Acteur {
 						}
 					}
 					if (allumeeeeeerLeFeuuuu) {
-						Feu monFeu = new Feu(mesVoisinsCoord.get(z).x, mesVoisinsCoord.get(z).y);
+						Point yMettreLeFeu = mesVoisinsCoord.get(z);
+						// On fout le feu au voisin courant.
+						Feu monFeu = new Feu(yMettreLeFeu.x, yMettreLeFeu.y);
 						maCarte.ajoutActeur(monFeu);
+						/**
+						 * On ajoute les coordonnées du voisin modifié dans la
+						 * Carte.
+						 */
+						maCarte.getModifications().add(yMettreLeFeu);
 					}
 				}
 			}

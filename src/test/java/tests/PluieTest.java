@@ -38,7 +38,11 @@ public class PluieTest {
 		maCarte.ajoutActeur(maPluie);
 		maCarte.ajoutActeur(maPluie2);
 
+		// On checke le nombre d'acteurs.
 		assertTrue(maCarte.getSesActeurs().size() == 2);
+
+		// On checke qu'il n'y ait pas encore de modifs dans la Carte.
+		assertTrue(maCarte.getModifications().size() == 0);
 
 		Terrain monTerrain = new Rocher();
 
@@ -49,6 +53,13 @@ public class PluieTest {
 			courant.agi(maCarte);
 			indice++;
 		}
+
+		/**
+		 * On a fait agir 1 fois chacune des 2 pluies, elles ont donc modifiées
+		 * leurs cases et leurs 6 voisins. Donc 1 x 2 + 6 x 2 = 14 cases
+		 * modifiées.
+		 */
+		assertTrue(maCarte.getModifications().size() == 14);
 
 		maPluie3.agi(maCarte2);
 
@@ -74,6 +85,29 @@ public class PluieTest {
 
 		assertTrue(maCarte.getSesActeurs().size() == 1);
 		assertTrue(maCarte.getSesActeurs().get(0) instanceof Pluie);
+
+		// On remet tout à zéro dans les modifs et dans la carte.
+		maCarte.getModifications().clear();
+		maCarte.getSesActeurs().clear();
+
+		/**
+		 * On teste une pluie sur un bord de map pour voir si les cases vides ne
+		 * sont pas modifiées.
+		 */
+		Pluie Pluie5 = new Pluie(0, 0);
+		maCarte.ajoutActeur(Pluie5);
+		maCarte.getSesActeurs().get(0).agi(maCarte);
+
+		assertTrue(maCarte.getModifications().size() == 3);
+
+		// On remet tout à zéro dans les modifs et dans la carte.
+		maCarte.getModifications().clear();
+		maCarte.getSesActeurs().clear();
+		Pluie5 = new Pluie(29, 29);
+		maCarte.ajoutActeur(Pluie5);
+		maCarte.getSesActeurs().get(0).agi(maCarte);
+
+		assertTrue(maCarte.getModifications().size() == 3);
 
 	}
 }

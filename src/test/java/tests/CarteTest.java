@@ -60,14 +60,17 @@ public class CarteTest {
 		// test contient un affichage du tableau de la carte. Juste pour tester
 		// et afficher le tableau dans la console.
 
+		// On supprime le Warning dégueulasse généré par l'inutilisation de la
+		// variable test servant à afficher le tableau si besoin.
+		@SuppressWarnings("unused")
 		String test = new String(""); // Décommenter le syso plus bas pour
 										// afficher le tableau.
 		for (int Y = 0; Y < 30; Y++) {
 			for (int X = 0; X < 31; X++) {
 				if (maCarte.getTabHexagones()[X][Y] instanceof Rocher)
-					test += "Cailloux !";
+					test += "Cailloux! ";
 				else {
-					test += "Vide";
+					test += "Vide ";
 				}
 				if (X == 30 && Y % 2 == 0) {
 					if (!(maCarte.getTabHexagones()[X][Y] instanceof TerrainVide))
@@ -91,11 +94,11 @@ public class CarteTest {
 	}
 
 	/**
-	 * Le petit test d'André, parce que bon transformeterrain() yavait des zone
+	 * Le petit test d'André, parce que bon transformeterrain() yavait des zones
 	 * d'ombre.
 	 */
 	@Test
-	public void TestTransformeTerrain() {
+	public void testTransformeTerrain() {
 
 		Carte mayk = new Carte(30);
 		for (int X = 0; X < 30; X++) {
@@ -113,7 +116,7 @@ public class CarteTest {
 	 * {@link main.Carte#transformeTerrain(src.Terrain, int, int)}.
 	 */
 	@Test
-	public void testTransformeTerrain() {
+	public void testTransformeTerrain2() {
 
 		assertTrue(maCarte.getTerrain(12, 12) instanceof Rocher);
 		Lac flaqueDeau = new Lac();

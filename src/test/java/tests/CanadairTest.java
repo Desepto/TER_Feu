@@ -35,6 +35,10 @@ public class CanadairTest {
 		// Le canadair ne largue pas de flotte sans feu.
 		maCarte.ajoutActeur(monFeu);
 
+		// On checke qu'aucune modification n'ait été prise en compte pour
+		// l'instant.
+		assertTrue(maCarte.getModifications().size() == 0);
+
 		assertTrue(maCarte.getTerrain(12, 12).getHumidite() == maCarte.getTerrain(15, 15).getHumidite());
 		// On checke l'humidite de base.
 
@@ -44,8 +48,13 @@ public class CanadairTest {
 
 		assertTrue(maCarte.getTerrain(12, 12).getHumidite() == maCarte.getTerrain(15, 15).getHumidite()
 				+ monCanadair.getEfficaciteCanadaire());
-		// On checke que le largage de flotte à fonctionné.
+				// On checke que le largage de flotte à fonctionné.
 
+		// On chercke que la case arossée ait bien été enregistrée dans la
+		// Carte.
+		assertTrue(maCarte.getModifications().size() == 1);
+		assertTrue(maCarte.getModifications().get(0).x == 12);
+		assertTrue(maCarte.getModifications().get(0).y == 12);
 	}
 
 }

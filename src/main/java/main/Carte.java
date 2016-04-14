@@ -120,7 +120,7 @@ public class Carte {
 	 *
 	 * @param X
 	 * @param Y
-	 * @return
+	 * @return Le terrain, ou un terrain vide si on est n'importe où.
 	 */
 	private Terrain ajoutListeVoisins(int X, int Y) {
 		if (X < tailleCarte + 1 && Y < tailleCarte && X >= 0 && Y >= 0)
@@ -134,20 +134,29 @@ public class Carte {
 	 * le cas, renvoie un TerrainVide. Permet de ne pas sortir du tableau
 	 * (OutOfBounds Exception).
 	 *
+	 * Plus de vérifications sont nécessaires par rapport à ajotuListeVoisins
+	 * car on doit checker les TerrainsVide qui sont dans le tableau.
+	 *
 	 * @param X
 	 * @param Y
-	 * @return
+	 * @return Les coordonnées du terrain, ou (-1;-1) si on est n'importe où.
 	 */
 	private Point ajoutListeVoisinsCoord(int X, int Y) {
+
+		if (X == 0 && Y % 2 != 0)
+			return new Point(-1, -1);
+
+		if (X == tailleCarte && Y % 2 == 0)
+			return new Point(-1, -1);
+
 		if (X < tailleCarte + 1 && Y < tailleCarte && X >= 0 && Y >= 0)
 			return new Point(X, Y);
+
 		return new Point(-1, -1);
 	}
 
 	/**
-	 * Renvoie une liste chaînée contenant les 6 voisins d'une case donnée. On
-	 * fait appel à convertador pour convertir les coordonnées en réelles pour
-	 * qu'elles soient exploitables dans le tableau.
+	 * Renvoie une liste chaînée contenant les 6 voisins d'une case donnée.
 	 *
 	 * @param X
 	 * @param Y
@@ -258,7 +267,6 @@ public class Carte {
 	public ArrayList<Terrain> superVoisinage(int X, int Y) {
 
 		X = ElConvertador(X, Y).x;
-		Y = ElConvertador(X, Y).y;
 
 		return voisinage(X, Y);
 	}
@@ -300,14 +308,14 @@ public class Carte {
 	}
 
 	/**
-	 * Pareil que SuperVoisinage mais renvoie des coordonnées au lieu de
-	 * Terrain.
+	 * NE PAS UTILISER, FONCTION OUTIL. Pareil que Voisinage mais renvoie des
+	 * coordonnées au lieu de Terrain.
 	 *
 	 * @param X
 	 * @param Y
 	 * @return La liste des 6 points correspondant aux coordonnées des voisins.
 	 */
-	public ArrayList<Point> superVoisinageCoord(int X, int Y) {
+	private ArrayList<Point> voisinageCoord(int X, int Y) {
 
 		if (X > tailleCarte + 1 || Y > tailleCarte) {
 			System.out.println("Mais quelle grosse cave, t'es sorti du tableau avec tes valeurs à la con !");
@@ -344,6 +352,22 @@ public class Carte {
 			mesVoisins.add(ajoutListeVoisinsCoord(X - 1, Y));
 		}
 		return mesVoisins;
+	}
+
+	/**
+	 * La VRAIE fonction de voisinage avec Coordonnées. Qui travaille avec des
+	 * coordonnées abstraites, celle avec laquelle on travaillera pour le reste
+	 * du programme.
+	 *
+	 * @param X
+	 * @param Y
+	 * @return la liste des coordonnées des voisins.
+	 */
+	public ArrayList<Point> superVoisinageCoord(int X, int Y) {
+
+		X = ElConvertador(X, Y).x;
+
+		return voisinageCoord(X, Y);
 	}
 
 	/**

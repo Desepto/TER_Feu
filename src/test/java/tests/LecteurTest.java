@@ -27,6 +27,7 @@ public class LecteurTest {
 
 		// Puis on l'affiche :
 
+		@SuppressWarnings("unused")
 		String test = new String(""); // Décommenter le syso plus bas pour
 		// afficher le tableau.
 		for (int Y = 0; Y < 30; Y++) {

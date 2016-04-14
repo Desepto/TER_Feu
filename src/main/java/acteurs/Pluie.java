@@ -3,6 +3,9 @@
  */
 package acteurs;
 
+import java.awt.Point;
+import java.util.ArrayList;
+
 import main.Carte;
 import terrains.Terrain;
 import terrains.TerrainVide;
@@ -28,6 +31,13 @@ public class Pluie extends Acteur {
 	 */
 	@Override
 	public void agi(Carte maCarte) {
+
+		/**
+		 * Que la pluie s'arrête ou non, on doit enregistrer les modifications
+		 * de la case dans la Carte.
+		 */
+		maCarte.getModifications().add(new Point(this.X, this.Y));
+
 		if (duree != 0) {
 
 			if (apparition) {
@@ -43,6 +53,16 @@ public class Pluie extends Acteur {
 					// On arrose pas n'importe quoi.
 					courant.arrose(intensitePluie / 2);
 				// +3% d'humidité au début et ensuite sur les cases voisines.
+			}
+
+			/**
+			 * On ajoute les cases modifiées (les voisins arrosés donc) dans la
+			 * Carte.
+			 */
+			ArrayList<Point> mesCoordsVoisins = maCarte.superVoisinageCoord(X, Y);
+			for (Point monPoint : mesCoordsVoisins) {
+				if (monPoint.x >= 0)
+					maCarte.getModifications().add(monPoint);
 			}
 
 			this.duree--;

@@ -1,5 +1,6 @@
 package acteurs;
 
+import java.awt.Point;
 import java.util.Random;
 
 import main.Carte;
@@ -22,6 +23,12 @@ public class Pompier extends Acteur {
 	 */
 	@Override
 	public void agi(Carte maCarte) {
+		/**
+		 * Qu'il meurt ou qu'il arrose, on enregistre d'abord les coordonnées de
+		 * la case modifiée dans la carte.
+		 */
+		maCarte.getModifications().add(new Point(this.X, this.Y));
+
 		// Le pompier décède.
 		if (!StillAlive()) {
 			for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
@@ -39,6 +46,7 @@ public class Pompier extends Acteur {
 
 		// Le pompier est toujours en vie.
 		maCarte.getTerrain(X, Y).arrose(efficacitePompier);
+		// Il balance sa flotte.
 	}
 
 	/**
