@@ -58,6 +58,7 @@ public class Carte {
 	 * @param y
 	 * @return Terrain
 	 */
+	@SuppressWarnings("unused")
 	private Terrain getTabHexagones(int x, int y) {
 		return tabHexagones[x][y];
 	}
@@ -247,7 +248,7 @@ public class Carte {
 	 * @param Y
 	 * @return Un point contenant les nouvelles coordonnées.
 	 */
-	public Point ElConvertador(int X, int Y) {
+	private static Point ElConvertador(int X, int Y) {
 
 		if (Y % 2 != 0) {
 			X++;
@@ -400,6 +401,11 @@ public class Carte {
 		return resultat;
 	}
 
+	/**
+	 * Le getteur de modifications.
+	 *
+	 * @return Les coordonnées des modifs effectuées.
+	 */
 	public ArrayList<Point> getModifications() {
 		return modifications;
 	}
