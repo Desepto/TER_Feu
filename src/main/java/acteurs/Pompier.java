@@ -31,6 +31,8 @@ public class Pompier extends Acteur {
 
 		// Le pompier décède.
 		if (!StillAlive()) {
+			maCarte.setnBpompiersMorts(maCarte.getnBpompiersMorts() + 1);
+			// On enregistre les stats des pompiers crevés.
 			for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
 				if (maCarte.getSesActeurs().get(i) instanceof Pompier) {
 					if (maCarte.getSesActeurs().get(i).X == X && maCarte.getSesActeurs().get(i).Y == Y) {

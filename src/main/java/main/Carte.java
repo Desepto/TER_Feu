@@ -30,6 +30,8 @@ public class Carte {
 	private ArrayList<Point> modifications;
 	// Contient toutes les coordonnées des cases qui ont été modifiées.
 
+	private int nBpompiersMorts = 0;
+
 	// El Constrouctador ! Ne pas toucher, utile pour les tests.
 	public Carte(int tailleCarte) {
 		this.tailleCarte = tailleCarte;
@@ -467,5 +469,87 @@ public class Carte {
 				resultat.add(courant);
 		}
 		return resultat;
+	}
+
+	/**
+	 * Nombre de pompiers sur une case précise.
+	 *
+	 * @param X
+	 *            La case souhaitée.
+	 * @param Y
+	 *            La case souhaitée.
+	 * @return le nombre de pompiers sur la case.
+	 */
+	public int getNbPompiers(int X, int Y) {
+		int res = 0;
+		for (Acteur courant : sesActeurs) {
+			if (courant instanceof Pompier) {
+				if (courant.getX() == X && courant.getY() == Y)
+					res++;
+			}
+		}
+		return res;
+	}
+
+	/**
+	 * Indique s'il y a un Canadair dans la case passée en argument.
+	 *
+	 * @param X
+	 * @param Y
+	 * @return true s'il y a un Canadair à la case indiquée. False sinon.
+	 */
+	public boolean presenceCanadair(int X, int Y) {
+		boolean res = false;
+		for (Acteur courant : sesActeurs) {
+			if (courant instanceof Canadair) {
+				if (courant.getX() == X && courant.getY() == Y)
+					res = true;
+			}
+		}
+		return res;
+	}
+
+	/**
+	 * Indique s'il y a un Pluie dans la case passée en argument.
+	 *
+	 * @param X
+	 * @param Y
+	 * @return true s'il y a un Pluie à la case indiquée. False sinon.
+	 */
+	public boolean presencePluie(int X, int Y) {
+		boolean res = false;
+		for (Acteur courant : sesActeurs) {
+			if (courant instanceof Pluie) {
+				if (courant.getX() == X && courant.getY() == Y)
+					res = true;
+			}
+		}
+		return res;
+	}
+
+	/**
+	 * Indique s'il y a un Feu dans la case passée en argument.
+	 *
+	 * @param X
+	 * @param Y
+	 * @return true s'il y a un Feu à la case indiquée. False sinon.
+	 */
+	public boolean presenceFeu(int X, int Y) {
+		boolean res = false;
+		for (Acteur courant : sesActeurs) {
+			if (courant instanceof Feu) {
+				if (courant.getX() == X && courant.getY() == Y)
+					res = true;
+			}
+		}
+		return res;
+	}
+
+	public int getnBpompiersMorts() {
+		return nBpompiersMorts;
+	}
+
+	public void setnBpompiersMorts(int nBpompiersMorts) {
+		this.nBpompiersMorts = nBpompiersMorts;
 	}
 }
