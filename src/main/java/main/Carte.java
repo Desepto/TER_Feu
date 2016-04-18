@@ -410,6 +410,10 @@ public class Carte {
 		return modifications;
 	}
 
+	public void setModifications(ArrayList<Point> truc) {
+		this.modifications = truc;
+	}
+
 	/**
 	 * Renvoie toutes les cases enflammées.
 	 *
@@ -464,6 +468,15 @@ public class Carte {
 		ArrayList<Acteur> resultat = new ArrayList<Acteur>();
 		for (Acteur courant : sesActeurs) {
 			if (courant instanceof Pompier)
+				resultat.add(courant);
+		}
+		return resultat;
+	}
+
+	public ArrayList<Acteur> getActeurCase(int x, int y) {
+		ArrayList<Acteur> resultat = new ArrayList<Acteur>();
+		for (Acteur courant : sesActeurs) {
+			if (courant.getX() == x && courant.getY() == y)
 				resultat.add(courant);
 		}
 		return resultat;
