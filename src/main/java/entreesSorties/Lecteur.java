@@ -1,7 +1,14 @@
 package entreesSorties;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
+import enumerations.Direction;
+import enumerations.Force;
+import enumerations.NiveauDensite;
 import main.Carte;
 import terrains.CoupeFeu;
 import terrains.Foret;
@@ -88,5 +95,143 @@ public class Lecteur {
 			}
 		}
 		return maCarte;
+	}
+
+	/**
+	 * @param chaine
+	 * @return
+	 */
+	public static ArrayList<String> sanslesPointvirgules(String chaine) {
+		ArrayList<String> temp = new ArrayList<String>();
+		for (String resultat : chaine.split(";")) {
+			temp.add(resultat);
+		}
+		return temp;
+
+	}
+
+	/**
+	 * @param chaine
+	 * @return
+	 */
+
+	public static ArrayList<String> sanslesVirgules(String chaine) {
+		ArrayList<String> temp = new ArrayList<String>();
+		for (String resultat : chaine.split(",")) {
+			temp.add(resultat);
+		}
+		return temp;
+
+	}
+
+	/**
+	 * @param nomFichier
+	 * @return
+	 */
+	public static Carte creemapFichier(String nomFichier) {
+
+		BufferedReader lecteurAvecBuffer = null;
+		String ligne;
+		try {
+			lecteurAvecBuffer = new BufferedReader(new FileReader(nomFichier));
+			Carte maCarte = null;
+			int taille = 0;
+			Force forceVent = null;
+			Direction directionVent = null;
+
+			for (int i = 0; (ligne = lecteurAvecBuffer.readLine()) != null; i++) {
+
+				if (i == 0) {
+					taille = Integer.parseInt(ligne);
+				} else if (i == 1) {
+					forceVent = Force.valueOf(ligne);
+				} else if (i == 2) {
+					directionVent = Direction.valueOf(ligne);
+					maCarte = new Carte(taille, forceVent, directionVent);
+				} else if (i < taille + 3) {
+					ArrayList<String> liste = sanslesPointvirgules(ligne);
+					for (int x = 0; x < liste.size(); x++) {
+
+						ArrayList<String> liste2 = sanslesVirgules(liste.get(x));
+						String typeCase = null;
+						int humidite = 0;
+						NiveauDensite densite = null;
+						for (int k = 0; k < liste2.size(); k++) {
+
+							if (k == 0) {
+								typeCase = liste2.get(k);
+							} else if (k == 1) {
+								humidite = Integer.parseInt(liste2.get(k));
+							} else if (k == 2) {
+								densite = NiveauDensite.valueOf(liste2.get(k));
+							}
+						}
+						switch (typeCase) {
+						case "Prairie":
+							Prairie p = new Prairie();
+							p.setDensite(densite);
+							p.setHumidite(humidite);
+							maCarte.transformeTerrain(x, i - 3, p);
+							break;
+						case "Lac":
+							Lac l = new Lac();
+							l.setDensite(densite);
+							l.setHumidite(humidite);
+							maCarte.transformeTerrain(x, i - 3, l);
+							break;
+						case "Maison":
+							Maison m = new Maison();
+							m.setDensite(densite);
+							m.setHumidite(humidite);
+							maCarte.transformeTerrain(x, i - 3, m);
+							break;
+						case "CoupeFeu":
+							CoupeFeu c = new CoupeFeu();
+							c.setDensite(densite);
+							c.setHumidite(humidite);
+							maCarte.transformeTerrain(x, i - 3, c);
+							break;
+						case "Plaine":
+							Plaine pl = new Plaine();
+							pl.setDensite(densite);
+							pl.setHumidite(humidite);
+							maCarte.transformeTerrain(x, i - 3, pl);
+							break;
+						case "Foret":
+							Foret f = new Foret();
+							f.setDensite(densite);
+							f.setHumidite(humidite);
+							maCarte.transformeTerrain(x, i - 3, f);
+							break;
+						case "Rocher":
+							Rocher r = new Rocher();
+							r.setDensite(densite);
+							r.setHumidite(humidite);
+							maCarte.transformeTerrain(x, i - 3, r);
+							break;
+						case "Route":
+							Route ro = new Route();
+							ro.setDensite(densite);
+							ro.setHumidite(humidite);
+							maCarte.transformeTerrain(x, i - 3, ro);
+							break;
+						default:
+							System.out.println("BUGGGGGGGGGGGGGGGGGGG;");
+							break;
+
+						}
+					}
+				} else {
+					System.out.println(ligne);
+				}
+				// System.out.println(ligne);
+			}
+			lecteurAvecBuffer.close();
+			return maCarte;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 }
