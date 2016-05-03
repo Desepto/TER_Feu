@@ -459,8 +459,7 @@ public class Carte {
 	/**
 	 * Renvoie toutes les cases Pompiérrées.
 	 *
-	 * @return une liste de Point correspondant à des cases dotées d'acteur
-	 *         Pompier.
+	 * @return une liste d'acteurs Pompier.
 	 */
 	public ArrayList<Acteur> getPompier() {
 		ArrayList<Acteur> resultat = new ArrayList<Acteur>();
@@ -558,5 +557,14 @@ public class Carte {
 	 */
 	public void nettoieModifications() {
 		this.modifications.clear();
+	}
+
+	/**
+	 * Le nombre de pompiers sur toute la carte.
+	 * 
+	 * @return nombre de pompiers sur la carte;
+	 */
+	public int nBPompiers() {
+		return getPompier().size();
 	}
 }
