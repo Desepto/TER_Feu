@@ -31,6 +31,30 @@ public class Ecrivain {
 		this.nomFichier = nomFichier;
 	}
 
+	public static int nombreCaseBrule(Carte maCarte) {
+		int compteur = 0;
+		for (int Y = 0; Y < maCarte.getTabHexagones()[0].length; Y++) {
+			for (int X = 0; X < maCarte.getTabHexagones()[0].length; X++) {
+				if (maCarte.getTerrain(X, Y).getPV() == 0) {
+					compteur += 1;
+				}
+			}
+		}
+		return compteur;
+	}
+
+	public static int nombreCaseIntacte(Carte maCarte) {
+		int compteur = 0;
+		for (int Y = 0; Y < maCarte.getTabHexagones()[0].length; Y++) {
+			for (int X = 0; X < maCarte.getTabHexagones()[0].length; X++) {
+				if (maCarte.getTerrain(X, Y).getPV() != 0) {
+					compteur += 1;
+				}
+			}
+		}
+		return compteur;
+	}
+
 	/**
 	 * @param maCarte
 	 * @param nomFichier
@@ -114,7 +138,7 @@ public class Ecrivain {
 			pw.println(1 + ";");
 			pw.println(1 + ";");
 			pw.println(maCarte.getTailleCarte() + ";" + maCarte.getTailleCarte() + ";");
-			pw.println("–––––––––––––––––––––––––––––––––––––––Anouar;");
+			pw.println("–––––––––––––––––––––––––––––––––––––––;");
 
 			for (int Y = 0; Y < maCarte.getTailleCarte(); Y++) {
 				for (int X = 0; X < maCarte.getTailleCarte(); X++) {
@@ -253,13 +277,21 @@ public class Ecrivain {
 	/**
 	 * @param nomFichier
 	 */
-	public void printFin() {
+	public void printFin(Carte carte) {
 		File f = new File(nomFichier);
 		try {
 			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f, true)));
-			pw.println("------------------------Anouar");
+			pw.println("------------------------;");
+			int nbCaseIntacte = nombreCaseIntacte(carte);
+			int nbCaseBrule = nombreCaseBrule(carte);
+			pw.println("Nombre de case intacte : " + Integer.toString(nbCaseIntacte));
+			pw.println("Nombre de case brûlé : " + Integer.toString(nbCaseBrule));
+			double p = new Double(new Integer(nbCaseBrule).doubleValue()
+					/ new Integer(carte.getTailleCarte() * carte.getTailleCarte()).doubleValue());
+			pw.println("Pourcentage de case brûlé : " + p);
+			pw.println("Nombre de pompier déployé : " + Integer.toString(carte.nBPompiers()));
+			pw.println("Nombre de pompier mort : " + Integer.toString(carte.getnBpompiersMorts()));
 			pw.close();
-
 		} catch (IOException e) {
 			// Celle-ci se produit lors d'une erreur d'�criture ou de lecture
 			e.printStackTrace();

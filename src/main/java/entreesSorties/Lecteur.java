@@ -124,6 +124,15 @@ public class Lecteur {
 
 	}
 
+	public static ArrayList<String> sansles2Points(String chaine) {
+		ArrayList<String> temp = new ArrayList<String>();
+		for (String resultat : chaine.split(":")) {
+			temp.add(resultat);
+		}
+		return temp;
+
+	}
+
 	/**
 	 * @param nomFichier
 	 * @return
@@ -222,9 +231,20 @@ public class Lecteur {
 						}
 					}
 				} else {
-					System.out.println(ligne);
+					ArrayList<String> liste3 = sansles2Points(ligne);
+					String type;
+					int temp;
+					for (int l = 0; l < liste3.size() && liste3.size() == 2; l++) {
+
+						if (l == 0) {
+							System.out.print("TYpe : " + liste3.get(l));
+							type = liste3.get(l);
+						} else if (l == 1) {
+							System.out.println(" Temps : " + liste3.get(l));
+							temp = Integer.parseInt(liste3.get(l));
+						}
+					}
 				}
-				// System.out.println(ligne);
 			}
 			lecteurAvecBuffer.close();
 			return maCarte;
