@@ -552,4 +552,11 @@ public class Carte {
 	public void setnBpompiersMorts(int nBpompiersMorts) {
 		this.nBpompiersMorts = nBpompiersMorts;
 	}
+
+	/**
+	 * Supprime l'historique des modifications.
+	 */
+	public void nettoieModifications() {
+		this.modifications.clear();
+	}
 }
