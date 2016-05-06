@@ -18,6 +18,19 @@ import main.Carte;
 public class Ecrivain {
 
 	private String nomFichier;
+	private final String prairie = "Prairie";
+	private final String rocher = "Rocher";
+	private final String lac = "Lac";
+	private final String route = "Route";
+	private final String plaine = "Plaine";
+	private final String maison = "Maison";
+	private final String foret = "Foret";
+	private final String coupeFeu = "CoupeFeu";
+	private final String caseDead = "CaseDead";
+	private final String feu = "Feu";
+	private final String pluie = "Pluie";
+	private final String canadair = "Canadair";
+	private final String pompier = "Pompier";
 
 	public String getNomFichier() {
 		return nomFichier;
@@ -143,33 +156,33 @@ public class Ecrivain {
 			for (int Y = 0; Y < maCarte.getTailleCarte(); Y++) {
 				for (int X = 0; X < maCarte.getTailleCarte(); X++) {
 					if (maCarte.getTerrain(X, Y).getPV() == 0) {
-						pw.print("CaseDeadddddddddddddd;");
+						pw.print(caseDead + ";");
 					} else {
 						switch (maCarte.getTerrain(X, Y).getClass().getSimpleName()) {
 
 						case "Prairie":
-							pw.print(maCarte.getTerrain(X, Y).getClass().getSimpleName() + ";");
+							pw.print(prairie + ";");
 							break;
 						case "Lac":
-							pw.print(maCarte.getTerrain(X, Y).getClass().getSimpleName() + ";");
+							pw.print(lac + ";");
 							break;
 						case "Maison":
-							pw.print(maCarte.getTerrain(X, Y).getClass().getSimpleName() + ";");
+							pw.print(maison + ";");
 							break;
 						case "CoupeFeu":
-							pw.print(maCarte.getTerrain(X, Y).getClass().getSimpleName() + ";");
+							pw.print(coupeFeu + ";");
 							break;
 						case "Plaine":
-							pw.print(maCarte.getTerrain(X, Y).getClass().getSimpleName() + ";");
+							pw.print(plaine + ";");
 							break;
 						case "Foret":
-							pw.print(maCarte.getTerrain(X, Y).getClass().getSimpleName() + ";");
+							pw.print(foret + ";");
 							break;
 						case "Rocher":
-							pw.print(maCarte.getTerrain(X, Y).getClass().getSimpleName() + ";");
+							pw.print(rocher + ";");
 							break;
 						case "Route":
-							pw.print(maCarte.getTerrain(X, Y).getClass().getSimpleName() + ";");
+							pw.print(route + ";");
 							break;
 						default:
 							pw.print("BUGGGGGGGGGGGGGGGGGGG" + ";");
@@ -201,33 +214,32 @@ public class Ecrivain {
 				pw.print((int) X + ";");
 				pw.print((int) Y + ";");
 				if (carte.getTerrain((int) X, (int) Y).getPV() == 0) {
-					pw.print("CaseDeadddddddddddddd;");
+					pw.print(caseDead + ";");
 				} else {
 					switch (carte.getTerrain((int) X, (int) Y).getClass().getSimpleName()) {
-
 					case "Prairie":
-						pw.print(carte.getTerrain((int) X, (int) Y).getClass().getSimpleName());
+						pw.print(prairie);
 						break;
 					case "Lac":
-						pw.print(carte.getTerrain((int) X, (int) Y).getClass().getSimpleName());
+						pw.print(lac);
 						break;
 					case "Maison":
-						pw.print(carte.getTerrain((int) X, (int) Y).getClass().getSimpleName());
+						pw.print(maison);
 						break;
 					case "CoupeFeu":
-						pw.print(carte.getTerrain((int) X, (int) Y).getClass().getSimpleName());
+						pw.print(coupeFeu);
 						break;
 					case "Plaine":
-						pw.print(carte.getTerrain((int) X, (int) Y).getClass().getSimpleName());
+						pw.print(plaine);
 						break;
 					case "Foret":
-						pw.print(carte.getTerrain((int) X, (int) Y).getClass().getSimpleName());
+						pw.print(foret);
 						break;
 					case "Rocher":
-						pw.print(carte.getTerrain((int) X, (int) Y).getClass().getSimpleName());
+						pw.print(rocher);
 						break;
 					case "Route":
-						pw.print(carte.getTerrain((int) X, (int) Y).getClass().getSimpleName());
+						pw.print(route);
 						break;
 					default:
 						pw.print("BUGGGGGGGGGGGGGGGGGGG" + ";");
@@ -236,32 +248,32 @@ public class Ecrivain {
 					}
 				}
 				if (carte.presenceCanadair((int) X, (int) Y)) {
-					pw.print("-Canadair");
+					pw.print("-" + canadair);
 				}
 				if (carte.presenceFeu((int) X, (int) Y)) {
-					pw.print("-Feu");
+					pw.print("-" + feu);
 				}
 				if (carte.presencePluie((int) X, (int) Y)) {
-					pw.print("-Pluie");
+					pw.print("-" + pluie);
 				}
 				if (carte.getNbPompiers((int) X, (int) Y) == 1) {
-					pw.print("-Pompier1");
+					pw.print("-" + pompier + "1");
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 2) {
-					pw.print("-Pompier2");
+					pw.print("-" + pompier + "2");
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 3) {
-					pw.print("-Pompier3");
+					pw.print("-" + pompier + "3");
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 4) {
-					pw.print("-Pompier4");
+					pw.print("-" + pompier + "4");
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 5) {
-					pw.print("-Pompier5");
+					pw.print("-" + pompier + "5");
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 6) {
-					pw.print("-Pompier6");
+					pw.print("-" + pompier + "6");
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 7) {
-					pw.print("-Pompier7");
+					pw.print("-" + pompier + "7");
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 8) {
-					pw.print("-Pompier8");
+					pw.print("-" + pompier + "8");
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 9) {
-					pw.print("-Pompier9");
+					pw.print("-" + pompier + "9");
 				}
 				pw.print(";");
 				pw.println();
