@@ -37,6 +37,7 @@ public class Evolueur {
 		// FEU/PLUIE/POMPIER/CANADAIR
 		while (this.tic < 15 || this.presenceFeu()) {
 			// vider la liste des modifi�s
+			this.c.nettoieModifications();
 			for (Acteur a : this.c.getFeu())
 				a.agi(this.c);
 
@@ -48,7 +49,7 @@ public class Evolueur {
 			this.e.printChangement(this.c, this.tic);
 			tic++;
 		}
-		this.e.printFin();
+		this.e.printFin(this.c);
 	}
 
 	// Il serait intelligent de mettre cette m�thode dans Carte
