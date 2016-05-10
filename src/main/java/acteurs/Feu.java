@@ -113,12 +113,6 @@ public class Feu extends Acteur {
 						 * dans l'historique des modifs de la carte.
 						 */
 						maCarte.getModifications().add(new Point(this.X, this.Y));
-						/**
-						 * Que le feu ait tout brûlé (disparition donc) on non,
-						 * il modifie sa case dans tous les cas. On le note donc
-						 * dans l'historique des modifs de la carte.
-						 */
-						maCarte.getModifications().add(new Point(this.X, this.Y));
 						Feu monFeu = new Feu(yMettreLeFeu.x, yMettreLeFeu.y);
 						maCarte.ajoutActeur(monFeu);
 						/**
