@@ -76,7 +76,6 @@ public class Carte {
 
 		X = ElConvertador(X, Y).x;
 		Y = ElConvertador(X, Y).y;
-		System.out.println("X = " + X + "Y = " + Y);
 		return this.tabHexagones[X][Y];
 	}
 

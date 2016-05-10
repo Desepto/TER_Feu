@@ -87,7 +87,8 @@ public class Feu extends Acteur {
 
 			ArrayList<Boolean> feuVoisins = propage(maCarte);
 			// On lance 6 dés pour tenter de propager le feu à ses voisins.
-			ArrayList<Point> mesVoisinsCoord = maCarte.voisinageCoord(X, Y);
+			ArrayList<Point> mesVoisinsCoord = maCarte
+					.superVoisinageCoord(X, Y);
 
 			boolean allumeeeeeerLeFeuuuu = true; // Lire la suite pour
 													// comprendre.
@@ -105,6 +106,9 @@ public class Feu extends Acteur {
 				if (feuVoisins.get(z) == true) {
 					if (allumeeeeeerLeFeuuuu) {
 						Point yMettreLeFeu = mesVoisinsCoord.get(z);
+						if (yMettreLeFeu.x == 0 && yMettreLeFeu.y == 1) {
+							System.err.println("WARNING");
+						}
 						// On fout le feu au voisin courant.
 						if (yMettreLeFeu.x >= 0
 								&& yMettreLeFeu.y >= 0

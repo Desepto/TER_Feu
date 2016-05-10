@@ -34,7 +34,7 @@ public class Evolueur {
 		// test tmtc
 		ArrayList<Acteur> list = new ArrayList<Acteur>();
 		// list.add(new Feu(3, 3));
-		list.add(new Feu(0, 0));
+		list.add(new Feu(25, 25));
 		// list.add(new Feu(6, 6));
 		// list.add(new Feu(9, 9));
 		Evenement test = new Evenement(list);
@@ -68,14 +68,17 @@ public class Evolueur {
 	public boolean presenceFeu() {
 		for (Acteur a : this.c.getSesActeurs())
 			if (a instanceof Feu) {
-				System.out.println(this.c.getSesActeurs().size() + " x :"
-						+ this.c.getSesActeurs().get(0).getX() + " y :"
-						+ this.c.getSesActeurs().get(0).getY());
+				/*
+				 * System.out.println(this.c.getSesActeurs().size() + " x :" +
+				 * this.c.getSesActeurs().get(0).getX() + " y :" +
+				 * this.c.getSesActeurs().get(0).getY());
+				 */
 				return true;
 			}
 
 		// System.out.println(this.c.getSesActeurs().toString());
-		System.out.println(" TA MAMAN : " + this.c.getSesActeurs().toString());
+		// System.out.println(" TA MAMAN : " +
+		// this.c.getSesActeurs().toString());
 		return false;
 	}
 
