@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 import acteurs.Acteur;
 import acteurs.Feu;
 import entreesSorties.Ecrivain;
@@ -28,6 +30,15 @@ public class Evolueur {
 		this.g = new Gestionnaire();
 		this.e = new Ecrivain(fichierSortie);
 		e.initFichier(this.c);
+
+		// test tmtc
+		ArrayList<Acteur> list = new ArrayList<Acteur>();
+		// list.add(new Feu(3, 3));
+		list.add(new Feu(0, 0));
+		// list.add(new Feu(6, 6));
+		// list.add(new Feu(9, 9));
+		Evenement test = new Evenement(list);
+		g.ajoutEvenement(test);
 	}
 
 	public void deroulement(String nomFichier) {
@@ -35,12 +46,11 @@ public class Evolueur {
 		// ICI IL FAUDRA CHANGER, METTRE UN GETTER QUI RENVOIE JUSTE LE
 		// FEU/PLUIE/POMPIER/CANADAIR
 		while (this.tic < 15 || this.presenceFeu()) {
-			// vider la liste des modifi�s
 			this.c.nettoieModifications();
+
 			for (Acteur a : this.c.getFeu())
 				a.agi(this.c);
 
-			// RAJOUTER UNE METHODE POUR RECUPERER TOUTE L'ARRAYLIST
 			try {
 				for (Acteur a : this.g.getUnEvent(this.tic).getActeurs()) {
 					this.c.ajoutActeur(a);
@@ -57,8 +67,15 @@ public class Evolueur {
 	// Il serait intelligent de mettre cette m�thode dans Carte
 	public boolean presenceFeu() {
 		for (Acteur a : this.c.getSesActeurs())
-			if (a instanceof Feu)
+			if (a instanceof Feu) {
+				System.out.println(this.c.getSesActeurs().size() + " x :"
+						+ this.c.getSesActeurs().get(0).getX() + " y :"
+						+ this.c.getSesActeurs().get(0).getY());
 				return true;
+			}
+
+		// System.out.println(this.c.getSesActeurs().toString());
+		System.out.println(" TA MAMAN : " + this.c.getSesActeurs().toString());
 		return false;
 	}
 

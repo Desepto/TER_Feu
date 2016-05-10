@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import enumerations.Direction;
-import enumerations.Force;
-import enumerations.NiveauDensite;
 import main.Carte;
 import terrains.CoupeFeu;
 import terrains.Foret;
@@ -19,12 +16,15 @@ import terrains.Prairie;
 import terrains.Rocher;
 import terrains.Route;
 import terrains.TerrainVide;
+import enumerations.Direction;
+import enumerations.Force;
+import enumerations.NiveauDensite;
 
 /**
  * Classe qui lit le fichier de base et le transforme en une map
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 
 public class Lecteur {
@@ -33,7 +33,7 @@ public class Lecteur {
 	 * Méthode statique pour générer une carte "en dur" sans passer par la
 	 * lecture d'un fichier. Utile pour faire une carte de base avec des
 	 * terrains aléatoires.
-	 *
+	 * 
 	 * @return la carte remplie.
 	 */
 	public static Carte carteEnDur() {
@@ -67,7 +67,7 @@ public class Lecteur {
 					maCarte.getTabHexagones()[X][Y] = new Route();
 					break;
 				case 1:
-					maCarte.getTabHexagones()[X][Y] = new Rocher();
+					maCarte.getTabHexagones()[X][Y] = new Route();
 					break;
 				case 2:
 					maCarte.getTabHexagones()[X][Y] = new Prairie();
@@ -79,13 +79,13 @@ public class Lecteur {
 					maCarte.getTabHexagones()[X][Y] = new Maison();
 					break;
 				case 5:
-					maCarte.getTabHexagones()[X][Y] = new Lac();
+					maCarte.getTabHexagones()[X][Y] = new Maison();
 					break;
 				case 6:
 					maCarte.getTabHexagones()[X][Y] = new Foret();
 					break;
 				case 7:
-					maCarte.getTabHexagones()[X][Y] = new CoupeFeu();
+					maCarte.getTabHexagones()[X][Y] = new Foret();
 					break;
 				default:
 					maCarte.getTabHexagones()[X][Y] = new TerrainVide();

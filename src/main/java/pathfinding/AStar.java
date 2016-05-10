@@ -16,7 +16,7 @@ public class AStar {
 
 	public static Point deplacement(Carte c, Point destination, Point depart,
 			int coutMax) {
-
+		// A TRAITER : CASES INACCESSIBLES + Cases à ne plus traiter
 		ArrayList<Node> closedList = new ArrayList<Node>();
 		ArrayList<Node> openList = new ArrayList<Node>();
 		openList.add(new Node(depart.x, depart.y, 0, 0));
@@ -60,6 +60,7 @@ public class AStar {
 			}
 			closedList.add(n);
 		}
+		// Renvoit le noeud accessible avec la plus petite heuristique
 		Node max = closedList.get(0);
 		for (Node parcours : closedList) {
 			if (parcours.heuristique < max.heuristique)
