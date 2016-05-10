@@ -13,7 +13,7 @@ import terrains.Terrain;
 /**
  * @author Nicolas Allumeeeeeeeeeeeeeeez, le feu ! Allumeeeeeeeeeeeeeez le
  *         feuuuu !
- * 
+ *
  */
 public class Feu extends Acteur {
 
@@ -30,9 +30,9 @@ public class Feu extends Acteur {
 
 	/**
 	 * Déclenche l'apocalypse de l'armageddon sur la terre.
-	 * 
+	 *
 	 * Grosse perte d'humidité et 1 PV sur la case centrale au premier toc.
-	 * 
+	 *
 	 * Perte de 1 PV et humidité sur case centrale à tous les tocs.
 	 */
 	@Override
@@ -40,9 +40,10 @@ public class Feu extends Acteur {
 
 		// On essaie pas de mettre le feu n'importe où...
 		// On est entre personnes civilisées.
-		if (!maCarte.getTerrain(X, Y).isInflammable()) {
+		if (!maCarte.getTabHexagones(X, Y).isInflammable()) {
 
-			// System.out.println("Euh, Herr General, vous voulez vraiment mettre le feu au lac ??");
+			// System.out.println("Euh, Herr General, vous voulez vraiment
+			// mettre le feu au lac ??");
 
 			return;
 		}
@@ -50,11 +51,10 @@ public class Feu extends Acteur {
 		/**
 		 * On gère le cas où le feu a tout brûlé : On le supprime des acteurs.
 		 */
-		if (maCarte.getTerrain(X, Y).getPV() <= 0) {
+		if (maCarte.getTabHexagones(X, Y).getPV() <= 0) {
 			for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
 				if (maCarte.getSesActeurs().get(i) instanceof Feu) {
-					if (maCarte.getSesActeurs().get(i).X == X
-							&& maCarte.getSesActeurs().get(i).Y == Y) {
+					if (maCarte.getSesActeurs().get(i).X == X && maCarte.getSesActeurs().get(i).Y == Y) {
 						// Suppression du feu.
 						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
 						maCarte.getSesActeurs().remove(i + 1);
@@ -70,25 +70,24 @@ public class Feu extends Acteur {
 		 * laisser 1 tic au feu pour se propager à ses voisins.)
 		 */
 		if (apparition) {
-			maCarte.getTerrain(X, Y).asseche(assechement);
+			maCarte.getTabHexagones(X, Y).asseche(assechement);
 			// On baisse l'humidité d'un montant exceptionnel au début.
-			if (maCarte.getTerrain(X, Y).getPV() > 0)
-				maCarte.getTerrain(X, Y).brule(1);
+			if (maCarte.getTabHexagones(X, Y).getPV() > 0)
+				maCarte.getTabHexagones(X, Y).brule(1);
 			// On décrémente les PV du terrain de 1.
 			this.apparition = false;
 		} else {
-			maCarte.getTerrain(X, Y).asseche(intensiteFeu);
+			maCarte.getTabHexagones(X, Y).asseche(intensiteFeu);
 			// On baisse l'humidite d'un montant classique.
-			if (maCarte.getTerrain(X, Y).getPV() > 0)
-				maCarte.getTerrain(X, Y).brule(1);
+			if (maCarte.getTabHexagones(X, Y).getPV() > 0)
+				maCarte.getTabHexagones(X, Y).brule(1);
 			// On décrémente les PV du terrain de 1.
 
 			// On s'occupe maintenant de la propagation.
 
 			ArrayList<Boolean> feuVoisins = propage(maCarte);
 			// On lance 6 dés pour tenter de propager le feu à ses voisins.
-			ArrayList<Point> mesVoisinsCoord = maCarte
-					.superVoisinageCoord(X, Y);
+			ArrayList<Point> mesVoisinsCoord = maCarte.voisinageCoord(X, Y);
 
 			boolean allumeeeeeerLeFeuuuu = true; // Lire la suite pour
 													// comprendre.
@@ -97,7 +96,7 @@ public class Feu extends Acteur {
 			 * On parcourt la liste de Bouléens feuVoisins qui contient les
 			 * résultats du tirage et mesVoisinsCoord qui contient les
 			 * coordonnées des 6 voisins de this. (indice de parcours z).
-			 * 
+			 *
 			 * Il faut que mon z courant de feuVoisins soit true pour mettre le
 			 * feu au voisin z. Si c'est le cas, il faut tester qu'il n'y ait
 			 * pas déjà un feu dessus. C'est à ça que sert allumeeeeeerLeFeuuuu.
@@ -106,19 +105,12 @@ public class Feu extends Acteur {
 				if (feuVoisins.get(z) == true) {
 					if (allumeeeeeerLeFeuuuu) {
 						Point yMettreLeFeu = mesVoisinsCoord.get(z);
-						if (yMettreLeFeu.x == 0 && yMettreLeFeu.y == 1) {
-							System.err.println("WARNING");
-						}
 						// On fout le feu au voisin courant.
-						if (yMettreLeFeu.x >= 0
-								&& yMettreLeFeu.y >= 0
-								&& !maCarte.presenceFeu(yMettreLeFeu.x,
-										yMettreLeFeu.y)) {
+						if (yMettreLeFeu.x >= 0 && yMettreLeFeu.y >= 0
+								&& !maCarte.presenceFeu(yMettreLeFeu.x, yMettreLeFeu.y)) {
 							Feu monFeu = new Feu(yMettreLeFeu.x, yMettreLeFeu.y);
-							if (maCarte.getTerrain(yMettreLeFeu.x,
-									yMettreLeFeu.y).isInflammable()
-									&& maCarte.getTerrain(yMettreLeFeu.x,
-											yMettreLeFeu.y).getPV() > 0) {
+							if (maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).isInflammable()
+									&& maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).getPV() > 0) {
 								maCarte.ajoutActeur(monFeu);
 								/**
 								 * On ajoute les coordonnées du voisin modifié
@@ -155,18 +147,18 @@ public class Feu extends Acteur {
 	/**
 	 * La fameuse fonction à équilibrer. Une carte est nécessaire pour récupérer
 	 * force et direction du vent.
-	 * 
+	 *
 	 * @return Une liste de bouléens. Vrai ou faux pour chaque voisin, s'il
 	 *         commence à brûler ou non.
 	 */
 
 	private ArrayList<Boolean> propage(Carte maCarte) {
-		double transmission = maCarte.getTerrain(X, Y).getTrans();
+		double transmission = maCarte.getTabHexagones(X, Y).getTrans();
 		// La transmission du terrain sur lequel y a le feu.
 		double humidite;
-		ArrayList<Point> mesVoisinsPoint = maCarte.superVoisinageCoord(X, Y);
+		ArrayList<Point> mesVoisinsPoint = maCarte.voisinageCoord(X, Y);
 		// Les coordonnées des voisins.
-		ArrayList<Terrain> mesVoisins = maCarte.superVoisinage(X, Y);
+		ArrayList<Terrain> mesVoisins = maCarte.voisinage(X, Y);
 		// Les voisins, pour avoir leur transmissions.
 		ArrayList<Boolean> resultat = new ArrayList<Boolean>();
 		// La liste finale, vrai ou faux pour chaque voisin s'il crame ou pas.
@@ -223,7 +215,7 @@ public class Feu extends Acteur {
 
 	/**
 	 * Petite fonction interne pour faire un tirage de 0 à 99.
-	 * 
+	 *
 	 * @return le nombre tiré.
 	 */
 	private static int probaAlea() {
@@ -237,7 +229,7 @@ public class Feu extends Acteur {
 	/**
 	 * Gère la force et la direction du vent, et renvoie une probas associée
 	 * pour chaque voisin.
-	 * 
+	 *
 	 * @return La liste de probas venant du vent à considérer pour la
 	 *         propagation.
 	 */

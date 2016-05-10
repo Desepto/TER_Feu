@@ -3,8 +3,6 @@ package main;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import terrains.Terrain;
-import terrains.TerrainVide;
 import acteurs.Acteur;
 import acteurs.Anouar;
 import acteurs.Canadair;
@@ -13,12 +11,14 @@ import acteurs.Pluie;
 import acteurs.Pompier;
 import enumerations.Direction;
 import enumerations.Force;
+import terrains.Terrain;
+import terrains.TerrainVide;
 
 /**
  * Carte contenant le tableau des terrains.
- * 
+ *
  * @author Nicolas
- * 
+ *
  */
 public class Carte {
 
@@ -55,7 +55,7 @@ public class Carte {
 	/**
 	 * NE PAS UTILISER, utiliser getTerrain() à la place. Ne travaille pas avec
 	 * les coordonnées abstraites. ACHTUNG Seul HER GENERAL peut utiliser ceci.
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 * @return Terrain
@@ -67,7 +67,7 @@ public class Carte {
 
 	/**
 	 * Retourne le terrain figurant aux coordonnées passées en paramètre.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @return Le terrain associé à la position X,Y
@@ -81,7 +81,7 @@ public class Carte {
 
 	/**
 	 * Accesseur peu utile.
-	 * 
+	 *
 	 * @return Terrain[][]
 	 */
 	public Terrain[][] getTabHexagones() {
@@ -98,7 +98,7 @@ public class Carte {
 
 	/**
 	 * Transforme un terrain de la carte en un autre, passé en paramètre.
-	 * 
+	 *
 	 * @param nouveau
 	 *            Le nouveau terrain
 	 * @param X
@@ -107,8 +107,7 @@ public class Carte {
 	 */
 	public void transformeTerrain(int X, int Y, Terrain nouveau) {
 		if (X > 29 || Y > 29 || X < 0 || Y < 0) {
-			System.out
-					.println("Ce Terrain n'est même pas sur la carte, pff, tu veux transformer quoi ? Anouar ?");
+			System.out.println("Ce Terrain n'est même pas sur la carte, pff, tu veux transformer quoi ? Anouar ?");
 			return;
 		}
 		X = ElConvertador(X, Y).x;
@@ -120,7 +119,7 @@ public class Carte {
 	 * vérifie que le voisin choisi existe bien dans le tableau. Si ce n'est pas
 	 * le cas, renvoie un TerrainVide. Permet de ne pas sortir du tableau
 	 * (OutOfBounds Exception).
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @return Le terrain, ou un terrain vide si on est n'importe où.
@@ -136,10 +135,10 @@ public class Carte {
 	 * vérifie que le voisin choisi existe bien dans le tableau. Si ce n'est pas
 	 * le cas, renvoie un TerrainVide. Permet de ne pas sortir du tableau
 	 * (OutOfBounds Exception).
-	 * 
+	 *
 	 * Plus de vérifications sont nécessaires par rapport à ajotuListeVoisins
 	 * car on doit checker les TerrainsVide qui sont dans le tableau.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @return Les coordonnées du terrain, ou (-1;-1) si on est n'importe où.
@@ -149,7 +148,7 @@ public class Carte {
 		if (X == 0 && Y % 2 != 0)
 			return new Point(-1, -1);
 
-		if (X == tailleCarte /* && Y % 2 == 0 */)
+		if (X == tailleCarte && Y % 2 == 0)
 			return new Point(-1, -1);
 
 		if (X < tailleCarte + 1 && Y < tailleCarte && X >= 0 && Y >= 0)
@@ -160,7 +159,7 @@ public class Carte {
 
 	/**
 	 * Renvoie une liste chaînée contenant les 6 voisins d'une case donnée.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @return la liste de voisins
@@ -168,14 +167,12 @@ public class Carte {
 	public ArrayList<Terrain> voisinage(int X, int Y) {
 
 		if (X > tailleCarte + 1 || Y > tailleCarte) {
-			System.out
-					.println("Mais quelle grosse cave, t'es sorti du tableau avec tes valeurs à la con !");
+			System.out.println("Mais quelle grosse cave, t'es sorti du tableau avec tes valeurs à la con !");
 			return null;
 		}
 
 		if (tabHexagones[X][Y] instanceof TerrainVide) {
-			System.out
-					.println("Ce Terrain ne figure pas dans la carte. Au Bucheeeeer !!!");
+			System.out.println("Ce Terrain ne figure pas dans la carte. Au Bucheeeeer !!!");
 			return null;
 		} // Impossible d'afficher les voisins d'une case inexistante.
 
@@ -209,7 +206,7 @@ public class Carte {
 	/**
 	 * Renvoie l'unique voisin d'une case donnée, avec une direction donnée. Cf
 	 * classe Enum Direction.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @param maDirection
@@ -239,8 +236,7 @@ public class Carte {
 		}
 
 		if (monTerrain instanceof TerrainVide) {
-			System.out
-					.println("Ce Terrain ne figure pas dans la carte. Au Bucheeeeer !!!");
+			System.out.println("Ce Terrain ne figure pas dans la carte. Au Bucheeeeer !!!");
 		}
 		return monTerrain;
 	}
@@ -248,7 +244,7 @@ public class Carte {
 	/**
 	 * Convertit des coordonnées abstraites en coordonnées réelles. Cf google
 	 * Doc.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @return Un point contenant les nouvelles coordonnées.
@@ -265,7 +261,7 @@ public class Carte {
 	 * La VRAIE fonction de voisinage. Qui travaille avec des coordonnées
 	 * abstraites, celle avec laquelle on travaillera pour le reste du
 	 * programme.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @return la liste de voisins.
@@ -280,7 +276,7 @@ public class Carte {
 	/**
 	 * La VRAIE fonction pour avoir un voisin à partir de coordonnées et d'une
 	 * direction. Travaille avec des coordonnées réelles.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @param maDirection
@@ -316,7 +312,7 @@ public class Carte {
 	/**
 	 * NE PAS UTILISER, FONCTION OUTIL. Pareil que Voisinage mais renvoie des
 	 * coordonnées au lieu de Terrain.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @return La liste des 6 points correspondant aux coordonnées des voisins.
@@ -324,14 +320,12 @@ public class Carte {
 	public ArrayList<Point> voisinageCoord(int X, int Y) {
 
 		if (X > tailleCarte + 1 || Y > tailleCarte) {
-			System.out
-					.println("Mais quelle grosse cave, t'es sorti du tableau avec tes valeurs à la con !");
+			System.out.println("Mais quelle grosse cave, t'es sorti du tableau avec tes valeurs à la con !");
 			return null;
 		}
 
 		if (tabHexagones[X][Y] instanceof TerrainVide) {
-			System.out
-					.println("Ce Terrain ne figure pas dans la carte. Au Bucheeeeer !!!");
+			System.out.println("Ce Terrain ne figure pas dans la carte. Au Bucheeeeer !!!");
 			return null;
 		} // Impossible d'afficher les voisins d'une case inexistante.
 
@@ -366,7 +360,7 @@ public class Carte {
 	 * La VRAIE fonction de voisinage avec Coordonnées. Qui travaille avec des
 	 * coordonnées abstraites, celle avec laquelle on travaillera pour le reste
 	 * du programme.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @return la liste des coordonnées des voisins.
@@ -380,7 +374,7 @@ public class Carte {
 
 	/**
 	 * Enlève les Anouar de la carte.
-	 * 
+	 *
 	 * Ils font des recherches mais enfin quand même...
 	 */
 	public void purifieActeurs() {
@@ -394,7 +388,7 @@ public class Carte {
 
 	/**
 	 * Renvoie la liste des acteurs figurant sur une case donnée.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @return La liste des acteurs présents en X, Y.
@@ -410,7 +404,7 @@ public class Carte {
 
 	/**
 	 * Le getteur de modifications.
-	 * 
+	 *
 	 * @return Les coordonnées des modifs effectuées.
 	 */
 	public ArrayList<Point> getModifications() {
@@ -419,7 +413,7 @@ public class Carte {
 
 	/**
 	 * Renvoie toutes les cases enflammées.
-	 * 
+	 *
 	 * @return une liste de Point correspondant à des cases dotées d'acteur Feu.
 	 */
 	public ArrayList<Acteur> getFeu() {
@@ -433,7 +427,7 @@ public class Carte {
 
 	/**
 	 * Renvoie toutes les cases pluvieuses.
-	 * 
+	 *
 	 * @return une liste de Point correspondant à des cases dotées d'acteur
 	 *         Pluie.
 	 */
@@ -448,7 +442,7 @@ public class Carte {
 
 	/**
 	 * Renvoie toutes les cases Canadairées.
-	 * 
+	 *
 	 * @return une liste de Point correspondant à des cases dotées d'acteur
 	 *         Canadair.
 	 */
@@ -463,7 +457,7 @@ public class Carte {
 
 	/**
 	 * Renvoie toutes les cases Pompiérrées.
-	 * 
+	 *
 	 * @return une liste d'acteurs Pompier.
 	 */
 	public ArrayList<Acteur> getPompier() {
@@ -477,7 +471,7 @@ public class Carte {
 
 	/**
 	 * Nombre de pompiers sur une case précise.
-	 * 
+	 *
 	 * @param X
 	 *            La case souhaitée.
 	 * @param Y
@@ -497,7 +491,7 @@ public class Carte {
 
 	/**
 	 * Indique s'il y a un Canadair dans la case passée en argument.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @return true s'il y a un Canadair à la case indiquée. False sinon.
@@ -515,7 +509,7 @@ public class Carte {
 
 	/**
 	 * Indique s'il y a un Pluie dans la case passée en argument.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @return true s'il y a un Pluie à la case indiquée. False sinon.
@@ -533,7 +527,7 @@ public class Carte {
 
 	/**
 	 * Indique s'il y a un Feu dans la case passée en argument.
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 * @return true s'il y a un Feu à la case indiquée. False sinon.
@@ -566,7 +560,7 @@ public class Carte {
 
 	/**
 	 * Le nombre de pompiers sur toute la carte.
-	 * 
+	 *
 	 * @return nombre de pompiers sur la carte;
 	 */
 	public int nBPompiers() {
