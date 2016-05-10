@@ -214,7 +214,7 @@ public class Ecrivain {
 				pw.print((int) X + ";");
 				pw.print((int) Y + ";");
 				if (carte.getTerrain((int) X, (int) Y).getPV() == 0) {
-					pw.print(caseDead + ";");
+					pw.print(caseDead);
 				} else {
 					switch (carte.getTerrain((int) X, (int) Y).getClass().getSimpleName()) {
 					case "Prairie":
