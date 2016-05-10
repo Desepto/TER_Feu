@@ -21,14 +21,13 @@ public class Evolueur {
 	protected Ecrivain e;
 	protected int tic = 0;
 
-	public Evolueur(int tailleCarte, String nomFichier) {
+	public Evolueur(int tailleCarte, String fichierEntree, String fichierSortie) {
 
 		this.c = new Carte(tailleCarte);
 		this.c = Lecteur.carteEnDur(); // Cr�ation temporaire
 		this.g = new Gestionnaire();
-		this.e = new Ecrivain(nomFichier);
+		this.e = new Ecrivain(fichierSortie);
 		e.initFichier(this.c);
-		// Ecrivain.ecritureTete(tailleCarte); OU QUELQUE CHOSE DU GENRE
 	}
 
 	public void deroulement(String nomFichier) {
@@ -42,10 +41,13 @@ public class Evolueur {
 				a.agi(this.c);
 
 			// RAJOUTER UNE METHODE POUR RECUPERER TOUTE L'ARRAYLIST
-
-			for (Acteur a : this.g.getUnEvent(this.tic).getActeurs()) {
-				this.c.ajoutActeur(a);
+			try {
+				for (Acteur a : this.g.getUnEvent(this.tic).getActeurs()) {
+					this.c.ajoutActeur(a);
+				}
+			} catch (IndexOutOfBoundsException e) {
 			}
+
 			this.e.printChangement(this.c, this.tic);
 			tic++;
 		}
@@ -63,7 +65,7 @@ public class Evolueur {
 	public static void main(String[] args) {
 
 		int tailleTemporaire = 5;
-		Evolueur e = new Evolueur(tailleTemporaire, args[0]);
+		Evolueur e = new Evolueur(tailleTemporaire, args[0], args[1]);
 		e.deroulement(args[0]);
 
 	}
