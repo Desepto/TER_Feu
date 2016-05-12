@@ -316,7 +316,7 @@ public class Ecrivain {
 			pw.println("Nombre de cases intactes : " + Integer.toString(nbCaseIntacte));
 			pw.println("Nombre de cases brûlées : " + Integer.toString(nbCaseBrule));
 			double p = new Double(new Integer(nbCaseBrule).doubleValue()
-					/ new Integer(carte.getTailleCarte() * carte.getTailleCarte()).doubleValue());
+					/ new Integer(carte.getTailleCarte() * carte.getTailleCarte()).doubleValue() * 100);
 			pw.println("Pourcentage de cases brûlées : " + p);
 			pw.println("Nombre de pompiers déployés : " + Integer.toString(carte.nBPompiers()));
 			pw.println("Nombre de pompiers morts : " + Integer.toString(carte.getnBpompiersMorts()));

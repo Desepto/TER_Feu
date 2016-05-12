@@ -6,7 +6,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import acteurs.Canadair;
+import acteurs.Feu;
+import acteurs.Pompier;
+import enumerations.Direction;
+import enumerations.Force;
+import enumerations.NiveauDensite;
 import main.Carte;
+import main.Gestionnaire;
 import terrains.CoupeFeu;
 import terrains.Foret;
 import terrains.Lac;
@@ -16,15 +23,12 @@ import terrains.Prairie;
 import terrains.Rocher;
 import terrains.Route;
 import terrains.TerrainVide;
-import enumerations.Direction;
-import enumerations.Force;
-import enumerations.NiveauDensite;
 
 /**
  * Classe qui lit le fichier de base et le transforme en une map
- * 
+ *
  * @author Nicolas
- * 
+ *
  */
 
 public class Lecteur {
@@ -33,7 +37,7 @@ public class Lecteur {
 	 * Méthode statique pour générer une carte "en dur" sans passer par la
 	 * lecture d'un fichier. Utile pour faire une carte de base avec des
 	 * terrains aléatoires.
-	 * 
+	 *
 	 * @return la carte remplie.
 	 */
 	public static Carte carteEnDur() {
@@ -67,7 +71,7 @@ public class Lecteur {
 					maCarte.getTabHexagones()[X][Y] = new Route();
 					break;
 				case 1:
-					maCarte.getTabHexagones()[X][Y] = new Route();
+					maCarte.getTabHexagones()[X][Y] = new CoupeFeu();
 					break;
 				case 2:
 					maCarte.getTabHexagones()[X][Y] = new Prairie();
@@ -76,7 +80,7 @@ public class Lecteur {
 					maCarte.getTabHexagones()[X][Y] = new Plaine();
 					break;
 				case 4:
-					maCarte.getTabHexagones()[X][Y] = new Maison();
+					maCarte.getTabHexagones()[X][Y] = new Lac();
 					break;
 				case 5:
 					maCarte.getTabHexagones()[X][Y] = new Maison();
@@ -85,7 +89,7 @@ public class Lecteur {
 					maCarte.getTabHexagones()[X][Y] = new Foret();
 					break;
 				case 7:
-					maCarte.getTabHexagones()[X][Y] = new Foret();
+					maCarte.getTabHexagones()[X][Y] = new Rocher();
 					break;
 				default:
 					maCarte.getTabHexagones()[X][Y] = new TerrainVide();
@@ -137,7 +141,7 @@ public class Lecteur {
 	 * @param nomFichier
 	 * @return
 	 */
-	public static Carte creemapFichier(String nomFichier) {
+	public static Carte creemapFichier(String nomFichier, Gestionnaire g) {
 
 		BufferedReader lecteurAvecBuffer = null;
 		String ligne;
@@ -232,20 +236,44 @@ public class Lecteur {
 					}
 				} else {
 					ArrayList<String> liste3 = sansles2Points(ligne);
-					String type;
-					int temp;
-					for (int l = 0; l < liste3.size() && liste3.size() == 2; l++) {
-
+					String type = "";
+					int temps = 0;
+					int x = 0;
+					int y = 0;
+					for (int l = 0; l < liste3.size() && liste3.size() == 4; l++) {
 						if (l == 0) {
-							System.out.print("TYpe : " + liste3.get(l));
 							type = liste3.get(l);
 						} else if (l == 1) {
-							System.out.println(" Temps : " + liste3.get(l));
-							temp = Integer.parseInt(liste3.get(l));
+							temps = Integer.parseInt(liste3.get(l));
+
+						} else if (l == 2) {
+							x = Integer.parseInt(liste3.get(l));
+
+						} else if (l == 3) {
+							y = Integer.parseInt(liste3.get(l));
+							switch (type) {
+							case "Pompier":
+								Pompier p = new Pompier(x, y);
+								g.ajoutActeurPosition(temps, p);
+								break;
+							case "Canadair":
+								Canadair c = new Canadair(x, y);
+								g.ajoutActeurPosition(temps, c);
+								break;
+							case "Feu":
+								Feu f = new Feu(x, y);
+								g.ajoutActeurPosition(temps, f);
+								break;
+							default:
+								System.out.println("BUGGGGGGGGGGGGGGGGGGG;");
+								break;
+							}
 						}
 					}
+
 				}
 			}
+			g.afficher();
 			lecteurAvecBuffer.close();
 			return maCarte;
 		} catch (IOException e) {

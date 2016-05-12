@@ -35,11 +35,21 @@ public class Evenement {
 	 *
 	 * @param acteurs
 	 */
+
+	public Evenement() {
+		this.acteurs = new ArrayList<Acteur>();
+	}
+
 	public Evenement(ArrayList<Acteur> acteurs) {
 		this.acteurs = acteurs;
+	}
+
+	public void ajouterActeur(Acteur a) {
+		acteurs.add(a);
 	}
 
 	public ArrayList<Acteur> getActeurs() {
 		return acteurs;
 	}
+
 }

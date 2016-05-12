@@ -1,7 +1,5 @@
 package main;
 
-import java.util.ArrayList;
-
 import acteurs.Acteur;
 import acteurs.Feu;
 import entreesSorties.Ecrivain;
@@ -25,20 +23,19 @@ public class Evolueur {
 
 	public Evolueur(int tailleCarte, String fichierEntree, String fichierSortie) {
 
-		this.c = new Carte(tailleCarte);
-		this.c = Lecteur.carteEnDur(); // Cr�ation temporaire
 		this.g = new Gestionnaire();
+		this.c = Lecteur.creemapFichier("Carte", g);
 		this.e = new Ecrivain(fichierSortie);
 		e.initFichier(this.c);
 
 		// test tmtc
-		ArrayList<Acteur> list = new ArrayList<Acteur>();
+		// ArrayList<Acteur> list = new ArrayList<Acteur>();
 		// list.add(new Feu(3, 3));
-		list.add(new Feu(25, 25));
+		// list.add(new Feu(25, 25));
 		// list.add(new Feu(6, 6));
 		// list.add(new Feu(9, 9));
-		Evenement test = new Evenement(list);
-		g.ajoutEvenement(test);
+		// Evenement test = new Evenement(list);
+		// g.ajoutEvenement(test);
 	}
 
 	public void deroulement(String nomFichier) {
@@ -52,9 +49,19 @@ public class Evolueur {
 				a.agi(this.c);
 
 			try {
-				for (Acteur a : this.g.getUnEvent(this.tic).getActeurs()) {
-					this.c.ajoutActeur(a);
+				/*
+				 * for (Acteur a : this.g.getUnEvent(this.tic).getActeurs()) {
+				 * this.c.ajoutActeur(a); }
+				 */
+				// Version 2.0 à verifier
+				Evenement e = new Evenement();
+				e = g.getUnEvent(tic);
+				if (e != null) {
+					for (Acteur a : e.getActeurs()) {
+						this.c.ajoutActeur(a);
+					}
 				}
+
 			} catch (IndexOutOfBoundsException e) {
 			}
 
