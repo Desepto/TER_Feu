@@ -273,7 +273,6 @@ public class Lecteur {
 
 				}
 			}
-			g.afficher();
 			lecteurAvecBuffer.close();
 			return maCarte;
 		} catch (IOException e) {
