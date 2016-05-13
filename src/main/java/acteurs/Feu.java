@@ -118,7 +118,7 @@ public class Feu extends Acteur {
 								maCarte.ajoutActeur(monFeu);
 								/**
 								 * On ajoute les coordonnées du voisin modifié
-								 * dans la Carte.
+								 * dans la Carte. BAH OUI
 								 */
 								maCarte.getModifications().add(yMettreLeFeu);
 							}
