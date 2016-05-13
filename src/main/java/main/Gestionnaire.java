@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import acteurs.Acteur;
+import acteurs.Canadair;
+import acteurs.Feu;
+import acteurs.Pompier;
 
 /**
  * Le gestionnaire des évènements
@@ -71,5 +74,55 @@ public class Gestionnaire {
 			}
 		}
 
+	}
+
+	public boolean presenceFeu(int x, int y) {
+		for (int i = 0; i < mesEvents.size(); i++) {
+			if (mesEvents.get(i) != null) {
+				ArrayList<Acteur> liste = mesEvents.get(i).getActeurs();
+				for (int j = 0; j < liste.size(); j++) {
+					if (liste.get(j) instanceof Feu) {
+						if (liste.get(j).getX() == x && liste.get(j).getX() == y) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	public int nombrePompier(int x, int y) {
+		int compteur = 0;
+		for (int i = 0; i < mesEvents.size(); i++) {
+			if (mesEvents.get(i) != null) {
+				ArrayList<Acteur> liste = mesEvents.get(i).getActeurs();
+				for (int j = 0; j < liste.size(); j++) {
+					if (liste.get(j) instanceof Pompier) {
+						if (liste.get(j).getX() == x && liste.get(j).getX() == y) {
+							compteur++;
+						}
+					}
+				}
+			}
+		}
+		return compteur;
+	}
+
+	public int nombreCanadair(int x, int y) {
+		int compteur = 0;
+		for (int i = 0; i < mesEvents.size(); i++) {
+			if (mesEvents.get(i) != null) {
+				ArrayList<Acteur> liste = mesEvents.get(i).getActeurs();
+				for (int j = 0; j < liste.size(); j++) {
+					if (liste.get(j) instanceof Canadair) {
+						if (liste.get(j).getX() == x && liste.get(j).getX() == y) {
+							compteur++;
+						}
+					}
+				}
+			}
+		}
+		return compteur;
 	}
 }

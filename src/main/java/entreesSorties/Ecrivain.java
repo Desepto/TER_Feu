@@ -30,7 +30,8 @@ public class Ecrivain {
 	private final String feu = "Feu";
 	private final String pluie = "Pluie";
 	private final String canadair = "Canadair";
-	private final String pompier = "Pompier";
+	private final int pompier = 70;
+	private final int vent = 90;
 
 	public String getNomFichier() {
 		return nomFichier;
@@ -240,6 +241,47 @@ public class Ecrivain {
 		try {
 			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f, true)));
 			int nombreModif = carte.getModifications().size();
+			if (tickClick == 0) {
+				pw.print(0 + ";");
+				pw.print(0 + ";");
+				pw.print(0 + ";");
+				if (carte.getTabHexagones(0, 0).getPV() == 0) {
+					pw.print(caseDead);
+				} else {
+					switch (carte.getTabHexagones(0, 0).getClass().getSimpleName()) {
+					case "Prairie":
+						pw.print(prairie);
+						break;
+					case "Lac":
+						pw.print(lac);
+						break;
+					case "Maison":
+						pw.print(maison);
+						break;
+					case "CoupeFeu":
+						pw.print(coupeFeu);
+						break;
+					case "Plaine":
+						pw.print(plaine);
+						break;
+					case "Foret":
+						pw.print(foret);
+						break;
+					case "Rocher":
+						pw.print(rocher);
+						break;
+					case "Route":
+						pw.print(route);
+						break;
+					default:
+						pw.print("BUGGGGGGGGGGGGGGGGGGG" + ";");
+						System.out.println("bauii" + carte.getTabHexagones(0, 0).getClass().getSimpleName());
+						break;
+					}
+				}
+				int ventfinal = carte.getDirectionVent().ordinal() + vent;
+				pw.println("-" + ventfinal + ";");
+			}
 			for (int i = 0; i < nombreModif; i++) {
 				double X = carte.getModifications().get(i).getX();
 				double Y = carte.getModifications().get(i).getY();
@@ -291,23 +333,27 @@ public class Ecrivain {
 					pw.print("-" + pluie);
 				}
 				if (carte.getNbPompiers((int) X, (int) Y) == 1) {
-					pw.print("-" + pompier + "1");
+					pw.print("-" + Integer.toString(pompier + 1));
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 2) {
-					pw.print("-" + pompier + "2");
+					pw.print("-" + Integer.toString(pompier + 2));
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 3) {
-					pw.print("-" + pompier + "3");
+					pw.print("-" + Integer.toString(pompier + 3));
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 4) {
-					pw.print("-" + pompier + "4");
+					pw.print("-" + Integer.toString(pompier + 4));
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 5) {
-					pw.print("-" + pompier + "5");
+					pw.print("-" + Integer.toString(pompier + 5));
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 6) {
-					pw.print("-" + pompier + "6");
+					pw.print("-" + Integer.toString(pompier + 6));
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 7) {
-					pw.print("-" + pompier + "7");
+					pw.print("-" + Integer.toString(pompier + 7));
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 8) {
-					pw.print("-" + pompier + "8");
+					pw.print("-" + Integer.toString(pompier + 8));
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 9) {
-					pw.print("-" + pompier + "9");
+					pw.print("-" + Integer.toString(pompier + 9));
+				}
+				if (X == 0 && Y == 0) {
+					int ventfinal = carte.getDirectionVent().ordinal() + vent;
+					pw.print("-" + ventfinal);
 				}
 				pw.print(";");
 				pw.println();
