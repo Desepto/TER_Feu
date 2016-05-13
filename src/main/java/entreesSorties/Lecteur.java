@@ -245,16 +245,16 @@ public class Lecteur {
 							type = liste3.get(l);
 						} else if (l == 1) {
 							temps = Integer.parseInt(liste3.get(l));
-
 						} else if (l == 2) {
 							x = Integer.parseInt(liste3.get(l));
-
 						} else if (l == 3) {
 							y = Integer.parseInt(liste3.get(l));
+							if (y % 2 != 0) {
+								x++;
+							}
 							if ((x == maCarte.getTailleCarte() && y % 2 == 0) || (x == 0 && y % 2 != 0) || x < 0
 									|| x > maCarte.getTailleCarte() || y < 0 || y > maCarte.getTailleCarte() - 1) {
 								System.out.println("Dar une case qui existe pas");
-
 							} else {
 								switch (type) {
 								case "Pompier":
@@ -263,16 +263,20 @@ public class Lecteur {
 										System.out.println("Un Pompier sur un Lac ba ui");
 									} else if (maCarte.getTabHexagones(x, y) instanceof Rocher) {
 										System.out.println("Un Pompier sur un Rocher ba ui");
-									} else if (maCarte.getTabHexagones(x, y) instanceof CoupeFeu) {
-										System.out.println("Un Pompier sur un CoupeFeu ba ui");
+									} else if (g.nombrePompier(x, y) >= 9) {
+										System.out.println("Pas plus de 9 pompier sur une case");
 									} else {
 										g.ajoutActeurPosition(temps, p);
 									}
-
 									break;
 								case "Canadair":
 									Canadair c = new Canadair(x, y);
-									g.ajoutActeurPosition(temps, c);
+									if (g.nombreCanadair(x, y) >= 9) {
+										System.out.println("Pas plus de 9 canadair sur une case");
+									} else {
+										g.ajoutActeurPosition(temps, c);
+									}
+
 									break;
 								case "Feu":
 									Feu f = new Feu(x, y);
@@ -282,6 +286,8 @@ public class Lecteur {
 										System.out.println("Un feu sur un Rocher ba ui");
 									} else if (maCarte.getTabHexagones(x, y) instanceof CoupeFeu) {
 										System.out.println("Un feu sur un CoupeFeu ba ui");
+									} else if (g.presenceFeu(x, y)) {
+										System.out.println("Un feu sur un feu ba ui");
 									} else {
 										g.ajoutActeurPosition(temps, f);
 									}
@@ -293,7 +299,6 @@ public class Lecteur {
 							}
 						}
 					}
-
 				}
 			}
 			lecteurAvecBuffer.close();
@@ -301,7 +306,6 @@ public class Lecteur {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 }
