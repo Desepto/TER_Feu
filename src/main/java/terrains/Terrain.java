@@ -4,17 +4,20 @@ import enumerations.NiveauDensite;
 
 /**
  * Classe mère de tous les types de terrains.
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 
 public abstract class Terrain {
 
 	protected final boolean inflammable;
+	protected boolean traversable = true;
 	protected NiveauDensite densite;
 	private int humidite = 10; // Humidité par défaut.
 	protected int PV = 1;
+	protected int coutDeplacement;
+
 	// Seuls les terrains inflammables verront leur PV calculés dans leurs
 	// constructeurs respectifs.
 	private int trans; // Capacité d'un terrain à propager son feu.
@@ -34,6 +37,14 @@ public abstract class Terrain {
 
 	public void setDensite(NiveauDensite densite) {
 		this.densite = densite;
+	}
+
+	public int getCoutDeplacement() {
+		return coutDeplacement;
+	}
+
+	public boolean isTraversable() {
+		return traversable;
 	}
 
 	// Setter personnalisé : Ajoute l'humidite d'un acteur à celle du terrain.
@@ -72,7 +83,8 @@ public abstract class Terrain {
 	}
 
 	/**
-	 * @param trans the trans to set
+	 * @param trans
+	 *            the trans to set
 	 */
 	public void setTrans(int trans) {
 		this.trans = trans;

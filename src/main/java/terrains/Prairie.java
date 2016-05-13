@@ -14,12 +14,13 @@ public class Prairie extends Terrain {
 		this.densite = NiveauDensite.un;
 		this.setTrans(5);
 		this.PV = duree;
+		this.coutDeplacement = 10;
 
 	}
 
 	/**
 	 * El Constrouctor !
-	 *
+	 * 
 	 * @param maDuree
 	 */
 	public Prairie(NiveauDensite maDensite) {
@@ -30,5 +31,6 @@ public class Prairie extends Terrain {
 			this.PV = duree;
 		else
 			this.PV = duree * 2;
+		this.coutDeplacement = 10;
 	}
 }

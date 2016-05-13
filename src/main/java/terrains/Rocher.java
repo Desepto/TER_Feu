@@ -4,9 +4,9 @@ import enumerations.NiveauDensite;
 
 /**
  * Un caillou !
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class Rocher extends Terrain {
 
@@ -16,6 +16,8 @@ public class Rocher extends Terrain {
 	public Rocher() {
 		super(false); // On rend le rocher non inflammable.
 		this.densite = NiveauDensite.un;
+		this.traversable = false;
+		this.coutDeplacement = -1;
 	}
 
 }

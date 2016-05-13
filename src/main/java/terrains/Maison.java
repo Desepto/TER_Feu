@@ -4,9 +4,9 @@ import enumerations.NiveauDensite;
 
 /**
  * Une maison !
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class Maison extends Terrain {
 
@@ -20,6 +20,7 @@ public class Maison extends Terrain {
 		densite = NiveauDensite.un;
 		this.setTrans(5);
 		this.PV = duree;
+		this.coutDeplacement = 10;
 	}
 
 }

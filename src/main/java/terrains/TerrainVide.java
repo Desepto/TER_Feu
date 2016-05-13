@@ -2,9 +2,9 @@ package terrains;
 
 /**
  * Terrain inexistant ne figurant pas sur la carte.
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class TerrainVide extends Terrain {
 
@@ -14,6 +14,7 @@ public class TerrainVide extends Terrain {
 	public TerrainVide() {
 		super(false); // Un terrain qui n'existe pas est à priori
 						// ininflammable... Bref.
+		this.traversable = false;
 	}
 
 }

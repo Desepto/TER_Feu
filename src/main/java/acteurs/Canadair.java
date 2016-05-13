@@ -6,9 +6,9 @@ import main.Carte;
 
 /**
  * Pilotés par nos meilleurs employés Talibans ! Vous ne courrez aucun risques !
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class Canadair extends Acteur {
 
@@ -25,9 +25,11 @@ public class Canadair extends Acteur {
 	@Override
 	public void agi(Carte maCarte) {
 		for (Acteur courant : maCarte.getSesActeurs()) {
-			if (courant.X == this.X && courant.Y == this.Y && courant instanceof Feu) {
+			if (courant.X == this.X && courant.Y == this.Y
+					&& courant instanceof Feu) {
 				if (estCharge) {
-					maCarte.getTerrain(this.X, this.Y).arrose(efficaciteCanadaire);
+					maCarte.getTerrain(this.X, this.Y).arrose(
+							efficaciteCanadaire);
 					// On arrose.
 					this.estCharge = false; // On décharge.
 					maCarte.getModifications().add(new Point(this.X, this.Y));
@@ -40,7 +42,7 @@ public class Canadair extends Acteur {
 	/**
 	 * El Constrouctoritatoress, si maque ! Un Canadair appraît chargé (rempli
 	 * d'eau).
-	 *
+	 * 
 	 * @param X
 	 * @param Y
 	 */
@@ -51,5 +53,9 @@ public class Canadair extends Acteur {
 
 	public int getEfficaciteCanadaire() {
 		return efficaciteCanadaire;
+	}
+
+	public boolean isEstCharge() {
+		return estCharge;
 	}
 }

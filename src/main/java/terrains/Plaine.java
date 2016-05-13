@@ -4,9 +4,9 @@ import enumerations.NiveauDensite;
 
 /**
  * Une plaine !
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class Plaine extends Terrain {
 
@@ -20,11 +20,12 @@ public class Plaine extends Terrain {
 		this.densite = NiveauDensite.un;
 		this.PV = duree;
 		this.setTrans(5);
+		this.coutDeplacement = 10;
 	}
 
 	/**
 	 * El Constrouctor !
-	 *
+	 * 
 	 * @param maDuree
 	 */
 	public Plaine(NiveauDensite maDensite) {
@@ -35,5 +36,6 @@ public class Plaine extends Terrain {
 			this.PV = duree;
 		else
 			this.PV = duree * 2;
+		this.coutDeplacement = 10;
 	}
 }

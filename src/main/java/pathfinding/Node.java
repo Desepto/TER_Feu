@@ -2,13 +2,18 @@ package pathfinding;
 
 public class Node {
 
-	public int x, y, cout, heuristique;
+	public int x, y, cout;
+	public Node parent;
 
-	public Node(int x, int y, int c, int h) {
+	public Node(int x, int y, int c, Node parent) {
 		this.x = x;
 		this.y = y;
 		this.cout = c;
-		this.heuristique = h;
+		this.parent = parent;
 	}
 
+	public void remplacer(Node v) {
+		this.cout = v.cout;
+		this.parent = v.parent;
+	}
 }

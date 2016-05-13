@@ -4,9 +4,9 @@ import enumerations.NiveauDensite;
 
 /**
  * Un coupe feu !
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class CoupeFeu extends Terrain {
 	/**
@@ -16,6 +16,7 @@ public class CoupeFeu extends Terrain {
 		// Coupe feu non inflammable, pratique pour un coupe Feu, HERR GENERAL.
 		super(false);
 		densite = NiveauDensite.un;
+		this.coutDeplacement = 12;
 	}
 
 }

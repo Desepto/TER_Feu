@@ -4,9 +4,9 @@ import enumerations.NiveauDensite;
 
 /**
  * Une route !
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class Route extends Terrain {
 
@@ -19,6 +19,7 @@ public class Route extends Terrain {
 		super(true); // On rend la route inflammable.
 		this.densite = NiveauDensite.un;
 		PV = duree;
+		this.coutDeplacement = 1;
 
 	}
 
