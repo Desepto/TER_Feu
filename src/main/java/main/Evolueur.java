@@ -60,9 +60,11 @@ public class Evolueur {
 				e = g.getUnEvent(tic);
 				if (e != null) {
 					for (Acteur a : e.getActeurs()) {
+
 						this.c.ajoutActeur(a);
 						Point p = new Point(a.getX(), a.getY());
 						this.c.getModifications().add(p);
+
 					}
 				}
 
