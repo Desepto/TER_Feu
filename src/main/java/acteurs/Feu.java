@@ -72,16 +72,25 @@ public class Feu extends Acteur {
 		 */
 		if (apparition) {
 
-			// On enregistre l'apparition du feu dans l'historique.
-			maCarte.getModifications().add(new Point(X, Y));
-			maCarte.getTabHexagones(X, Y).asseche(assechement);
+			/**
+			 * On enregistre l'apparition du feu dans l'historique. Mais
+			 * uniquement s'il n'y a pas déjà un feu à cet endroit (ce qui
+			 * arrive, car lorsque le feu se propage, on met les voisins dans
+			 * l'historique. Ce qui créé des doubles modifications dans
+			 * l'historique une fois que les voisins "apparaitrons" dans leur
+			 * agi respectifs).
+			 */
+			if (!maCarte.presenceFeu(X, Y))
+				maCarte.getModifications().add(new Point(X, Y));
+
+			maCarte.getTabHexagones(X, Y).asseche(assechement, X, Y, maCarte);
 			// On baisse l'humidité d'un montant exceptionnel au début.
 			if (maCarte.getTabHexagones(X, Y).getPV() > 0)
 				maCarte.getTabHexagones(X, Y).brule(1);
 			// On décrémente les PV du terrain de 1.
 			this.apparition = false;
 		} else {
-			maCarte.getTabHexagones(X, Y).asseche(intensiteFeu);
+			maCarte.getTabHexagones(X, Y).asseche(intensiteFeu, X, Y, maCarte);
 			// On baisse l'humidite d'un montant classique.
 			if (maCarte.getTabHexagones(X, Y).getPV() > 0)
 				maCarte.getTabHexagones(X, Y).brule(1);
@@ -112,15 +121,21 @@ public class Feu extends Acteur {
 						// On fout le feu au voisin courant.
 						if (yMettreLeFeu.x >= 0 && yMettreLeFeu.y >= 0
 								&& !maCarte.presenceFeu(yMettreLeFeu.x, yMettreLeFeu.y)) {
-							Feu monFeu = new Feu(yMettreLeFeu.x, yMettreLeFeu.y);
-							if (maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).isInflammable()
-									&& maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).getPV() > 0) {
-								maCarte.ajoutActeur(monFeu);
-								/**
-								 * On ajoute les coordonnées du voisin modifié
-								 * dans la Carte. BAH OUI !!!!
-								 */
-								maCarte.getModifications().add(yMettreLeFeu);
+							/**
+							 * Le feu ne peu se déclencher si la case est
+							 * inondée.
+							 */
+							if (maCarte.getTabHexagones()[yMettreLeFeu.x][yMettreLeFeu.y].isInonde()) {
+								Feu monFeu = new Feu(yMettreLeFeu.x, yMettreLeFeu.y);
+								if (maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).isInflammable()
+										&& maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).getPV() > 0) {
+									maCarte.ajoutActeur(monFeu);
+									/**
+									 * On ajoute les coordonnées du voisin
+									 * modifié dans la Carte. BAH OUI !!!!
+									 */
+									maCarte.getModifications().add(yMettreLeFeu);
+								}
 							}
 						}
 
@@ -187,8 +202,8 @@ public class Feu extends Acteur {
 						// Humidité trop élevée, no way que ça crame.
 					}
 					// la formule avec vent.
-					// probas.add(100 - humidite + transmission + vent.get(i));
-					probas.add(100.0);
+					probas.add(100 - humidite + transmission + vent.get(i));
+
 					// 100 - humidité + transmission;
 					// On glisse le résultat dans une liste probas.
 
