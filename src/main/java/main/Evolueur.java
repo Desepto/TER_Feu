@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.Point;
+
 import acteurs.Acteur;
 import acteurs.Feu;
 import entreesSorties.Ecrivain;
@@ -59,12 +61,13 @@ public class Evolueur {
 				if (e != null) {
 					for (Acteur a : e.getActeurs()) {
 						this.c.ajoutActeur(a);
+						Point p = new Point(a.getX(), a.getY());
+						this.c.getModifications().add(p);
 					}
 				}
 
 			} catch (IndexOutOfBoundsException e) {
 			}
-
 			this.e.printChangement(this.c, this.tic);
 			tic++;
 		}
