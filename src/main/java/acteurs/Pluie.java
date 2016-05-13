@@ -32,15 +32,14 @@ public class Pluie extends Acteur {
 	@Override
 	public void agi(Carte maCarte) {
 
-		/**
-		 * Que la pluie s'arrête ou non, on doit enregistrer les modifications
-		 * de la case dans la Carte.
-		 */
-		maCarte.getModifications().add(new Point(this.X, this.Y));
-
 		if (duree != 0) {
 
 			if (apparition) {
+				/**
+				 * Apparition de la pluie, on doit enregistrer les modifications
+				 * de la case dans la Carte.
+				 */
+				maCarte.getModifications().add(new Point(this.X, this.Y));
 				maCarte.getTerrain(X, Y).arrose(intensitePluie * 2);
 				// 12% d'humidité en plus au début sur la case centrale.
 				apparition = false;
@@ -57,11 +56,11 @@ public class Pluie extends Acteur {
 
 			/**
 			 * On ajoute les cases modifiées (les voisins arrosés donc) dans la
-			 * Carte.
+			 * Carte, uniquement s'il n'y a pas déjà de la pluie dessus.
 			 */
 			ArrayList<Point> mesCoordsVoisins = maCarte.superVoisinageCoord(X, Y);
 			for (Point monPoint : mesCoordsVoisins) {
-				if (monPoint.x >= 0)
+				if (monPoint.x >= 0 && maCarte.presencePluie(monPoint.x, monPoint.y))
 					maCarte.getModifications().add(monPoint);
 			}
 
@@ -74,6 +73,8 @@ public class Pluie extends Acteur {
 							maCarte.getSesActeurs().add(i, new Anouar(X, Y));
 							maCarte.getSesActeurs().remove(i + 1);
 							maCarte.purifieActeurs();
+							// On enregistre la disparitation de la pluie.
+							maCarte.getModifications().add(new Point(X, Y));
 							return;
 						}
 					}

@@ -42,9 +42,7 @@ public class Feu extends Acteur {
 		// On est entre personnes civilisées.
 		if (!maCarte.getTabHexagones(X, Y).isInflammable()) {
 
-			// System.out.println("Euh, Herr General, vous voulez vraiment
-			// mettre le feu au lac ??");
-
+			System.out.println("Euh, Herr General, vous voulez vraiment mettre le feu au lac ??");
 			return;
 		}
 
@@ -59,6 +57,9 @@ public class Feu extends Acteur {
 						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
 						maCarte.getSesActeurs().remove(i + 1);
 						maCarte.purifieActeurs();
+						// On enregistre la modification de la case dans la
+						// liste historique.
+						maCarte.getModifications().add(new Point(X, Y));
 						return;
 					}
 				}
@@ -70,6 +71,9 @@ public class Feu extends Acteur {
 		 * laisser 1 tic au feu pour se propager à ses voisins.)
 		 */
 		if (apparition) {
+
+			// On enregistre l'apparition du feu dans l'historique.
+			maCarte.getModifications().add(new Point(X, Y));
 			maCarte.getTabHexagones(X, Y).asseche(assechement);
 			// On baisse l'humidité d'un montant exceptionnel au début.
 			if (maCarte.getTabHexagones(X, Y).getPV() > 0)
@@ -221,9 +225,8 @@ public class Feu extends Acteur {
 	private static int probaAlea() {
 		Random rand = new Random();
 		int tirage = rand.nextInt(100);
-		return 0;
-		// ATTENTION PUTAIN DE BORDEL DE MERDE IL FAUT REMETTRE /§\ RETURN
-		// TIRAGE
+		return tirage;
+		// Return 100 ici pour forcer le feu à se propager.
 	}
 
 	/**
