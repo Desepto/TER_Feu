@@ -1,7 +1,5 @@
 package acteurs;
 
-import java.awt.Point;
-
 import main.Carte;
 
 /**
@@ -27,11 +25,10 @@ public class Canadair extends Acteur {
 		for (Acteur courant : maCarte.getSesActeurs()) {
 			if (courant.X == this.X && courant.Y == this.Y && courant instanceof Feu) {
 				if (estCharge) {
-					maCarte.getTerrain(this.X, this.Y).arrose(efficaciteCanadaire);
+					maCarte.getTerrain(this.X, this.Y).arrose(efficaciteCanadaire, X, Y, maCarte);
 					// On arrose.
 					this.estCharge = false; // On décharge.
-					maCarte.getModifications().add(new Point(this.X, this.Y));
-					// On enregistre les coordonnées de la case modifiée.
+
 				}
 			}
 		}

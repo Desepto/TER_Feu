@@ -53,10 +53,10 @@ public class PompierTest {
 		// On remet le pompier sur la carte.
 		maCarte.getSesActeurs().get(0).agi(maCarte);
 		// Il balance sa flotte et ne meurt pas.
-
-		// 2 cases devraient être modifiées maintenant. (deux fois la même).
-		assertTrue(maCarte.getModifications().size() == 2);
-
+		/*
+		 * // 2 cases devraient être modifiées maintenant. (deux fois la même).
+		 * assertTrue(maCarte.getModifications().size() == 2);
+		 */
 		assertTrue(maCarte.getTerrain(12, 12).getHumidite() == maCarte.getTerrain(19, 19).getHumidite()
 				+ monPompier.getEfficacitePompier());
 		// On checke qu'il a bien arrosé son terrain.

@@ -52,4 +52,16 @@ public abstract class Acteur {
 		Y = y;
 	}
 
+	/**
+	 * Déplace un acteur.
+	 *
+	 * @param X
+	 * @param Y
+	 */
+	public void setActeur(int X, int Y) {
+
+		this.X = X;
+		this.Y = Y;
+	}
+
 }

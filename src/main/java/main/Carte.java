@@ -414,7 +414,7 @@ public class Carte {
 	/**
 	 * Renvoie toutes les cases enflammées.
 	 *
-	 * @return une liste de Point correspondant à des cases dotées d'acteur Feu.
+	 * @return une liste d'acteur Feu.
 	 */
 	public ArrayList<Acteur> getFeu() {
 		ArrayList<Acteur> resultat = new ArrayList<Acteur>();
@@ -428,8 +428,7 @@ public class Carte {
 	/**
 	 * Renvoie toutes les cases pluvieuses.
 	 *
-	 * @return une liste de Point correspondant à des cases dotées d'acteur
-	 *         Pluie.
+	 * @return une liste d'acteurs Pluie.
 	 */
 	public ArrayList<Acteur> getPluie() {
 		ArrayList<Acteur> resultat = new ArrayList<Acteur>();
@@ -443,8 +442,7 @@ public class Carte {
 	/**
 	 * Renvoie toutes les cases Canadairées.
 	 *
-	 * @return une liste de Point correspondant à des cases dotées d'acteur
-	 *         Canadair.
+	 * @return une liste d'acteurs Canadair.
 	 */
 	public ArrayList<Acteur> getCanadair() {
 		ArrayList<Acteur> resultat = new ArrayList<Acteur>();

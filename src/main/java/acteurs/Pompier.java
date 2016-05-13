@@ -23,11 +23,6 @@ public class Pompier extends Acteur {
 	 */
 	@Override
 	public void agi(Carte maCarte) {
-		/**
-		 * Qu'il meurt ou qu'il arrose, on enregistre d'abord les coordonnées de
-		 * la case modifiée dans la carte.
-		 */
-		maCarte.getModifications().add(new Point(this.X, this.Y));
 
 		// Le pompier décède.
 		if (!StillAlive()) {
@@ -40,6 +35,9 @@ public class Pompier extends Acteur {
 						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
 						maCarte.getSesActeurs().remove(i + 1);
 						maCarte.purifieActeurs();
+						maCarte.getModifications().add(new Point(this.X, this.Y));
+						// On enregistre les coordonnées de la case modifiée
+						// (pompier qui disparait).
 						return;
 					}
 				}
@@ -47,7 +45,7 @@ public class Pompier extends Acteur {
 		}
 
 		// Le pompier est toujours en vie.
-		maCarte.getTerrain(X, Y).arrose(efficacitePompier);
+		maCarte.getTerrain(X, Y).arrose(efficacitePompier, X, Y, maCarte);
 		// Il balance sa flotte.
 	}
 

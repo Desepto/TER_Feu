@@ -40,17 +40,17 @@ public class Pluie extends Acteur {
 				 * de la case dans la Carte.
 				 */
 				maCarte.getModifications().add(new Point(this.X, this.Y));
-				maCarte.getTerrain(X, Y).arrose(intensitePluie * 2);
+				maCarte.getTerrain(X, Y).arrose(intensitePluie * 2, X, Y, maCarte);
 				// 12% d'humidité en plus au début sur la case centrale.
 				apparition = false;
 			} else {
-				maCarte.getTerrain(X, Y).arrose(intensitePluie);
+				maCarte.getTerrain(X, Y).arrose(intensitePluie, X, Y, maCarte);
 				// 6% d'humidité en plus ensuite sur la case centrale.
 			}
 			for (Terrain courant : maCarte.superVoisinage(X, Y)) {
 				if (!(courant instanceof TerrainVide))
 					// On arrose pas n'importe quoi.
-					courant.arrose(intensitePluie / 2);
+					courant.arrose(intensitePluie / 2, X, Y, maCarte);
 				// +3% d'humidité au début et ensuite sur les cases voisines.
 			}
 
