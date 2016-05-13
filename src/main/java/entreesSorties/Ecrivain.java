@@ -326,7 +326,6 @@ public class Ecrivain {
 							continue;
 						}
 					}
-
 					if (carte.presenceFeu(X, Y)) {
 						pw.print("F");
 					} else {

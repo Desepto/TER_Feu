@@ -251,22 +251,45 @@ public class Lecteur {
 
 						} else if (l == 3) {
 							y = Integer.parseInt(liste3.get(l));
-							switch (type) {
-							case "Pompier":
-								Pompier p = new Pompier(x, y);
-								g.ajoutActeurPosition(temps, p);
-								break;
-							case "Canadair":
-								Canadair c = new Canadair(x, y);
-								g.ajoutActeurPosition(temps, c);
-								break;
-							case "Feu":
-								Feu f = new Feu(x, y);
-								g.ajoutActeurPosition(temps, f);
-								break;
-							default:
-								System.out.println("BUGGGGGGGGGGGGGGGGGGG;");
-								break;
+							if ((x == maCarte.getTailleCarte() && y % 2 == 0) || (x == 0 && y % 2 != 0) || x < 0
+									|| x > maCarte.getTailleCarte() || y < 0 || y > maCarte.getTailleCarte() - 1) {
+								System.out.println("Dar une case qui existe pas");
+
+							} else {
+								switch (type) {
+								case "Pompier":
+									Pompier p = new Pompier(x, y);
+									if (maCarte.getTabHexagones(x, y) instanceof Lac) {
+										System.out.println("Un Pompier sur un Lac ba ui");
+									} else if (maCarte.getTabHexagones(x, y) instanceof Rocher) {
+										System.out.println("Un Pompier sur un Rocher ba ui");
+									} else if (maCarte.getTabHexagones(x, y) instanceof CoupeFeu) {
+										System.out.println("Un Pompier sur un CoupeFeu ba ui");
+									} else {
+										g.ajoutActeurPosition(temps, p);
+									}
+
+									break;
+								case "Canadair":
+									Canadair c = new Canadair(x, y);
+									g.ajoutActeurPosition(temps, c);
+									break;
+								case "Feu":
+									Feu f = new Feu(x, y);
+									if (maCarte.getTabHexagones(x, y) instanceof Lac) {
+										System.out.println("Un feu sur un Lac ba ui");
+									} else if (maCarte.getTabHexagones(x, y) instanceof Rocher) {
+										System.out.println("Un feu sur un Rocher ba ui");
+									} else if (maCarte.getTabHexagones(x, y) instanceof CoupeFeu) {
+										System.out.println("Un feu sur un CoupeFeu ba ui");
+									} else {
+										g.ajoutActeurPosition(temps, f);
+									}
+									break;
+								default:
+									System.out.println("BUGGGGGGGGGGGGGGGGGGG;");
+									break;
+								}
 							}
 						}
 					}
