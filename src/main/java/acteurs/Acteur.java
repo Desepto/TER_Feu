@@ -1,13 +1,15 @@
 package acteurs;
 
+import java.awt.Point;
+
 import main.Carte;
 
 /**
  * Classe mère de tous les acteurs Un bon acteur doit bien connaître son texte
  * pour bien jouer la comédie !
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 
 public abstract class Acteur {
@@ -20,14 +22,14 @@ public abstract class Acteur {
 	 * une tentative d'extinction de feu. Pour un canadaire, le largage de son
 	 * réservoir d'eau. Pour de la pluie, l'humidification de la case et ses
 	 * voisins. Pour du feu, la carbonisation totale.
-	 *
+	 * 
 	 * @param maCarte
 	 */
 	public abstract void agi(Carte maCarte);
 
 	/**
 	 * El Constrouctivoush
-	 *
+	 * 
 	 * @param X
 	 * @param Y
 	 */
@@ -54,7 +56,7 @@ public abstract class Acteur {
 
 	/**
 	 * Déplace un acteur.
-	 *
+	 * 
 	 * @param X
 	 * @param Y
 	 */
@@ -64,4 +66,15 @@ public abstract class Acteur {
 		this.Y = Y;
 	}
 
+	public void setActeur(Point p, Carte c) {
+
+		c.getModifications().add(new Point(this.X, this.Y));
+
+		if (this.X != p.x || this.Y != p.y)
+			c.getModifications().add(p);
+
+		this.X = p.x;
+		this.Y = p.y;
+
+	}
 }

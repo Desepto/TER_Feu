@@ -1,6 +1,7 @@
 package acteurs;
 
 import main.Carte;
+import terrains.Lac;
 
 /**
  * Pilotés par nos meilleurs employés Talibans ! Vous ne courrez aucun risques !
@@ -22,18 +23,21 @@ public class Canadair extends Acteur {
 	 */
 	@Override
 	public void agi(Carte maCarte) {
+
 		for (Acteur courant : maCarte.getSesActeurs()) {
 			if (courant.X == this.X && courant.Y == this.Y
 					&& courant instanceof Feu) {
 				if (estCharge) {
 					maCarte.getTerrain(this.X, this.Y).arrose(
-							efficaciteCanadaire);
-					maCarte.getTerrain(this.X, this.Y).arrose(efficaciteCanadaire, X, Y, maCarte);
+							efficaciteCanadaire, X, Y, maCarte);
 					// On arrose.
 					this.estCharge = false; // On décharge.
 
 				}
 			}
+		}
+		if (maCarte.getTabHexagones(this.X, this.Y) instanceof Lac) {
+			this.estCharge = true;
 		}
 	}
 

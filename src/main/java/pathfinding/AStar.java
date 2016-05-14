@@ -28,8 +28,9 @@ public class AStar {
 	 *            Si l'acteur vole ou marche
 	 * @return La case sur laquelle arrive l'acteur
 	 */
-	public static Point deplacementVersFeu(Carte c, Point depart, Acteur a) {
+	public static Point deplacement(Carte c, Acteur a) {
 
+		Point depart = new Point(a.getX(), a.getY());
 		int coutMax;
 		boolean aPied;
 		if (a instanceof Pompier) {
