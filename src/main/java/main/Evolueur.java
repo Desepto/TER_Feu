@@ -16,6 +16,15 @@ import entreesSorties.Lecteur;
  * 
  */
 
+/**
+ * keskejdoifair
+ * <ul>
+ * <li>prendre en compte args[0]</li>
+ * <li>vérifier que le deplacement fonctionne envoyer</li>
+ * <li>envoyer les trucs à shouta + faire icone inondé + les autres icones</li>
+ * </ul>
+ */
+
 public class Evolueur {
 
 	protected Carte c;
