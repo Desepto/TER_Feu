@@ -13,7 +13,7 @@ import terrains.Terrain;
 /**
  * @author Nicolas Allumeeeeeeeeeeeeeeez, le feu ! Allumeeeeeeeeeeeeeez le
  *         feuuuu !
- *
+ * 
  */
 public class Feu extends Acteur {
 
@@ -30,9 +30,9 @@ public class Feu extends Acteur {
 
 	/**
 	 * Déclenche l'apocalypse de l'armageddon sur la terre.
-	 *
+	 * 
 	 * Grosse perte d'humidité et 1 PV sur la case centrale au premier toc.
-	 *
+	 * 
 	 * Perte de 1 PV et humidité sur case centrale à tous les tocs.
 	 */
 	@Override
@@ -42,7 +42,8 @@ public class Feu extends Acteur {
 		// On est entre personnes civilisées.
 		if (!maCarte.getTabHexagones(X, Y).isInflammable()) {
 
-			System.out.println("Euh, Herr General, vous voulez vraiment mettre le feu au lac ??");
+			System.out
+					.println("Euh, Herr General, vous voulez vraiment mettre le feu au lac ??");
 			return;
 		}
 
@@ -52,7 +53,8 @@ public class Feu extends Acteur {
 		if (maCarte.getTabHexagones(X, Y).getPV() <= 0) {
 			for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
 				if (maCarte.getSesActeurs().get(i) instanceof Feu) {
-					if (maCarte.getSesActeurs().get(i).X == X && maCarte.getSesActeurs().get(i).Y == Y) {
+					if (maCarte.getSesActeurs().get(i).X == X
+							&& maCarte.getSesActeurs().get(i).Y == Y) {
 						// Suppression du feu.
 						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
 						maCarte.getSesActeurs().remove(i + 1);
@@ -80,8 +82,7 @@ public class Feu extends Acteur {
 			 * l'historique une fois que les voisins "apparaitrons" dans leur
 			 * agi respectifs).
 			 */
-			if (!maCarte.presenceFeu(X, Y))
-				maCarte.getModifications().add(new Point(X, Y));
+			maCarte.getModifications().add(new Point(X, Y));
 
 			maCarte.getTabHexagones(X, Y).asseche(assechement, X, Y, maCarte);
 			// On baisse l'humidité d'un montant exceptionnel au début.
@@ -109,7 +110,7 @@ public class Feu extends Acteur {
 			 * On parcourt la liste de Bouléens feuVoisins qui contient les
 			 * résultats du tirage et mesVoisinsCoord qui contient les
 			 * coordonnées des 6 voisins de this. (indice de parcours z).
-			 *
+			 * 
 			 * Il faut que mon z courant de feuVoisins soit true pour mettre le
 			 * feu au voisin z. Si c'est le cas, il faut tester qu'il n'y ait
 			 * pas déjà un feu dessus. C'est à ça que sert allumeeeeeerLeFeuuuu.
@@ -119,22 +120,24 @@ public class Feu extends Acteur {
 					if (allumeeeeeerLeFeuuuu) {
 						Point yMettreLeFeu = mesVoisinsCoord.get(z);
 						// On fout le feu au voisin courant.
-						if (yMettreLeFeu.x >= 0 && yMettreLeFeu.y >= 0
-								&& !maCarte.presenceFeu(yMettreLeFeu.x, yMettreLeFeu.y)) {
+						if (yMettreLeFeu.x >= 0
+								&& yMettreLeFeu.y >= 0
+								&& !maCarte.presenceFeu(yMettreLeFeu.x,
+										yMettreLeFeu.y)) {
 							/**
-							 * Le feu ne peu se déclencher si la case est
+							 * Le feu ne peut se déclencher si la case est
 							 * inondée.
 							 */
-							if (maCarte.getTabHexagones()[yMettreLeFeu.x][yMettreLeFeu.y].isInonde()) {
-								Feu monFeu = new Feu(yMettreLeFeu.x, yMettreLeFeu.y);
-								if (maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).isInflammable()
-										&& maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).getPV() > 0) {
+							if (!maCarte.getTabHexagones()[yMettreLeFeu.x][yMettreLeFeu.y]
+									.isInonde()) {
+								Feu monFeu = new Feu(yMettreLeFeu.x,
+										yMettreLeFeu.y);
+								if (maCarte.getTabHexagones(yMettreLeFeu.x,
+										yMettreLeFeu.y).isInflammable()
+										&& maCarte.getTabHexagones(
+												yMettreLeFeu.x, yMettreLeFeu.y)
+												.getPV() > 0) {
 									maCarte.ajoutActeur(monFeu);
-									/**
-									 * On ajoute les coordonnées du voisin
-									 * modifié dans la Carte. BAH OUI !!!!
-									 */
-									maCarte.getModifications().add(yMettreLeFeu);
 								}
 							}
 						}
@@ -166,7 +169,7 @@ public class Feu extends Acteur {
 	/**
 	 * La fameuse fonction à équilibrer. Une carte est nécessaire pour récupérer
 	 * force et direction du vent.
-	 *
+	 * 
 	 * @return Une liste de bouléens. Vrai ou faux pour chaque voisin, s'il
 	 *         commence à brûler ou non.
 	 */
@@ -202,8 +205,8 @@ public class Feu extends Acteur {
 						// Humidité trop élevée, no way que ça crame.
 					}
 					// la formule avec vent.
-					probas.add(100 - humidite + transmission + vent.get(i));
-
+					// probas.add(100 - humidite + transmission + vent.get(i));
+					probas.add(100.0);
 					// 100 - humidité + transmission;
 					// On glisse le résultat dans une liste probas.
 
@@ -234,7 +237,7 @@ public class Feu extends Acteur {
 
 	/**
 	 * Petite fonction interne pour faire un tirage de 0 à 99.
-	 *
+	 * 
 	 * @return le nombre tiré.
 	 */
 	private static int probaAlea() {
@@ -247,7 +250,7 @@ public class Feu extends Acteur {
 	/**
 	 * Gère la force et la direction du vent, et renvoie une probas associée
 	 * pour chaque voisin.
-	 *
+	 * 
 	 * @return La liste de probas venant du vent à considérer pour la
 	 *         propagation.
 	 */

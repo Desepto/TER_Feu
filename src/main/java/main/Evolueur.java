@@ -2,10 +2,7 @@ package main;
 
 import java.awt.Point;
 
-import pathfinding.AStar;
-import terrains.Lac;
 import acteurs.Acteur;
-import acteurs.Canadair;
 import acteurs.Feu;
 import entreesSorties.Ecrivain;
 import entreesSorties.Lecteur;
@@ -44,26 +41,19 @@ public class Evolueur {
 
 			for (Acteur a : this.c.getFeu())
 				a.agi(this.c);
-			for (Acteur a : this.c.getPompier()) {
-				if (this.c.presenceFeu(a.getX(), a.getY()))
-					a.agi(this.c);
-				else
-					a.setActeur(AStar.deplacement(this.c, a), this.c);
-			}
-			for (Acteur a : this.c.getCanadair()) {
-				// Si le canadair est plein et sur une zone de feu ou s'il est
-				// vide et sur un lac, il agit
-				if ((this.c.presenceFeu(a.getX(), a.getY()) && ((Canadair) a)
-						.isEstCharge())
-						|| (this.c.getTabHexagones(a.getX(), a.getY()) instanceof Lac && !((Canadair) a)
-								.isEstCharge()))
-					a.agi(this.c);
-				else
-					a.setActeur(AStar.deplacement(this.c, a), this.c);
-			}
-			for (Acteur a : this.c.getPluie())
-				a.agi(this.c);
-
+			System.out.println(this.c.getModifications().size());
+			/*
+			 * for (Acteur a : this.c.getPompier()) { if
+			 * (this.c.presenceFeu(a.getX(), a.getY())) a.agi(this.c); else
+			 * a.setActeur(AStar.deplacement(this.c, a), this.c); } for (Acteur
+			 * a : this.c.getCanadair()) { // Si le canadair est plein et sur
+			 * une zone de feu ou s'il est // vide et sur un lac, il agit if
+			 * ((this.c.presenceFeu(a.getX(), a.getY()) && ((Canadair) a)
+			 * .isEstCharge()) || (this.c.getTabHexagones(a.getX(), a.getY())
+			 * instanceof Lac && !((Canadair) a) .isEstCharge())) a.agi(this.c);
+			 * else a.setActeur(AStar.deplacement(this.c, a), this.c); } for
+			 * (Acteur a : this.c.getPluie()) a.agi(this.c);
+			 */
 			try {
 				Evenement e = new Evenement();
 				e = g.getUnEvent(tic);

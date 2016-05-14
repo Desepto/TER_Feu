@@ -11,25 +11,26 @@ import main.Carte;
 /**
  * Classe qui génère le fichier de sortie Appelée au début pour le head, pendant
  * pour le body et à la fin pour le foot
- *
+ * 
  * @author Thomas
- *
+ * 
  */
 public class Ecrivain {
 
 	private String nomFichier;
-	private final String prairie = "Prairie";
-	private final String rocher = "Rocher";
-	private final String lac = "Lac";
-	private final String route = "Route";
-	private final String plaine = "Plaine";
-	private final String maison = "Maison";
-	private final String foret = "Foret";
-	private final String coupeFeu = "CoupeFeu";
-	private final String caseDead = "CaseDead";
-	private final String feu = "Feu";
-	private final String pluie = "Pluie";
-	private final String canadair = "Canadair";
+	private final String prairie = "3";
+	private final String rocher = "7";
+	private final String lac = "8";
+	private final String route = "4";
+	private final String plaine = "2";
+	private final String maison = "6";
+	private final String foret = "1";
+	private final String coupeFeu = "5";
+	private final String caseDead = "0";
+	private final String feu = "10";
+	private final String pluie = "11";
+	private final String inonde = "9";
+	private final int canadair = 80; // ON A CHANGE C'EST LA MEW NOIWE
 	private final int pompier = 70;
 	private final int vent = 90;
 
@@ -98,57 +99,93 @@ public class Ecrivain {
 	public void ecrireMap(Carte maCarte) {
 		File f = new File(nomFichier);
 		try {
-			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f, false)));
+			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(
+					f, false)));
 			pw.println(maCarte.getTailleCarte());
 			pw.println(maCarte.getForceVent());
 			pw.println(maCarte.getDirectionVent());
 
 			for (int Y = 0; Y < maCarte.getTabHexagones()[0].length; Y++) {
 				for (int X = 0; X < maCarte.getTabHexagones()[0].length + 1; X++) {
-					switch (maCarte.getTabHexagones(X, Y).getClass().getSimpleName()) {
+					switch (maCarte.getTabHexagones(X, Y).getClass()
+							.getSimpleName()) {
 					case "Prairie":
-						pw.print(maCarte.getTabHexagones(X, Y).getClass().getSimpleName() + ","
-								+ maCarte.getTabHexagones(X, Y).getHumidite() + ","
-								+ maCarte.getTabHexagones(X, Y).getDensite() + ";");
+						pw.print(maCarte.getTabHexagones(X, Y).getClass()
+								.getSimpleName()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getHumidite()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getDensite()
+								+ ";");
 						break;
 					case "Lac":
-						pw.print(maCarte.getTabHexagones(X, Y).getClass().getSimpleName() + ","
-								+ maCarte.getTabHexagones(X, Y).getHumidite() + ","
-								+ maCarte.getTabHexagones(X, Y).getDensite() + ";");
+						pw.print(maCarte.getTabHexagones(X, Y).getClass()
+								.getSimpleName()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getHumidite()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getDensite()
+								+ ";");
 						break;
 					case "Maison":
-						pw.print(maCarte.getTabHexagones(X, Y).getClass().getSimpleName() + ","
-								+ maCarte.getTabHexagones(X, Y).getHumidite() + ","
-								+ maCarte.getTabHexagones(X, Y).getDensite() + ";");
+						pw.print(maCarte.getTabHexagones(X, Y).getClass()
+								.getSimpleName()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getHumidite()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getDensite()
+								+ ";");
 						break;
 					case "CoupeFeu":
-						pw.print(maCarte.getTabHexagones(X, Y).getClass().getSimpleName() + ","
-								+ maCarte.getTabHexagones(X, Y).getHumidite() + ","
-								+ maCarte.getTabHexagones(X, Y).getDensite() + ";");
+						pw.print(maCarte.getTabHexagones(X, Y).getClass()
+								.getSimpleName()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getHumidite()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getDensite()
+								+ ";");
 						break;
 					case "Plaine":
-						pw.print(maCarte.getTabHexagones(X, Y).getClass().getSimpleName() + ","
-								+ maCarte.getTabHexagones(X, Y) + "," + maCarte.getTabHexagones(X, Y).getDensite()
+						pw.print(maCarte.getTabHexagones(X, Y).getClass()
+								.getSimpleName()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y)
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getDensite()
 								+ ";");
 						break;
 					case "Foret":
-						pw.print(maCarte.getTabHexagones(X, Y).getClass().getSimpleName() + ","
-								+ maCarte.getTabHexagones(X, Y).getHumidite() + ","
-								+ maCarte.getTabHexagones(X, Y).getDensite() + ";");
+						pw.print(maCarte.getTabHexagones(X, Y).getClass()
+								.getSimpleName()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getHumidite()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getDensite()
+								+ ";");
 						break;
 					case "Rocher":
-						pw.print(maCarte.getTabHexagones(X, Y).getClass().getSimpleName() + ","
-								+ maCarte.getTabHexagones(X, Y).getHumidite() + ","
-								+ maCarte.getTabHexagones(X, Y).getDensite() + ";");
+						pw.print(maCarte.getTabHexagones(X, Y).getClass()
+								.getSimpleName()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getHumidite()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getDensite()
+								+ ";");
 						break;
 					case "Route":
-						pw.print(maCarte.getTabHexagones(X, Y).getClass().getSimpleName() + ","
-								+ maCarte.getTabHexagones(X, Y).getHumidite() + ","
-								+ maCarte.getTabHexagones(X, Y).getDensite() + ";");
+						pw.print(maCarte.getTabHexagones(X, Y).getClass()
+								.getSimpleName()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getHumidite()
+								+ ","
+								+ maCarte.getTabHexagones(X, Y).getDensite()
+								+ ";");
 						break;
 					default:
 						pw.print("BUGGGGGGGGGGGGGGGGGGG" + ";");
-						System.out.println("bauii" + maCarte.getTabHexagones(X, Y).getClass().getSimpleName());
+						System.out.println("bauii"
+								+ maCarte.getTabHexagones(X, Y).getClass()
+										.getSimpleName());
 						break;
 
 					}
@@ -169,11 +206,13 @@ public class Ecrivain {
 	public void initFichier(Carte maCarte) {
 		File f = new File(nomFichier);
 		try {
-			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f, false)));
+			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(
+					f, false)));
 			pw.println("feu;");
 			pw.println(1 + ";");
 			pw.println(1 + ";");
-			pw.println(maCarte.getTailleCarte() + ";" + maCarte.getTailleCarte() + ";");
+			pw.println(maCarte.getTailleCarte() + ";"
+					+ maCarte.getTailleCarte() + ";");
 			pw.println("–––––––––––––––––––––––––––––––––––––––;");
 
 			for (int Y = 0; Y < maCarte.getTailleCarte(); Y++) {
@@ -192,7 +231,8 @@ public class Ecrivain {
 					if (maCarte.getTabHexagones(X, Y).getPV() == 0) {
 						pw.print(caseDead + ";");
 					} else {
-						switch (maCarte.getTabHexagones(X, Y).getClass().getSimpleName()) {
+						switch (maCarte.getTabHexagones(X, Y).getClass()
+								.getSimpleName()) {
 
 						case "Prairie":
 							pw.print(prairie + ";");
@@ -220,7 +260,9 @@ public class Ecrivain {
 							break;
 						default:
 							pw.print("BUGGGGGGGGGGGGGGGGGGG" + ";");
-							System.out.println("bauii" + maCarte.getTabHexagones(X, Y).getClass().getSimpleName());
+							System.out.println("bauii"
+									+ maCarte.getTabHexagones(X, Y).getClass()
+											.getSimpleName());
 							break;
 						}
 					}
@@ -239,7 +281,8 @@ public class Ecrivain {
 	public void printChangement(Carte carte, int tickClick) {
 		File f = new File(nomFichier);
 		try {
-			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f, true)));
+			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(
+					f, true)));
 			int nombreModif = carte.getModifications().size();
 			if (tickClick == 0) {
 				pw.print(0 + ";");
@@ -248,7 +291,8 @@ public class Ecrivain {
 				if (carte.getTabHexagones(0, 0).getPV() == 0) {
 					pw.print(caseDead);
 				} else {
-					switch (carte.getTabHexagones(0, 0).getClass().getSimpleName()) {
+					switch (carte.getTabHexagones(0, 0).getClass()
+							.getSimpleName()) {
 					case "Prairie":
 						pw.print(prairie);
 						break;
@@ -275,7 +319,9 @@ public class Ecrivain {
 						break;
 					default:
 						pw.print("BUGGGGGGGGGGGGGGGGGGG" + ";");
-						System.out.println("bauii" + carte.getTabHexagones(0, 0).getClass().getSimpleName());
+						System.out.println("bauii"
+								+ carte.getTabHexagones(0, 0).getClass()
+										.getSimpleName());
 						break;
 					}
 				}
@@ -291,7 +337,8 @@ public class Ecrivain {
 				if (carte.getTabHexagones((int) X, (int) Y).getPV() == 0) {
 					pw.print(caseDead);
 				} else {
-					switch (carte.getTabHexagones((int) X, (int) Y).getClass().getSimpleName()) {
+					switch (carte.getTabHexagones((int) X, (int) Y).getClass()
+							.getSimpleName()) {
 					case "Prairie":
 						pw.print(prairie);
 						break;
@@ -318,8 +365,9 @@ public class Ecrivain {
 						break;
 					default:
 						pw.print("BUGGGGGGGGGGGGGGGGGGG" + ";");
-						System.out
-								.println("bauii" + carte.getTabHexagones((int) X, (int) Y).getClass().getSimpleName());
+						System.out.println("bauii"
+								+ carte.getTabHexagones((int) X, (int) Y)
+										.getClass().getSimpleName());
 						break;
 					}
 				}
@@ -358,32 +406,18 @@ public class Ecrivain {
 				pw.print(";");
 				pw.println();
 			}
-			for (int Y = 0; Y < carte.getTailleCarte(); Y++) {
-
-				for (int X = 0; X < carte.getTailleCarte() + 1; X++) {
-					if (Y % 2 == 0) {
-						if (X == carte.getTabHexagones()[0].length) {
-							continue;
-						}
-					}
-					if (Y % 2 != 0) {
-						if (X == 0) {
-							pw.print(" ");
-							continue;
-						}
-					}
-					if (carte.presenceFeu(X, Y)) {
-						pw.print("F");
-					} else {
-						if (carte.getTabHexagones(X, Y).getPV() <= 0)
-							pw.print("C");
-						else
-							pw.print("N");
-					}
-				}
-				pw.println();
-			}
-			pw.println(carte.getFeu().size());
+			// Pour afficher la carte en texte dans le fichier de sortie
+			/*
+			 * for (int Y = 0; Y < carte.getTailleCarte(); Y++) {
+			 * 
+			 * for (int X = 0; X < carte.getTailleCarte() + 1; X++) { if (Y % 2
+			 * == 0) { if (X == carte.getTabHexagones()[0].length) { continue; }
+			 * } if (Y % 2 != 0) { if (X == 0) { pw.print(" "); continue; } } if
+			 * (carte.presenceFeu(X, Y)) { pw.print("F"); } else { if
+			 * (carte.getTabHexagones(X, Y).getPV() <= 0) pw.print("C"); else
+			 * pw.print("N"); } } pw.println(); }
+			 * pw.println(carte.getFeu().size());
+			 */
 			pw.close();
 		} catch (IOException e) {
 			// Celle-ci se produit lors d'une erreur d'�criture ou de lecture
@@ -398,40 +432,35 @@ public class Ecrivain {
 	public void printFin(Carte carte) {
 		File f = new File(nomFichier);
 		try {
-			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f, true)));
+			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(
+					f, true)));
 			pw.println("------------------------;");
 			int nbCaseIntacte = nombreCaseIntacte(carte);
 			int nbCaseBrule = nombreCaseBrule(carte);
-			pw.println("Nombre de cases intactes : " + Integer.toString(nbCaseIntacte));
-			pw.println("Nombre de cases brûlées : " + Integer.toString(nbCaseBrule));
+			pw.println("Nombre de cases intactes : "
+					+ Integer.toString(nbCaseIntacte));
+			pw.println("Nombre de cases brûlées : "
+					+ Integer.toString(nbCaseBrule));
 			double p = new Double(new Integer(nbCaseBrule).doubleValue()
-					/ new Integer(carte.getTailleCarte() * carte.getTailleCarte()).doubleValue() * 100);
+					/ new Integer(carte.getTailleCarte()
+							* carte.getTailleCarte()).doubleValue() * 100);
 			pw.println("Pourcentage de cases brûlées : " + p);
-			pw.println("Nombre de pompiers déployés : " + Integer.toString(carte.nBPompiers()));
-			pw.println("Nombre de pompiers morts : " + Integer.toString(carte.getnBpompiersMorts()));
+			pw.println("Nombre de pompiers déployés : "
+					+ Integer.toString(carte.nBPompiers()));
+			pw.println("Nombre de pompiers morts : "
+					+ Integer.toString(carte.getnBpompiersMorts()));
 
-			pw.println();
-			pw.println("--------------------------------------");
-			for (int Y = 0; Y < carte.getTailleCarte(); Y++) {
-				for (int X = 0; X < carte.getTailleCarte() + 1; X++) {
-					if (Y % 2 == 0) {
-						if (X == carte.getTabHexagones()[0].length) {
-							continue;
-						}
-					}
-					if (Y % 2 != 0) {
-						if (X == 0) {
-							pw.print(" ");
-							continue;
-						}
-					}
-					if (carte.getTabHexagones(X, Y).getPV() <= 0)
-						pw.print("0");
-					else
-						pw.print("#");
-				}
-				pw.println();
-			}
+			// Affichage de la fin (pour le débug)
+			/*
+			 * pw.println();
+			 * pw.println("--------------------------------------"); for (int Y
+			 * = 0; Y < carte.getTailleCarte(); Y++) { for (int X = 0; X <
+			 * carte.getTailleCarte() + 1; X++) { if (Y % 2 == 0) { if (X ==
+			 * carte.getTabHexagones()[0].length) { continue; } } if (Y % 2 !=
+			 * 0) { if (X == 0) { pw.print(" "); continue; } } if
+			 * (carte.getTabHexagones(X, Y).getPV() <= 0) pw.print("0"); else
+			 * pw.print("#"); } pw.println(); }
+			 */
 			pw.close();
 		} catch (IOException e) {
 			// Celle-ci se produit lors d'une erreur d'écriture ou de lecture
