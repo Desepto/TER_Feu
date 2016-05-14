@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 
 import main.Carte;
 
@@ -30,7 +31,7 @@ public class Ecrivain {
 	private final String feu = "10";
 	private final String pluie = "11";
 	private final String inonde = "9";
-	private final int canadair = 80; // ON A CHANGE C'EST LA MEW NOIWE
+	private final int canadair = 80;
 	private final int pompier = 70;
 	private final int vent = 90;
 
@@ -55,7 +56,6 @@ public class Ecrivain {
 						continue;
 					}
 				}
-
 				if (Y % 2 != 0) {
 					if (X == 0) {
 						continue;
@@ -78,7 +78,6 @@ public class Ecrivain {
 						continue;
 					}
 				}
-
 				if (Y % 2 != 0) {
 					if (X == 0) {
 						continue;
@@ -324,15 +323,17 @@ public class Ecrivain {
 						break;
 					}
 				}
-				if (carte.presenceCanadair((int) X, (int) Y)) {
-					pw.print("-" + canadair);
-				}
+
 				if (carte.presenceFeu((int) X, (int) Y)) {
 					pw.print("-" + feu);
 				}
 				if (carte.presencePluie((int) X, (int) Y)) {
 					pw.print("-" + pluie);
 				}
+				if (carte.getTabHexagones((int) X, (int) Y).isInonde()) {
+					pw.print("-" + inonde);
+				}
+
 				if (carte.getNbPompiers((int) X, (int) Y) == 1) {
 					pw.print("-" + Integer.toString(pompier + 1));
 				} else if (carte.getNbPompiers((int) X, (int) Y) == 2) {
@@ -352,6 +353,27 @@ public class Ecrivain {
 				} else if (carte.getNbPompiers((int) X, (int) Y) > 8) {
 					pw.print("-" + Integer.toString(pompier + 9));
 				}
+
+				if (carte.getNbCanadair((int) X, (int) Y) == 1) {
+					pw.print("-" + Integer.toString(canadair + 1));
+				} else if (carte.getNbCanadair((int) X, (int) Y) == 2) {
+					pw.print("-" + Integer.toString(canadair + 2));
+				} else if (carte.getNbCanadair((int) X, (int) Y) == 3) {
+					pw.print("-" + Integer.toString(canadair + 3));
+				} else if (carte.getNbCanadair((int) X, (int) Y) == 4) {
+					pw.print("-" + Integer.toString(canadair + 4));
+				} else if (carte.getNbCanadair((int) X, (int) Y) == 5) {
+					pw.print("-" + Integer.toString(canadair + 5));
+				} else if (carte.getNbCanadair((int) X, (int) Y) == 6) {
+					pw.print("-" + Integer.toString(canadair + 6));
+				} else if (carte.getNbCanadair((int) X, (int) Y) == 7) {
+					pw.print("-" + Integer.toString(canadair + 7));
+				} else if (carte.getNbCanadair((int) X, (int) Y) == 8) {
+					pw.print("-" + Integer.toString(canadair + 8));
+				} else if (carte.getNbCanadair((int) X, (int) Y) > 8) {
+					pw.print("-" + Integer.toString(canadair + 9));
+				}
+
 				if (X == 0 && Y == 0) {
 					int ventfinal = carte.getDirectionVent().ordinal() + vent;
 					pw.print("-" + ventfinal);
@@ -393,7 +415,8 @@ public class Ecrivain {
 			pw.println("Nombre de cases brûlées : " + Integer.toString(nbCaseBrule));
 			double p = new Double(new Integer(nbCaseBrule).doubleValue()
 					/ new Integer(carte.getTailleCarte() * carte.getTailleCarte()).doubleValue() * 100);
-			pw.println("Pourcentage de cases brûlées : " + p);
+			DecimalFormat df = new DecimalFormat("########.00");
+			pw.println("Pourcentage de cases brûlées : " + df.format(p));
 			pw.println("Nombre de pompiers déployés : " + Integer.toString(carte.nBPompiers()));
 			pw.println("Nombre de pompiers morts : " + Integer.toString(carte.getnBpompiersMorts()));
 

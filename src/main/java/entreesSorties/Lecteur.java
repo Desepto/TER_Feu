@@ -263,16 +263,14 @@ public class Lecteur {
 										System.out.println("Un Pompier sur un Lac ba ui");
 									} else if (maCarte.getTabHexagones(x, y) instanceof Rocher) {
 										System.out.println("Un Pompier sur un Rocher ba ui");
-									} else if (g.nombrePompier(x, y) >= 9) {
-										System.out.println("Pas plus de 9 pompier sur une case");
 									} else {
 										g.ajoutActeurPosition(temps, p);
 									}
 									break;
 								case "Canadair":
 									Canadair c = new Canadair(x, y);
-									if (g.nombreCanadair(x, y) >= 9) {
-										System.out.println("Pas plus de 9 canadair sur une case");
+									if (!maCarte.presenceLac()) {
+										System.out.println("Pas de Lac");
 									} else {
 										g.ajoutActeurPosition(temps, c);
 									}
@@ -288,6 +286,8 @@ public class Lecteur {
 										System.out.println("Un feu sur un CoupeFeu ba ui");
 									} else if (g.presenceFeu(x, y)) {
 										System.out.println("Un feu sur un feu ba ui");
+									} else if (maCarte.getTabHexagones(x, y).isInonde()) {
+										System.out.println("On peut pas brulé une piscine");
 									} else {
 										g.ajoutActeurPosition(temps, f);
 									}
