@@ -488,6 +488,26 @@ public class Carte {
 	}
 
 	/**
+	 * Nombre de canadair sur une case précise.
+	 *
+	 * @param X
+	 *            La case souhaitée.
+	 * @param Y
+	 *            La case souhaitée.
+	 * @return le nombre de canadair sur la case.
+	 */
+	public int getNbCanadair(int X, int Y) {
+		int res = 0;
+		for (Acteur courant : sesActeurs) {
+			if (courant instanceof Canadair) {
+				if (courant.getX() == X && courant.getY() == Y)
+					res++;
+			}
+		}
+		return res;
+	}
+
+	/**
 	 * Indique s'il y a un Canadair dans la case passée en argument.
 	 *
 	 * @param X
