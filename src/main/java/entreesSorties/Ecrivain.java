@@ -286,7 +286,12 @@ public class Ecrivain {
 				double X = carte.getModifications().get(i).getX();
 				double Y = carte.getModifications().get(i).getY();
 				pw.print(tickClick + ";");
-				pw.print((int) X + ";");
+				if (Y % 2 != 0) {
+					pw.print(Integer.toString((int) X - 1) + ";");
+				} else {
+					pw.print((int) X + ";");
+				}
+
 				pw.print((int) Y + ";");
 				if (carte.getTabHexagones((int) X, (int) Y).getPV() == 0) {
 					pw.print(caseDead);
