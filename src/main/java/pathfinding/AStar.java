@@ -44,38 +44,51 @@ public class AStar {
 		ArrayList<Node> closedList = new ArrayList<Node>();
 		// OpenList = sommets déjà partiellement traités
 		ArrayList<Node> openList = new ArrayList<Node>();
-		openList.add(new Node(depart.x, depart.y, 0, null));
+		openList.add(new Node(depart.x, depart.y, 0));
 		Node n;
+		int compteNombreTraiteTotal = 0;
 		while (!openList.isEmpty()) {// tant que tous les sommets ne sont pas
 										// traités
+
 			n = openList.remove(0);// On récupère le haut de la liste
 			for (Point voisin : c.voisinageCoord(n.x, n.y)) {
 				// Pour chaque voisin de n
-				Node v = new Node(voisin.x, voisin.y, n.cout
-						+ determineCout(n, voisin, c, aPied), n); // DETERMINECOUT
-																	// PAS
-				// CODEE
-				if (!c.getTabHexagones(voisin.x, voisin.y).isTraversable()
-						&& aPied)
-					// Si c'est une case intraversable et qu'on est à pied on
-					// l'ajoute direct à la closedList
-					closedList.add(v);
-				else {
-					if (contient(closedList, v) == 0) {
-						// Si le noeud n'est pas dans la closedList(n'a pas déjà
-						// été totalement traité)
-						int traite = contient(openList, v);
-						if (traite == 1)
-							// Si le noeud est déjà dans l'openList (a déjà été
-							// traité mais on a trouvé mieux, on le remplace)
-							openList.get(recuperePositionNoeud(openList, v))
-									.remplacer(v);
-						if (traite != -1)
-							// si on doit le rajouter, on le rajoute
-							openList.add(v);
+
+				if (voisin.x >= 0 && voisin.y >= 0
+						&& voisin.x < c.getTailleCarte()
+						&& voisin.y < c.getTailleCarte()) {
+					Node v = new Node(voisin.x, voisin.y, +determineCout(n,
+							voisin, c, aPied), n);
+					if (!c.getTabHexagones(voisin.x, voisin.y).isTraversable()
+							&& aPied) {
+						// Si c'est une case intraversable et qu'on est à pied
+						// on
+						// l'ajoute direct à la closedList
+						closedList.add(v);
+
+					} else {
+						if (contient(closedList, v) == 0) {
+							// Si le noeud n'est pas dans la closedList(n'a pas
+							// déjà
+							// été totalement traité)
+							int traite = contient(openList, v);
+							if (traite == 1) {
+								// Si le noeud est déjà dans l'openList (a déjà
+								// été
+								// traité mais on a trouvé mieux, on le
+								// remplace)
+								openList.get(recuperePositionNoeud(openList, v))
+										.remplacer(v);
+							}
+							if (traite == 0) {
+								// si on doit le rajouter, on le rajoute
+								openList.add(v);
+							}
+						}
 					}
 				}
 			}
+			compteNombreTraiteTotal++;
 			// Tous les voisins du sommet sont traités
 			closedList.add(n);
 		}
@@ -86,7 +99,8 @@ public class AStar {
 			destination = determineEauPlusProche(closedList, c);
 		else
 			destination = determineFeuPlusProche(closedList, c);
-
+		if (destination != null)
+			System.out.println("destination :" + destination.toString());
 		if (destination == null)
 			return depart;
 		// On renvoit la case la plus proche du feu où l'on veut aller
@@ -190,10 +204,17 @@ public class AStar {
 	 */
 	public static Point getPositionPlusAvancee(Node n, Point depart, int coutMax) {
 
-		while (n.parent != null) {
+		int nbExec = 0;
+		// System.out.println("depart : " + depart.toString());
+		while (n.x != depart.x || n.y != depart.y) {
+			// System.out.println(nbExec);
+			nbExec++;
+			System.out.println(n.toString());
 			if (n.cout <= coutMax) {
+				System.out.println("cout " + n.cout + " coutMax" + coutMax);
 				return new Point(n.x, n.y);
 			}
+
 			n = n.parent;
 		}
 
@@ -215,7 +236,7 @@ public class AStar {
 	public static int contient(ArrayList<Node> list, Node n) {
 
 		for (Node n2 : list)
-			if (n.x == n2.x && n.y == n2.y && n2.cout < n.cout) {
+			if (n.x == n2.x && n.y == n2.y) {
 				if (n2.cout <= n.cout)
 					return -1;
 				else if (n2.cout > n.cout)
