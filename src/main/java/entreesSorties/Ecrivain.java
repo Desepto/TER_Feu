@@ -8,6 +8,9 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 
 import main.Carte;
+import terrains.CoupeFeu;
+import terrains.Lac;
+import terrains.Rocher;
 
 /**
  * Classe qui génère le fichier de sortie Appelée au début pour le head, pendant
@@ -84,6 +87,54 @@ public class Ecrivain {
 					}
 				}
 				if (maCarte.getTabHexagones(X, Y).getPV() != 0) {
+					compteur += 1;
+				}
+			}
+		}
+		return compteur;
+	}
+
+	public static int nombreCaseBrulable(Carte maCarte) {
+		int compteur = 0;
+		for (int Y = 0; Y < maCarte.getTabHexagones()[0].length; Y++) {
+			for (int X = 0; X < maCarte.getTabHexagones()[0].length + 1; X++) {
+				if (Y % 2 == 0) {
+					if (X == maCarte.getTabHexagones()[0].length) {
+						continue;
+					}
+				}
+				if (Y % 2 != 0) {
+					if (X == 0) {
+						continue;
+					}
+				}
+				if (!(maCarte.getTabHexagones(X, Y) instanceof Lac)
+						&& !(maCarte.getTabHexagones(X, Y) instanceof Rocher)
+						&& !(maCarte.getTabHexagones(X, Y) instanceof CoupeFeu)) {
+					compteur += 1;
+				}
+			}
+		}
+		return compteur;
+	}
+
+	public static int nombreCaseIntacteBrulable(Carte maCarte) {
+		int compteur = 0;
+		for (int Y = 0; Y < maCarte.getTabHexagones()[0].length; Y++) {
+			for (int X = 0; X < maCarte.getTabHexagones()[0].length + 1; X++) {
+				if (Y % 2 == 0) {
+					if (X == maCarte.getTabHexagones()[0].length) {
+						continue;
+					}
+				}
+				if (Y % 2 != 0) {
+					if (X == 0) {
+						continue;
+					}
+				}
+				if (maCarte.getTabHexagones(X, Y).getPV() != 0 && !(maCarte.getTabHexagones(X, Y) instanceof Lac)
+						&& !(maCarte.getTabHexagones(X, Y) instanceof Rocher)
+						&& !(maCarte.getTabHexagones(X, Y) instanceof CoupeFeu)) {
 					compteur += 1;
 				}
 			}
@@ -415,11 +466,14 @@ public class Ecrivain {
 			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f, true)));
 			pw.println("------------------------;");
 			int nbCaseIntacte = nombreCaseIntacte(carte);
+			int nbCaseIntacteBrulable = nombreCaseIntacteBrulable(carte);
 			int nbCaseBrule = nombreCaseBrule(carte);
-			pw.println("Nombre de cases intactes : " + Integer.toString(nbCaseIntacte));
-			pw.println("Nombre de cases brûlées : " + Integer.toString(nbCaseBrule));
-			double p = new Double(new Integer(nbCaseBrule).doubleValue()
-					/ new Integer(carte.getTailleCarte() * carte.getTailleCarte()).doubleValue() * 100);
+			int nbCaseBrulable = nombreCaseBrulable(carte);
+			pw.println("Nombre de cases brulables  : " + Integer.toString(nbCaseBrulable));
+			pw.println("Nombre de cases intactes : " + Integer.toString(nbCaseIntacteBrulable));
+			pw.println("Nombre de cases brulées : " + Integer.toString(nbCaseBrule));
+			double p = new Double(
+					new Integer(nbCaseBrule).doubleValue() / new Integer(nbCaseBrulable).doubleValue() * 100);
 			DecimalFormat df = new DecimalFormat("########.00");
 			pw.println("Pourcentage de cases brûlées : " + df.format(p));
 			pw.println("Nombre de pompiers déployés : " + Integer.toString(carte.nBPompiers()));

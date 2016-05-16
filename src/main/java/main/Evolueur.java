@@ -11,9 +11,9 @@ import entreesSorties.Lecteur;
  * Classe principale du bouzin, contient la m�thode main, cr�e tous les trucs et
  * s'occupe de faire avancer le temps. Elle sera p'tet d�coup�e en 2 (une partie
  * main, une partie evolueur)
- * 
+ *
  * @author Thomas
- * 
+ *
  */
 
 /**
@@ -35,7 +35,7 @@ public class Evolueur {
 	public Evolueur(int tailleCarte, String fichierEntree, String fichierSortie) {
 
 		this.g = new Gestionnaire();
-		this.c = Lecteur.creemapFichier("Carte", g);
+		this.c = Lecteur.creemapFichier("Carte_2", g);
 		this.e = new Ecrivain(fichierSortie);
 		e.initFichier(this.c);
 
