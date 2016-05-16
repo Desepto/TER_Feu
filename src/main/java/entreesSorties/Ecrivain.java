@@ -423,6 +423,7 @@ public class Ecrivain {
 			DecimalFormat df = new DecimalFormat("########.00");
 			pw.println("Pourcentage de cases brûlées : " + df.format(p));
 			pw.println("Nombre de pompiers déployés : " + Integer.toString(carte.nBPompiers()));
+			pw.println("Nombre de candairs déployés : " + Integer.toString(carte.getCanadair().size()));
 			pw.println("Nombre de pompiers morts : " + Integer.toString(carte.getnBpompiersMorts()));
 
 			// Affichage de la fin (pour le débug)

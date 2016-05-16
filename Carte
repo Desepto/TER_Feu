@@ -31,8 +31,10 @@ Maison,10,un;Route,10,un;Plaine,10,un;Plaine,10,un;Plaine,10,un;Rocher,10,un;Pla
 Route,10,un;CoupeFeu,10,un;Plaine,10,un;Prairie,10,un;Plaine,10,un;Foret,10,un;CoupeFeu,10,un;Maison,10,un;Prairie,10,un;Foret,10,un;Foret,10,un;CoupeFeu,10,un;Rocher,10,un;Lac,10,un;Foret,10,un;Prairie,10,un;Plaine,10,un;Foret,10,un;Lac,10,un;Prairie,10,un;Maison,10,un;Plaine,10,un;Plaine,10,un;CoupeFeu,10,un;Route,10,un;Foret,10,un;Route,10,un;Prairie,10,un;CoupeFeu,10,un;Lac,10,un;
 Plaine,10,un;Route,10,un;Rocher,10,un;Foret,10,un;Rocher,10,un;Rocher,10,un;Route,10,un;Foret,10,un;Prairie,10,un;Lac,10,un;CoupeFeu,10,un;Foret,10,un;Prairie,10,un;Lac,10,un;Prairie,10,un;Rocher,10,un;Plaine,10,un;Foret,10,un;Route,10,un;Lac,10,un;Foret,10,un;Plaine,10,un;Prairie,10,un;CoupeFeu,10,un;Rocher,10,un;CoupeFeu,10,un;Maison,10,un;Rocher,10,un;Maison,10,un;Lac,10,un;
 Plaine,10,un;Maison,10,un;Route,10,un;Prairie,10,un;Route,10,un;Maison,10,un;Maison,10,un;Rocher,10,un;Lac,10,un;Route,10,un;Route,10,un;Prairie,10,un;Foret,10,un;Plaine,10,un;CoupeFeu,10,un;Plaine,10,un;Plaine,10,un;Rocher,10,un;CoupeFeu,10,un;Foret,10,un;Maison,10,un;Lac,10,un;Prairie,10,un;CoupeFeu,10,un;Plaine,10,un;Plaine,10,un;Prairie,10,un;Rocher,10,un;CoupeFeu,10,un;Foret,10,un;
-Feu:0:29:29:Anouarrr ba ui hardcore street
-Arosage automatique 
+Feu:0:29:29
 Feu:0:0:0
+Pompier:0:0:7
+Canadair:0:0:7
 Feu:5:8:6
 Feu:12:15:15
+Pompier:0:0:7
