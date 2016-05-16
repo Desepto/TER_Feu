@@ -9,8 +9,8 @@ import main.Carte;
 import org.junit.Test;
 
 import pathfinding.AStar;
+import terrains.Lac;
 import terrains.Plaine;
-import terrains.Rocher;
 import terrains.Terrain;
 import acteurs.Canadair;
 import acteurs.Feu;
@@ -28,14 +28,14 @@ public class AStarTest {
 		for (int i = 0; i < 25; i++)
 			for (int j = 0; j < 25; j++)
 				tab[i][j] = new Plaine(NiveauDensite.un);
-		tab[1][0] = new Rocher();
+		tab[15][2] = new Lac();
 		// tab[1][1] = new Rocher();
 		c.setMaCarte(tab);
 		c.ajoutActeur(new Feu(12, 12));
 		c.ajoutActeur(new Feu(15, 20));
 		// c.ajoutActeur(new Feu(1, 5));
 		c.ajoutActeur(new Canadair(0, 0));
-		c.getCanadair().get(0).agi(c);
+		// ((Canadair) c.getCanadair().get(0)).vider();
 		System.out.println(((Canadair) c.getCanadair().get(0)).isEstCharge());
 
 		System.out.println("eesth");
