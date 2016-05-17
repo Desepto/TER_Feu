@@ -215,6 +215,7 @@ public class Feu extends Acteur {
 					proba *= 100;
 					probas.add(proba);
 					System.out.println("proba :" + proba);
+
 					// 100 - humidité + transmission;
 					// On glisse le résultat dans une liste probas.
 
@@ -267,11 +268,10 @@ public class Feu extends Acteur {
 		double vent = 35 + 5 * maCarte.getForceVent().ordinal();
 		// La force du vent. 35-40-45.
 
-		double ventDirection = maCarte.getDirectionVent().ordinal();
+		double ventDirection = maCarte.getDirectionVent().ordinal() + 1;
 		// La direction du vent global de la carte conveti en entier.
 		ArrayList<Double> probasVent = new ArrayList<Double>();
 		// La proba finale de chaque voisin qui sera renvoyée.
-
 		for (int z = 0; z < 6; z++) {
 			// System.out.println(ventDirection + " pd");
 			if (ventDirection == z) {
