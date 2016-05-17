@@ -2,24 +2,27 @@ package terrains;
 
 import java.awt.Point;
 
+import main.Carte;
 import acteurs.Acteur;
 import enumerations.NiveauDensite;
-import main.Carte;
 
 /**
  * Classe mère de tous les types de terrains.
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 
 public abstract class Terrain {
 
 	protected final boolean inflammable;
 	protected boolean inonde = false;
+	protected boolean traversable = true;
 	protected NiveauDensite densite;
 	private int humidite = 10; // Humidité par défaut.
 	protected int PV = 1;
+	protected int coutDeplacement;
+
 	// Seuls les terrains inflammables verront leur PV calculés dans leurs
 	// constructeurs respectifs.
 	private int trans; // Capacité d'un terrain à propager son feu.
@@ -41,12 +44,20 @@ public abstract class Terrain {
 		this.densite = densite;
 	}
 
+	public int getCoutDeplacement() {
+		return coutDeplacement;
+	}
+
+	public boolean isTraversable() {
+		return traversable;
+	}
+
 	/**
 	 * Setter personnalisé : Ajoute l'humidite d'un acteur à celle du terrain.
-	 *
+	 * 
 	 * Il peut très bien ne pas y avoir de Feu sur une case que l'on arrose : La
 	 * pluie.
-	 *
+	 * 
 	 * @param monHumidite
 	 *            De combien j'arrose.
 	 * @param X
@@ -54,7 +65,7 @@ public abstract class Terrain {
 	 *            être supprimé si l'arrose est conséquent.
 	 * @param Y
 	 *            idem
-	 *
+	 * 
 	 * @param maCarte
 	 *            La carte pour pouvoir apeller presenceFeu() et supprimer le
 	 *            Feu si besoin.
@@ -90,7 +101,7 @@ public abstract class Terrain {
 	 * Enlève l'humidite d'un acteur à celle du terrain. Si la case redevient
 	 * suffisament sèche, (humidité < 100) elle n'est plus inondée et le feu
 	 * pourra de nouveau s'y propager.
-	 *
+	 * 
 	 * @param monHumidite
 	 * @param X
 	 * @param Y
@@ -101,10 +112,10 @@ public abstract class Terrain {
 
 		// Si l'humidité repasse sous la barre des 100, le terrain n'est plus
 		// inondé.
-		if (this.humidite < 100) {
-			this.inonde = false;
-			maCarte.getModifications().add(new Point(X, Y));
-		}
+		/*
+		 * if (this.humidite < 100) { this.inonde = false;
+		 * maCarte.getModifications().add(new Point(X, Y)); }
+		 */
 	}
 
 	public int getPV() {

@@ -2,7 +2,10 @@ package main;
 
 import java.awt.Point;
 
+import pathfinding.AStar;
+import terrains.Lac;
 import acteurs.Acteur;
+import acteurs.Canadair;
 import acteurs.Feu;
 import entreesSorties.Ecrivain;
 import entreesSorties.Lecteur;
@@ -11,9 +14,18 @@ import entreesSorties.Lecteur;
  * Classe principale du bouzin, contient la m�thode main, cr�e tous les trucs et
  * s'occupe de faire avancer le temps. Elle sera p'tet d�coup�e en 2 (une partie
  * main, une partie evolueur)
- *
+ * 
  * @author Thomas
- *
+ * 
+ */
+
+/**
+ * keskejdoifair
+ * <ul>
+ * <li>prendre en compte args[0]</li>
+ * <li>vérifier que le deplacement fonctionne envoyer</li>
+ * <li>envoyer les trucs à shouta + faire icone inondé + les autres icones</li>
+ * </ul>
  */
 
 public class Evolueur {
@@ -26,7 +38,7 @@ public class Evolueur {
 	public Evolueur(int tailleCarte, String fichierEntree, String fichierSortie) {
 
 		this.g = new Gestionnaire();
-		this.c = Lecteur.creemapFichier("Carte", g);
+		this.c = Lecteur.creemapFichier("Carte_2", g);
 		this.e = new Ecrivain(fichierSortie);
 		e.initFichier(this.c);
 
@@ -40,6 +52,27 @@ public class Evolueur {
 			this.c.nettoieModifications();
 
 			for (Acteur a : this.c.getFeu())
+				a.agi(this.c);
+			System.out.println(this.c.getModifications().size());
+
+			for (Acteur a : this.c.getPompier()) {
+				if (this.c.presenceFeu(a.getX(), a.getY()))
+					a.agi(this.c);
+				else
+					a.setActeur(AStar.deplacement(this.c, a), this.c);
+			}
+			for (Acteur a : this.c.getCanadair()) {
+				// Si le canadair est plein et sur une zone de feu ou s'il est
+				// vide et sur un lac, il agit
+				if ((this.c.presenceFeu(a.getX(), a.getY()) && ((Canadair) a)
+						.isEstCharge())
+						|| (this.c.getTabHexagones(a.getX(), a.getY()) instanceof Lac && !((Canadair) a)
+								.isEstCharge()))
+					a.agi(this.c);
+				else
+					a.setActeur(AStar.deplacement(this.c, a), this.c);
+			}
+			for (Acteur a : this.c.getPluie())
 				a.agi(this.c);
 
 			try {

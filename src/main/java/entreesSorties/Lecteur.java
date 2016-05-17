@@ -260,19 +260,17 @@ public class Lecteur {
 								case "Pompier":
 									Pompier p = new Pompier(x, y);
 									if (maCarte.getTabHexagones(x, y) instanceof Lac) {
-										System.out.println("Un Pompier sur un Lac ba ui");
+										System.out.println("Un Pompier sur un Lac pas possible");
 									} else if (maCarte.getTabHexagones(x, y) instanceof Rocher) {
-										System.out.println("Un Pompier sur un Rocher ba ui");
-									} else if (g.nombrePompier(x, y) >= 9) {
-										System.out.println("Pas plus de 9 pompier sur une case");
+										System.out.println("Un Pompier sur un Rocher pas possible");
 									} else {
 										g.ajoutActeurPosition(temps, p);
 									}
 									break;
 								case "Canadair":
 									Canadair c = new Canadair(x, y);
-									if (g.nombreCanadair(x, y) >= 9) {
-										System.out.println("Pas plus de 9 canadair sur une case");
+									if (!maCarte.presenceLac()) {
+										System.out.println("Pas de Lac");
 									} else {
 										g.ajoutActeurPosition(temps, c);
 									}
@@ -281,13 +279,15 @@ public class Lecteur {
 								case "Feu":
 									Feu f = new Feu(x, y);
 									if (maCarte.getTabHexagones(x, y) instanceof Lac) {
-										System.out.println("Un feu sur un Lac ba ui");
+										System.out.println("Un feu sur un Lac pas possible");
 									} else if (maCarte.getTabHexagones(x, y) instanceof Rocher) {
-										System.out.println("Un feu sur un Rocher ba ui");
+										System.out.println("Un feu sur un Rocher pas possible");
 									} else if (maCarte.getTabHexagones(x, y) instanceof CoupeFeu) {
-										System.out.println("Un feu sur un CoupeFeu ba ui");
+										System.out.println("Un feu sur un CoupeFeu pas possible");
 									} else if (g.presenceFeu(x, y)) {
-										System.out.println("Un feu sur un feu ba ui");
+										System.out.println("Un feu sur un feu pas possible");
+									} else if (maCarte.getTabHexagones(x, y).isInonde()) {
+										System.out.println("On peut pas brulé une piscine");
 									} else {
 										g.ajoutActeurPosition(temps, f);
 									}

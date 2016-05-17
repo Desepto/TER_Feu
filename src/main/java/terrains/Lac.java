@@ -4,9 +4,9 @@ import enumerations.NiveauDensite;
 
 /**
  * Un lac !
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class Lac extends Terrain {
 
@@ -16,6 +16,8 @@ public class Lac extends Terrain {
 	public Lac() {
 		super(false); // On rend le lac non inflammable.
 		densite = NiveauDensite.un;
+		this.traversable = false;
+		this.coutDeplacement = -1;
 	}
 
 }

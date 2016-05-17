@@ -4,9 +4,9 @@ import enumerations.NiveauDensite;
 
 /**
  * Une forêt !
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class Foret extends Terrain {
 
@@ -20,11 +20,12 @@ public class Foret extends Terrain {
 		this.densite = NiveauDensite.un;
 		this.setTrans(5);
 		this.PV = duree;
+		this.coutDeplacement = 15;
 	}
 
 	/**
 	 * El Constrouctor !
-	 *
+	 * 
 	 * @param maDensite
 	 */
 	public Foret(NiveauDensite maDensite) {
@@ -35,5 +36,6 @@ public class Foret extends Terrain {
 			this.PV = duree;
 		else
 			this.PV = duree * 2;
+		this.coutDeplacement = 15;
 	}
 }

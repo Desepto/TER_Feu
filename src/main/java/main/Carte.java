@@ -11,6 +11,7 @@ import acteurs.Pluie;
 import acteurs.Pompier;
 import enumerations.Direction;
 import enumerations.Force;
+import terrains.Lac;
 import terrains.Terrain;
 import terrains.TerrainVide;
 
@@ -412,6 +413,22 @@ public class Carte {
 	}
 
 	/**
+	 * Fonction qui renvoie vrai si un lac est présent
+	 *
+	 * @return vrai si y a un lac, faux sinon.
+	 */
+	public boolean presenceLac() {
+
+		for (int i = 0; i < tailleCarte; i++) {
+			for (int j = 0; j < tailleCarte; j++) {
+				if (this.getTerrain(i, j) instanceof Lac)
+					return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Renvoie toutes les cases enflammées.
 	 *
 	 * @return une liste d'acteur Feu.
@@ -563,5 +580,25 @@ public class Carte {
 	 */
 	public int nBPompiers() {
 		return getPompier().size();
+	}
+
+	/**
+	 * Nombre de canadair sur une case précise.
+	 *
+	 * @param X
+	 *            La case souhaitée.
+	 * @param Y
+	 *            La case souhaitée.
+	 * @return le nombre de canadair sur la case.
+	 */
+	public int getNbCanadair(int X, int Y) {
+		int res = 0;
+		for (Acteur courant : sesActeurs) {
+			if (courant instanceof Canadair) {
+				if (courant.getX() == X && courant.getY() == Y)
+					res++;
+			}
+		}
+		return res;
 	}
 }
