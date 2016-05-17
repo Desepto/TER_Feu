@@ -110,14 +110,12 @@ public class Feu extends Acteur {
 							 * inondée.
 							 */
 							if (!maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).isInonde()) {
-								System.out.println("TA MAMAN EN STRING");
 								Feu monFeu = new Feu(yMettreLeFeu.x, yMettreLeFeu.y);
 								if (maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).isInflammable()
 										&& maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).getPV() > 0) {
 									maCarte.ajoutActeur(monFeu);
 								}
-							} else
-								System.out.println("Ton pere en slip kangourou");
+							}
 						}
 
 					}
@@ -232,7 +230,6 @@ public class Feu extends Acteur {
 					resultat.set(z, false);
 			}
 		}
-
 		return resultat;
 	}
 
@@ -279,19 +276,18 @@ public class Feu extends Acteur {
 				// sont disjoints.
 			}
 
-			if (Math.abs(ventDirection - z) == 1) {
+			if (Math.abs(ventDirection - z) == 2 || Math.abs(ventDirection - z) == 4) {
 				// Directions presque opposées. Légèrement défavorable.
 				probasVent.add((5.5 - vent) / 10);
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 				// sont disjoints.
 			}
 
-			if (Math.abs(ventDirection - z) == 2) {
+			if (Math.abs(ventDirection - z) == 1 || Math.abs(ventDirection - z) == 5) {
 				// Directions presque égales. Légèrement favorable.
 				probasVent.add((4.5 + vent) / 10);
 			}
 		}
-		// System.out.println(probasVent.size() + "JE SUCE TA SOEUR SALE GAY");
 		return probasVent;
 	}
 

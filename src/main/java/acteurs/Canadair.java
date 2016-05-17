@@ -5,9 +5,9 @@ import terrains.Lac;
 
 /**
  * Pilotés par nos meilleurs employés Talibans ! Vous ne courrez aucun risques !
- * 
+ *
  * @author Nicolas
- * 
+ *
  */
 public class Canadair extends Acteur {
 
@@ -29,21 +29,17 @@ public class Canadair extends Acteur {
 	public boolean agi(Carte maCarte, int autre) {
 
 		for (Acteur courant : maCarte.getSesActeurs()) {
-			if (courant.X == this.X && courant.Y == this.Y
-					&& courant instanceof Feu) {
+			if (courant.X == this.X && courant.Y == this.Y && courant instanceof Feu) {
 				if (estCharge) {
-					maCarte.getTabHexagones(this.X, this.Y).arrose(
-							efficaciteCanadaire, X, Y, maCarte);
+					maCarte.getTabHexagones(this.X, this.Y).arrose(efficaciteCanadaire, X, Y, maCarte);
 					// On arrose.
 					this.estCharge = false; // On décharge.
 					return false;
 				}
 			}
 		}
-		if (maCarte.getTabHexagones(this.X, this.Y) instanceof Lac
-				&& this.estCharge == false) {
+		if (maCarte.getTabHexagones(this.X, this.Y) instanceof Lac && this.estCharge == false) {
 			this.estCharge = true;
-			System.out.println("RAMDOULILAH");
 			return false;
 		}
 		return true;
@@ -52,7 +48,7 @@ public class Canadair extends Acteur {
 	/**
 	 * El Constrouctoritatoress, si maque ! Un Canadair appraît chargé (rempli
 	 * d'eau).
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 */

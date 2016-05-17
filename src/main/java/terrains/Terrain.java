@@ -2,15 +2,15 @@ package terrains;
 
 import java.awt.Point;
 
-import main.Carte;
 import acteurs.Acteur;
 import enumerations.NiveauDensite;
+import main.Carte;
 
 /**
  * Classe mère de tous les types de terrains.
- * 
+ *
  * @author Nicolas
- * 
+ *
  */
 
 public abstract class Terrain {
@@ -54,10 +54,10 @@ public abstract class Terrain {
 
 	/**
 	 * Setter personnalisé : Ajoute l'humidite d'un acteur à celle du terrain.
-	 * 
+	 *
 	 * Il peut très bien ne pas y avoir de Feu sur une case que l'on arrose : La
 	 * pluie.
-	 * 
+	 *
 	 * @param monHumidite
 	 *            De combien j'arrose.
 	 * @param X
@@ -65,7 +65,7 @@ public abstract class Terrain {
 	 *            être supprimé si l'arrose est conséquent.
 	 * @param Y
 	 *            idem
-	 * 
+	 *
 	 * @param maCarte
 	 *            La carte pour pouvoir apeller presenceFeu() et supprimer le
 	 *            Feu si besoin.
@@ -74,7 +74,6 @@ public abstract class Terrain {
 		this.setHumidite(this.getHumidite() + monHumidite);
 
 		if (this.humidite >= 100) {
-			System.out.println("HUMIDITE > 100");
 			this.inonde = true; // Le terrain passe à l'état inondé.
 			if (maCarte.presenceFeu(X, Y)) {
 				for (Acteur courant : maCarte.getFeu()) {
@@ -99,7 +98,7 @@ public abstract class Terrain {
 	 * Enlève l'humidite d'un acteur à celle du terrain. Si la case redevient
 	 * suffisament sèche, (humidité < 100) elle n'est plus inondée et le feu
 	 * pourra de nouveau s'y propager.
-	 * 
+	 *
 	 * @param monHumidite
 	 * @param X
 	 * @param Y
@@ -165,7 +164,7 @@ public abstract class Terrain {
 
 	/**
 	 * Change l'état du terrain (true pour inondé, false pour normal).
-	 * 
+	 *
 	 * @param innondation
 	 */
 	public void setInonde(boolean innondation) {

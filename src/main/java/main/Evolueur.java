@@ -52,7 +52,7 @@ public class Evolueur {
 
 			for (Acteur a : this.c.getFeu())
 				a.agi(this.c);
-			System.out.println(this.c.getModifications().size());
+			// System.out.println(this.c.getModifications().size());
 
 			for (Acteur a : this.c.getPompier()) {
 				if (this.c.presenceFeu(a.getX(), a.getY()))
