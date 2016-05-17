@@ -203,7 +203,7 @@ public class Feu extends Acteur {
 					}
 					// la formule avec vent.
 					probas.add(100 - humidite + transmission + vent.get(i));
-
+					System.out.println("LA COCKA " + probas.get(i));
 					// 100 - humidité + transmission;
 					// On glisse le résultat dans une liste probas.
 
@@ -256,12 +256,12 @@ public class Feu extends Acteur {
 		double vent = 35 + 5 * maCarte.getForceVent().ordinal();
 		// La force du vent. 35-40-45.
 
-		double ventDirection = maCarte.getDirectionVent().ordinal();
+		double ventDirection = maCarte.getDirectionVent().ordinal() + 1;
 		// La direction du vent global de la carte conveti en entier.
 		ArrayList<Double> probasVent = new ArrayList<Double>();
 		// La proba finale de chaque voisin qui sera renvoyée.
-
-		for (int z = 0; z < 6; z++) {
+		System.out.println("ANAL " + ventDirection);
+		for (int z = 1; z < 7; z++) {
 			if (ventDirection == z) {
 				// Directions égales. Favorable.
 				probasVent.add(vent);
