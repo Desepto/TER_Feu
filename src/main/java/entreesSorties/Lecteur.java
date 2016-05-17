@@ -102,6 +102,67 @@ public class Lecteur {
 		return maCarte;
 	}
 
+	public static Carte carteEnDurToutCrame(int taille, Force f, Direction d) {
+
+		Carte maCarte = new Carte(taille, f, d);
+		int nombre; // Nombre aléatoire qui contiendra le type de terrain.
+		Random rand;
+		for (int Y = 0; Y < taille; Y++) {
+			for (int X = 0; X < taille + 1; X++) {
+
+				if (Y % 2 == 0) {
+					if (X == taille) {
+						maCarte.getTabHexagones()[X][Y] = new TerrainVide();
+						continue;
+					}
+				}
+
+				if (Y % 2 != 0) {
+					if (X == 0) {
+						maCarte.getTabHexagones()[X][Y] = new TerrainVide();
+						continue;
+					}
+				}
+
+				rand = new Random();
+				nombre = rand.nextInt(8); // Entre 0 et 7 car il y a 8 terrains
+											// différents.
+
+				switch (nombre) {
+				case 0:
+					maCarte.getTabHexagones()[X][Y] = new Foret();
+					break;
+				case 1:
+					maCarte.getTabHexagones()[X][Y] = new Foret();
+					break;
+				case 2:
+					maCarte.getTabHexagones()[X][Y] = new Prairie();
+					break;
+				case 3:
+					maCarte.getTabHexagones()[X][Y] = new Plaine();
+					break;
+				case 4:
+					maCarte.getTabHexagones()[X][Y] = new Foret();
+					break;
+				case 5:
+					maCarte.getTabHexagones()[X][Y] = new Maison();
+					break;
+				case 6:
+					maCarte.getTabHexagones()[X][Y] = new Foret();
+					break;
+				case 7:
+					maCarte.getTabHexagones()[X][Y] = new Foret();
+					break;
+				default:
+					maCarte.getTabHexagones()[X][Y] = new TerrainVide();
+					break;
+				}
+
+			}
+		}
+		return maCarte;
+	}
+
 	/**
 	 * @param chaine
 	 * @return
