@@ -2,20 +2,20 @@ package main;
 
 import java.awt.Point;
 
-import pathfinding.AStar;
 import acteurs.Acteur;
 import acteurs.Canadair;
 import acteurs.Feu;
 import entreesSorties.Ecrivain;
 import entreesSorties.Lecteur;
+import pathfinding.AStar;
 
 /**
  * Classe principale du bouzin, contient la m�thode main, cr�e tous les trucs et
  * s'occupe de faire avancer le temps. Elle sera p'tet d�coup�e en 2 (une partie
  * main, une partie evolueur)
- * 
+ *
  * @author Thomas
- * 
+ *
  */
 
 /**

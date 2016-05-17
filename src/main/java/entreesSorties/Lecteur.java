@@ -8,6 +8,7 @@ import java.util.Random;
 
 import acteurs.Canadair;
 import acteurs.Feu;
+import acteurs.Pluie;
 import acteurs.Pompier;
 import enumerations.Direction;
 import enumerations.Force;
@@ -290,6 +291,15 @@ public class Lecteur {
 										System.out.println("On peut pas brulé une piscine");
 									} else {
 										g.ajoutActeurPosition(temps, f);
+									}
+									break;
+								case "Pluie":
+									Pluie pl = new Pluie(x, y);
+									if (g.presencePluie(x, y)) {
+										System.out.println("il pleut deja");
+									} else {
+										g.ajoutActeurPosition(temps, pl);
+										System.out.println("marche");
 									}
 									break;
 								default:

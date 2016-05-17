@@ -6,6 +6,7 @@ import java.util.Vector;
 import acteurs.Acteur;
 import acteurs.Canadair;
 import acteurs.Feu;
+import acteurs.Pluie;
 import acteurs.Pompier;
 
 /**
@@ -82,6 +83,22 @@ public class Gestionnaire {
 				ArrayList<Acteur> liste = mesEvents.get(i).getActeurs();
 				for (int j = 0; j < liste.size(); j++) {
 					if (liste.get(j) instanceof Feu) {
+						if (liste.get(j).getX() == x && liste.get(j).getX() == y) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	public boolean presencePluie(int x, int y) {
+		for (int i = 0; i < mesEvents.size(); i++) {
+			if (mesEvents.get(i) != null) {
+				ArrayList<Acteur> liste = mesEvents.get(i).getActeurs();
+				for (int j = 0; j < liste.size(); j++) {
+					if (liste.get(j) instanceof Pluie) {
 						if (liste.get(j).getX() == x && liste.get(j).getX() == y) {
 							return true;
 						}

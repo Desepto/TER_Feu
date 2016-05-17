@@ -334,6 +334,7 @@ public class Ecrivain {
 				pw.println("-" + ventfinal + ";");
 			}
 			for (int i = 0; i < nombreModif; i++) {
+
 				double X = carte.getModifications().get(i).getX();
 				double Y = carte.getModifications().get(i).getY();
 				pw.print(tickClick + ";");
