@@ -102,6 +102,7 @@ public class Evolueur {
 		for (Acteur a : this.c.getSesActeurs())
 			if (a instanceof Feu) {
 				/*
+				 *
 				 * System.out.println(this.c.getSesActeurs().size() + " x :" +
 				 * this.c.getSesActeurs().get(0).getX() + " y :" +
 				 * this.c.getSesActeurs().get(0).getY());

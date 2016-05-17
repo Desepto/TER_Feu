@@ -291,6 +291,7 @@ public class Lecteur {
 										System.out.println("On peut pas brulé une piscine");
 									} else {
 										g.ajoutActeurPosition(temps, f);
+
 									}
 									break;
 								case "Pluie":

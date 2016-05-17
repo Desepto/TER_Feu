@@ -28,6 +28,7 @@ public class Gestionnaire {
 	public Evenement getUnEvent(int indice) {
 
 		return mesEvents.get(indice);
+
 	}
 
 	public void ajoutEvenement(Evenement monEvent) {
