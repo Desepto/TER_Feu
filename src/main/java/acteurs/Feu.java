@@ -267,28 +267,28 @@ public class Feu extends Acteur {
 		for (int z = 1; z < 7; z++) {
 			if (ventDirection == z) {
 				// Directions égales. Favorable.
-				probasVent.add(vent + 6);
+				probasVent.add((vent + 6) / 10);
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 							// sont disjoints.
 			}
 
 			if (Math.abs(ventDirection - z) == 3) {
 				// Directions opposées. Défavorable.
-				probasVent.add(4 - vent);
+				probasVent.add((4 - vent) / 10);
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 				// sont disjoints.
 			}
 
 			if (Math.abs(ventDirection - z) == 1) {
 				// Directions presque opposées. Légèrement défavorable.
-				probasVent.add(5.5 - vent);
+				probasVent.add((5.5 - vent) / 10);
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 				// sont disjoints.
 			}
 
 			if (Math.abs(ventDirection - z) == 2) {
 				// Directions presque égales. Légèrement favorable.
-				probasVent.add(4.5 + vent);
+				probasVent.add((4.5 + vent) / 10);
 			}
 		}
 		// System.out.println(probasVent.size() + "JE SUCE TA SOEUR SALE GAY");
