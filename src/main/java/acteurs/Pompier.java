@@ -9,7 +9,7 @@ public class Pompier extends Acteur {
 
 	/**
 	 * Probabilité de décès d'un pompier sur une case en feu, en pourcentage.
-	 * 
+	 *
 	 * Cet attribut ne peut pas être final car on a besoin de rendre un pompier
 	 * immortel ou débile durant les tests.
 	 */
@@ -31,14 +31,12 @@ public class Pompier extends Acteur {
 			// On enregistre les stats des pompiers crevés.
 			for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
 				if (maCarte.getSesActeurs().get(i) instanceof Pompier) {
-					if (maCarte.getSesActeurs().get(i).X == X
-							&& maCarte.getSesActeurs().get(i).Y == Y) {
+					if (maCarte.getSesActeurs().get(i).X == X && maCarte.getSesActeurs().get(i).Y == Y) {
 						// Suppression du pompier.
 						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
 						maCarte.getSesActeurs().remove(i + 1);
 						maCarte.purifieActeurs();
-						maCarte.getModifications().add(
-								new Point(this.X, this.Y));
+						maCarte.getModifications().add(new Point(this.X, this.Y));
 						// On enregistre les coordonnées de la case modifiée
 						// (pompier qui disparait).
 						return;
@@ -54,7 +52,7 @@ public class Pompier extends Acteur {
 
 	/**
 	 * El Counstrouctativoush
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 */
@@ -65,12 +63,12 @@ public class Pompier extends Acteur {
 	/**
 	 * Lance un dé pour savoir si le pompier sur une case en feu décède ou s'il
 	 * sagit d'un SURVIVOR.
-	 * 
+	 *
 	 * @return true s'il est encore vivant, false s'il est mort.
 	 */
 	public boolean StillAlive() {
 		Random rand = new Random();
-		int mort = rand.nextInt(1000); // Nombre aléatoire entre 0 et 99.
+		int mort = rand.nextInt(1000); // Nombre aléatoire entre 0 et 999.
 		if (mort <= this.probaMort)
 			return false;
 		return true;

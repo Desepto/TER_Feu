@@ -13,7 +13,7 @@ import terrains.Terrain;
 /**
  * @author Nicolas Allumeeeeeeeeeeeeeeez, le feu ! Allumeeeeeeeeeeeeeez le
  *         feuuuu !
- * 
+ *
  */
 public class Feu extends Acteur {
 
@@ -30,9 +30,9 @@ public class Feu extends Acteur {
 
 	/**
 	 * Déclenche l'apocalypse de l'armageddon sur la terre.
-	 * 
+	 *
 	 * Grosse perte d'humidité et 1 PV sur la case centrale au premier toc.
-	 * 
+	 *
 	 * Perte de 1 PV et humidité sur case centrale à tous les tocs.
 	 */
 	@Override
@@ -42,8 +42,7 @@ public class Feu extends Acteur {
 		// On est entre personnes civilisées.
 		if (!maCarte.getTabHexagones(X, Y).isInflammable()) {
 
-			System.out
-					.println("Euh, Herr General, vous voulez vraiment mettre le feu au lac ??");
+			System.out.println("Euh, Herr General, vous voulez vraiment mettre le feu au lac ??");
 			return;
 		}
 
@@ -94,7 +93,7 @@ public class Feu extends Acteur {
 			 * On parcourt la liste de Bouléens feuVoisins qui contient les
 			 * résultats du tirage et mesVoisinsCoord qui contient les
 			 * coordonnées des 6 voisins de this. (indice de parcours z).
-			 * 
+			 *
 			 * Il faut que mon z courant de feuVoisins soit true pour mettre le
 			 * feu au voisin z. Si c'est le cas, il faut tester qu'il n'y ait
 			 * pas déjà un feu dessus. C'est à ça que sert allumeeeeeerLeFeuuuu.
@@ -104,29 +103,21 @@ public class Feu extends Acteur {
 					if (allumeeeeeerLeFeuuuu) {
 						Point yMettreLeFeu = mesVoisinsCoord.get(z);
 						// On fout le feu au voisin courant.
-						if (yMettreLeFeu.x >= 0
-								&& yMettreLeFeu.y >= 0
-								&& !maCarte.presenceFeu(yMettreLeFeu.x,
-										yMettreLeFeu.y)) {
+						if (yMettreLeFeu.x >= 0 && yMettreLeFeu.y >= 0
+								&& !maCarte.presenceFeu(yMettreLeFeu.x, yMettreLeFeu.y)) {
 							/**
 							 * Le feu ne peut se déclencher si la case est
 							 * inondée.
 							 */
-							if (!maCarte.getTabHexagones(yMettreLeFeu.x,
-									yMettreLeFeu.y).isInonde()) {
+							if (!maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).isInonde()) {
 								System.out.println("TA MAMAN EN STRING");
-								Feu monFeu = new Feu(yMettreLeFeu.x,
-										yMettreLeFeu.y);
-								if (maCarte.getTabHexagones(yMettreLeFeu.x,
-										yMettreLeFeu.y).isInflammable()
-										&& maCarte.getTabHexagones(
-												yMettreLeFeu.x, yMettreLeFeu.y)
-												.getPV() > 0) {
+								Feu monFeu = new Feu(yMettreLeFeu.x, yMettreLeFeu.y);
+								if (maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).isInflammable()
+										&& maCarte.getTabHexagones(yMettreLeFeu.x, yMettreLeFeu.y).getPV() > 0) {
 									maCarte.ajoutActeur(monFeu);
 								}
 							} else
-								System.out
-										.println("Ton pere en slip kangourou");
+								System.out.println("Ton pere en slip kangourou");
 						}
 
 					}
@@ -139,8 +130,7 @@ public class Feu extends Acteur {
 		if (maCarte.getTabHexagones(X, Y).getPV() <= 0) {
 			for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
 				if (maCarte.getSesActeurs().get(i) instanceof Feu) {
-					if (maCarte.getSesActeurs().get(i).X == X
-							&& maCarte.getSesActeurs().get(i).Y == Y) {
+					if (maCarte.getSesActeurs().get(i).X == X && maCarte.getSesActeurs().get(i).Y == Y) {
 						// Suppression du feu.
 						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
 						maCarte.getSesActeurs().remove(i + 1);
@@ -175,7 +165,7 @@ public class Feu extends Acteur {
 	/**
 	 * La fameuse fonction à équilibrer. Une carte est nécessaire pour récupérer
 	 * force et direction du vent.
-	 * 
+	 *
 	 * @return Une liste de bouléens. Vrai ou faux pour chaque voisin, s'il
 	 *         commence à brûler ou non.
 	 */
@@ -210,20 +200,16 @@ public class Feu extends Acteur {
 						resultat.set(i, false);
 						// Humidité trop élevée, no way que ça crame.
 					}
-					// la formule avec vent.
-					// probas.add(probaOU(0.2 * (1.0 / humidite),
-					// transmission / 10));
-					double proba = probaOU(0.2 * (1.0 / humidite),
-							(transmission / 20));
+
+					double proba = probaOU(0.2 * (1.0 / humidite), (transmission / 20));
 					if (proba < 0.0) {
 						proba = 0.0;
 					}
 
-					probas.add(1.0/* proba */);
-					// System.out.println("proba :" + proba);
-
-					// 100 - humidité + transmission;
-					// On glisse le résultat dans une liste probas.
+					probas.add(proba);
+					/**
+					 * LA PROBAS ICI
+					 */
 
 				} else {
 					probas.add(-666.666);
@@ -252,54 +238,50 @@ public class Feu extends Acteur {
 
 	/**
 	 * Petite fonction interne pour faire un tirage de 0 à 99.
-	 * 
+	 *
 	 * @return le nombre tiré.
 	 */
 	private static double probaAlea() {
 		Random rand = new Random();
-		// int tirage = rand.nextInt(100);
 
 		return rand.nextDouble();
-		// Return 100 ici pour forcer le feu à se propager.
+		// Return 1 ici pour forcer le feu à se propager.
 	}
 
 	/**
 	 * Gère la force et la direction du vent, et renvoie une probas associée
 	 * pour chaque voisin.
-	 * 
+	 *
 	 * @return La liste de probas venant du vent à considérer pour la
 	 *         propagation.
 	 */
 	private static ArrayList<Double> ventProba(Carte maCarte) {
 
-		double vent = 35 + 5 * maCarte.getForceVent().ordinal();
-		// La force du vent. 35-40-45.
+		double vent = maCarte.getForceVent().ordinal() + 1;
+		// La force du vent. 1-2-3
 
 		double ventDirection = maCarte.getDirectionVent().ordinal() + 1;
 		// La direction du vent global de la carte conveti en entier.
 		ArrayList<Double> probasVent = new ArrayList<Double>();
 		// La proba finale de chaque voisin qui sera renvoyée.
-		for (int z = 0; z < 6; z++) {
-			// System.out.println(ventDirection + " pd");
+		for (int z = 1; z < 7; z++) {
 			if (ventDirection == z) {
 				// Directions égales. Favorable.
-				probasVent.add(vent);
-				// System.out.println(z);
+				probasVent.add(vent + 6);
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 							// sont disjoints.
 			}
 
 			if (Math.abs(ventDirection - z) == 3) {
 				// Directions opposées. Défavorable.
-				probasVent.add(-vent);
-				// System.out.println(z);
+				probasVent.add(4 - vent);
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 				// sont disjoints.
 			}
 
 			if (Math.abs(ventDirection - z) == 1) {
 				// Directions presque opposées. Légèrement défavorable.
-				probasVent.add(-0.5 * vent);
+				probasVent.add(5.5 - vent);
 				// System.out.println(z);
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 				// sont disjoints.
@@ -307,7 +289,7 @@ public class Feu extends Acteur {
 
 			if (Math.abs(ventDirection - z) == 2) {
 				// Directions presque égales. Légèrement favorable.
-				probasVent.add(0.5 * vent);
+				probasVent.add(4.5 + vent);
 				// System.out.println(z);
 			}
 		}
