@@ -205,8 +205,16 @@ public class Feu extends Acteur {
 						// Humidité trop élevée, no way que ça crame.
 					}
 					// la formule avec vent.
-					// probas.add(100 - humidite + transmission + vent.get(i));
-					probas.add(100.0);
+					// probas.add(probaOU(0.2 * (1.0 / humidite),
+					// transmission / 10));
+					double proba = probaOU(0.2 * (1.0 / humidite),
+							(transmission / 20));
+					if (proba < 0.0) {
+						proba = 0;
+					}
+					proba *= 100;
+					probas.add(proba);
+					System.out.println("proba :" + proba);
 					// 100 - humidité + transmission;
 					// On glisse le résultat dans une liste probas.
 
@@ -265,9 +273,11 @@ public class Feu extends Acteur {
 		// La proba finale de chaque voisin qui sera renvoyée.
 
 		for (int z = 0; z < 6; z++) {
+			// System.out.println(ventDirection + " pd");
 			if (ventDirection == z) {
 				// Directions égales. Favorable.
 				probasVent.add(vent);
+				// System.out.println(z);
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 							// sont disjoints.
 			}
@@ -275,6 +285,7 @@ public class Feu extends Acteur {
 			if (Math.abs(ventDirection - z) == 3) {
 				// Directions opposées. Défavorable.
 				probasVent.add(-vent);
+				// System.out.println(z);
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 				// sont disjoints.
 			}
@@ -282,16 +293,23 @@ public class Feu extends Acteur {
 			if (Math.abs(ventDirection - z) == 1) {
 				// Directions presque opposées. Légèrement défavorable.
 				probasVent.add(-0.5 * vent);
+				// System.out.println(z);
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 				// sont disjoints.
 			}
 
-			if (Math.abs(ventDirection - z) == 2)
+			if (Math.abs(ventDirection - z) == 2) {
 				// Directions presque égales. Légèrement favorable.
 				probasVent.add(0.5 * vent);
+				// System.out.println(z);
+			}
 		}
-
+		// System.out.println(probasVent.size() + "JE SUCE TA SOEUR SALE GAY");
 		return probasVent;
+	}
+
+	public static double probaOU(double a, double b) {
+		return (a + b) - (a * b);
 	}
 
 }

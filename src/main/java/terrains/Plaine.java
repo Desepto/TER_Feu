@@ -10,7 +10,7 @@ import enumerations.NiveauDensite;
  */
 public class Plaine extends Terrain {
 
-	private final int duree = 5;
+	private final int duree = 10;
 
 	/**
 	 * Constructeur par défaut à modifier.
@@ -19,7 +19,7 @@ public class Plaine extends Terrain {
 		super(true); // On rend la plaine non inflammable.
 		this.densite = NiveauDensite.un;
 		this.PV = duree;
-		this.setTrans(5);
+		this.setTrans(3);
 		this.coutDeplacement = 10;
 	}
 

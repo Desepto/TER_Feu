@@ -4,7 +4,7 @@ import enumerations.NiveauDensite;
 
 public class Prairie extends Terrain {
 
-	private final int duree = 4;
+	private final int duree = 8;
 
 	/**
 	 * Constructeur par défaut à modifier.
@@ -12,7 +12,7 @@ public class Prairie extends Terrain {
 	public Prairie() {
 		super(true); // On rend la prairie non inflammable.
 		this.densite = NiveauDensite.un;
-		this.setTrans(5);
+		this.setTrans(8);
 		this.PV = duree;
 		this.coutDeplacement = 10;
 

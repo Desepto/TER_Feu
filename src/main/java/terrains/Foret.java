@@ -10,7 +10,7 @@ import enumerations.NiveauDensite;
  */
 public class Foret extends Terrain {
 
-	private final int duree = 6;
+	private final int duree = 12;
 
 	/**
 	 * Constructeur par défaut à modifier.

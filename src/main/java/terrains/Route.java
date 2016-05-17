@@ -10,7 +10,7 @@ import enumerations.NiveauDensite;
  */
 public class Route extends Terrain {
 
-	private final int duree = 4;
+	private final int duree = 8;
 
 	/**
 	 * Constructeur par défaut à modifier.

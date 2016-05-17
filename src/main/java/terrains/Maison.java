@@ -10,7 +10,7 @@ import enumerations.NiveauDensite;
  */
 public class Maison extends Terrain {
 
-	private final int duree = 5;
+	private final int duree = 10;
 
 	/**
 	 * Constructeur par défaut à modifier.
