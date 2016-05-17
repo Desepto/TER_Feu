@@ -23,6 +23,7 @@ public class Pluie extends Acteur {
 	private int duree = 4; // Nombre de tocs pendant lesquels il pleut.
 
 	private boolean apparition = true;
+
 	// Pour savoir si c'est la première fois que cet acteur agi sur sa case.
 
 	/**
@@ -40,11 +41,13 @@ public class Pluie extends Acteur {
 				 * de la case dans la Carte.
 				 */
 				maCarte.getModifications().add(new Point(this.X, this.Y));
-				maCarte.getTerrain(X, Y).arrose(intensitePluie * 2, X, Y, maCarte);
+				maCarte.getTabHexagones(X, Y).arrose(intensitePluie * 2, X, Y,
+						maCarte);
 				// 12% d'humidité en plus au début sur la case centrale.
 				apparition = false;
 			} else {
-				maCarte.getTerrain(X, Y).arrose(intensitePluie, X, Y, maCarte);
+				maCarte.getTabHexagones(X, Y).arrose(intensitePluie, X, Y,
+						maCarte);
 				// 6% d'humidité en plus ensuite sur la case centrale.
 			}
 			for (Terrain courant : maCarte.superVoisinage(X, Y)) {
@@ -58,9 +61,11 @@ public class Pluie extends Acteur {
 			 * On ajoute les cases modifiées (les voisins arrosés donc) dans la
 			 * Carte, uniquement s'il n'y a pas déjà de la pluie dessus.
 			 */
-			ArrayList<Point> mesCoordsVoisins = maCarte.superVoisinageCoord(X, Y);
+			ArrayList<Point> mesCoordsVoisins = maCarte.superVoisinageCoord(X,
+					Y);
 			for (Point monPoint : mesCoordsVoisins) {
-				if (monPoint.x >= 0 && maCarte.presencePluie(monPoint.x, monPoint.y))
+				if (monPoint.x >= 0
+						&& maCarte.presencePluie(monPoint.x, monPoint.y))
 					maCarte.getModifications().add(monPoint);
 			}
 
@@ -68,7 +73,8 @@ public class Pluie extends Acteur {
 			if (this.duree == 0) {
 				for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
 					if (maCarte.getSesActeurs().get(i) instanceof Pluie) {
-						if (maCarte.getSesActeurs().get(i).X == X && maCarte.getSesActeurs().get(i).Y == Y) {
+						if (maCarte.getSesActeurs().get(i).X == X
+								&& maCarte.getSesActeurs().get(i).Y == Y) {
 							// Suppression de la pluie.
 							maCarte.getSesActeurs().add(i, new Anouar(X, Y));
 							maCarte.getSesActeurs().remove(i + 1);
@@ -87,7 +93,7 @@ public class Pluie extends Acteur {
 
 	/**
 	 * El Constrouctivatooooorrress, SI !
-	 *
+	 * 
 	 * @param X
 	 * @param Y
 	 */

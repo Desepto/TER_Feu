@@ -3,7 +3,6 @@ package main;
 import java.awt.Point;
 
 import pathfinding.AStar;
-import terrains.Lac;
 import acteurs.Acteur;
 import acteurs.Canadair;
 import acteurs.Feu;
@@ -64,12 +63,14 @@ public class Evolueur {
 			for (Acteur a : this.c.getCanadair()) {
 				// Si le canadair est plein et sur une zone de feu ou s'il est
 				// vide et sur un lac, il agit
-				if ((this.c.presenceFeu(a.getX(), a.getY()) && ((Canadair) a)
-						.isEstCharge())
-						|| (this.c.getTabHexagones(a.getX(), a.getY()) instanceof Lac && !((Canadair) a)
-								.isEstCharge()))
-					a.agi(this.c);
-				else
+				// if ((this.c.presenceFeu(a.getX(), a.getY()) && ((Canadair) a)
+				// .isEstCharge())
+				// || (this.c.getTabHexagones(a.getX(), a.getY()) instanceof Lac
+				// && !((Canadair) a)
+				// .isEstCharge()))
+				if (((Canadair) a).agi(this.c, 0)) // si le canadair n'a pas
+													// agit il se
+					// déplace
 					a.setActeur(AStar.deplacement(this.c, a), this.c);
 			}
 			for (Acteur a : this.c.getPluie())
@@ -96,7 +97,7 @@ public class Evolueur {
 		this.e.printFin(this.c);
 	}
 
-	// Il serait intelligent de mettre cette m�thode dans Carte
+	// Il serait intelligent de mettre cette méthode dans Carte
 	public boolean presenceFeu() {
 		for (Acteur a : this.c.getSesActeurs())
 			if (a instanceof Feu) {

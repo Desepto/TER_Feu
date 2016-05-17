@@ -13,7 +13,7 @@ public class Canadair extends Acteur {
 
 	// Correspond à l'efficacite du Canadair, c'est à dire à l'augmentation de
 	// l'humidite de la case sur laquelle il largue son eau.
-	private final int efficaciteCanadaire = 50;
+	private final int efficaciteCanadaire = 100;
 	private boolean estCharge;
 
 	/**
@@ -24,21 +24,29 @@ public class Canadair extends Acteur {
 	@Override
 	public void agi(Carte maCarte) {
 
+	}
+
+	public boolean agi(Carte maCarte, int autre) {
+
 		for (Acteur courant : maCarte.getSesActeurs()) {
 			if (courant.X == this.X && courant.Y == this.Y
 					&& courant instanceof Feu) {
 				if (estCharge) {
-					maCarte.getTerrain(this.X, this.Y).arrose(
+					maCarte.getTabHexagones(this.X, this.Y).arrose(
 							efficaciteCanadaire, X, Y, maCarte);
 					// On arrose.
 					this.estCharge = false; // On décharge.
-
+					return false;
 				}
 			}
 		}
-		if (maCarte.getTabHexagones(this.X, this.Y) instanceof Lac) {
+		if (maCarte.getTabHexagones(this.X, this.Y) instanceof Lac
+				&& this.estCharge == false) {
 			this.estCharge = true;
+			System.out.println("RAMDOULILAH");
+			return false;
 		}
+		return true;
 	}
 
 	/**

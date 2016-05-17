@@ -48,26 +48,6 @@ public class Feu extends Acteur {
 		}
 
 		/**
-		 * On gère le cas où le feu a tout brûlé : On le supprime des acteurs.
-		 */
-		if (maCarte.getTabHexagones(X, Y).getPV() <= 0) {
-			for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
-				if (maCarte.getSesActeurs().get(i) instanceof Feu) {
-					if (maCarte.getSesActeurs().get(i).X == X
-							&& maCarte.getSesActeurs().get(i).Y == Y) {
-						// Suppression du feu.
-						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
-						maCarte.getSesActeurs().remove(i + 1);
-						maCarte.purifieActeurs();
-						// On enregistre la modification de la case dans la
-						// liste historique.
-						maCarte.getModifications().add(new Point(X, Y));
-						return;
-					}
-				}
-			}
-		}
-		/**
 		 * Première fois que le feu agit : Il fait baisser les PV, l'humidité de
 		 * beaucoup et ne peut pas se propager ! (Cellules de 1 borne de large,
 		 * laisser 1 tic au feu pour se propager à ses voisins.)
@@ -91,8 +71,12 @@ public class Feu extends Acteur {
 			// On décrémente les PV du terrain de 1.
 			this.apparition = false;
 		} else {
-			maCarte.getTabHexagones(X, Y).asseche(intensiteFeu, X, Y, maCarte);
-			// On baisse l'humidite d'un montant classique.
+			// maCarte.getTabHexagones(X, Y).asseche(intensiteFeu, X, Y,
+			// maCarte);
+
+			/** ATTENION A REMETTRE */
+
+			// On baisse les pv d'un montant classique.
 			if (maCarte.getTabHexagones(X, Y).getPV() > 0)
 				maCarte.getTabHexagones(X, Y).brule(1);
 			// On décrémente les PV du terrain de 1.
@@ -128,8 +112,9 @@ public class Feu extends Acteur {
 							 * Le feu ne peut se déclencher si la case est
 							 * inondée.
 							 */
-							if (!maCarte.getTabHexagones()[yMettreLeFeu.x][yMettreLeFeu.y]
-									.isInonde()) {
+							if (!maCarte.getTabHexagones(yMettreLeFeu.x,
+									yMettreLeFeu.y).isInonde()) {
+								System.out.println("TA MAMAN EN STRING");
 								Feu monFeu = new Feu(yMettreLeFeu.x,
 										yMettreLeFeu.y);
 								if (maCarte.getTabHexagones(yMettreLeFeu.x,
@@ -139,14 +124,35 @@ public class Feu extends Acteur {
 												.getPV() > 0) {
 									maCarte.ajoutActeur(monFeu);
 								}
-							}
+							} else
+								System.out
+										.println("Ton pere en slip kangourou");
 						}
 
 					}
 				}
 			}
 		}
-
+		/**
+		 * On gère le cas où le feu a tout brûlé : On le supprime des acteurs.
+		 */
+		if (maCarte.getTabHexagones(X, Y).getPV() <= 0) {
+			for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
+				if (maCarte.getSesActeurs().get(i) instanceof Feu) {
+					if (maCarte.getSesActeurs().get(i).X == X
+							&& maCarte.getSesActeurs().get(i).Y == Y) {
+						// Suppression du feu.
+						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
+						maCarte.getSesActeurs().remove(i + 1);
+						maCarte.purifieActeurs();
+						// On enregistre la modification de la case dans la
+						// liste historique.
+						maCarte.getModifications().add(new Point(X, Y));
+						return;
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -210,11 +216,11 @@ public class Feu extends Acteur {
 					double proba = probaOU(0.2 * (1.0 / humidite),
 							(transmission / 20));
 					if (proba < 0.0) {
-						proba = 0;
+						proba = 0.0;
 					}
-					proba *= 100;
-					probas.add(proba);
-					System.out.println("proba :" + proba);
+
+					probas.add(1.0/* proba */);
+					// System.out.println("proba :" + proba);
 
 					// 100 - humidité + transmission;
 					// On glisse le résultat dans une liste probas.
@@ -249,10 +255,11 @@ public class Feu extends Acteur {
 	 * 
 	 * @return le nombre tiré.
 	 */
-	private static int probaAlea() {
+	private static double probaAlea() {
 		Random rand = new Random();
-		int tirage = rand.nextInt(100);
-		return tirage;
+		// int tirage = rand.nextInt(100);
+
+		return rand.nextDouble();
 		// Return 100 ici pour forcer le feu à se propager.
 	}
 

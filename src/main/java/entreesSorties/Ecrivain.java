@@ -428,6 +428,12 @@ public class Ecrivain {
 					}
 				}
 
+				if ((int) X == 2 && (int) Y == 4
+						&& carte.getTabHexagones((int) X, (int) Y).isInonde()) {
+					if (carte.presenceFeu((int) X, (int) Y)) {
+						System.out.println("Y a un bug");
+					}
+				}
 				if (carte.presenceFeu((int) X, (int) Y)) {
 					pw.print("-" + feu);
 				}

@@ -74,9 +74,9 @@ public abstract class Terrain {
 		this.setHumidite(this.getHumidite() + monHumidite);
 
 		if (this.humidite >= 100) {
+			System.out.println("HUMIDITE > 100");
 			this.inonde = true; // Le terrain passe à l'état inondé.
 			if (maCarte.presenceFeu(X, Y)) {
-				int i = 0;
 				for (Acteur courant : maCarte.getFeu()) {
 					if (courant.getX() == X && courant.getY() == Y) {
 						// On supprime le Feu. Pas besoin de la technique acteur
@@ -84,14 +84,12 @@ public abstract class Terrain {
 						// par la méthode arrose (qui ne peut être appellée
 						// depuis un Feu), donc pas de soucis technique pour la
 						// suppression.
-						maCarte.getSesActeurs().remove(i);
-
+						maCarte.getSesActeurs().remove(courant);
 						// On enregistre la modification de la case dans la
 						// liste historique.
 						maCarte.getModifications().add(new Point(X, Y));
 						return;
 					}
-					i++;
 				}
 			}
 		}
