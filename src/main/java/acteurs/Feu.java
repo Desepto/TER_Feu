@@ -199,11 +199,16 @@ public class Feu extends Acteur {
 						// Humidité trop élevée, no way que ça crame.
 					}
 
-					double proba = probaOU(0.2 * (1.0 / humidite), (transmission / 20));
+					double proba = probaOU(0.1 * (1.0 / humidite), (transmission / 20));
+					// proba = probaOU(proba, vent.get(i));
+					proba = proba * vent.get(i);
 					if (proba < 0.0) {
 						proba = 0.0;
 					}
-
+					// System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+					// vent.get(i));
+					// System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+					// proba);
 					probas.add(proba);
 					/**
 					 * LA PROBAS ICI
@@ -240,7 +245,6 @@ public class Feu extends Acteur {
 	 */
 	private static double probaAlea() {
 		Random rand = new Random();
-
 		return rand.nextDouble();
 		// Return 1 ici pour forcer le feu à se propager.
 	}
