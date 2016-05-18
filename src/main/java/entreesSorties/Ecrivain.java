@@ -156,6 +156,17 @@ public class Ecrivain {
 
 			for (int Y = 0; Y < maCarte.getTabHexagones()[0].length; Y++) {
 				for (int X = 0; X < maCarte.getTabHexagones()[0].length + 1; X++) {
+					if (Y % 2 == 0) {
+						if (X == maCarte.getTabHexagones()[0].length) {
+							continue;
+						}
+					}
+
+					if (Y % 2 != 0) {
+						if (X == 0) {
+							continue;
+						}
+					}
 					switch (maCarte.getTabHexagones(X, Y).getClass().getSimpleName()) {
 					case "Prairie":
 						pw.print(maCarte.getTabHexagones(X, Y).getClass().getSimpleName() + ","

@@ -7,8 +7,6 @@ import acteurs.Canadair;
 import acteurs.Feu;
 import entreesSorties.Ecrivain;
 import entreesSorties.Lecteur;
-import enumerations.Direction;
-import enumerations.Force;
 import pathfinding.AStar;
 
 /**
@@ -39,8 +37,9 @@ public class Evolueur {
 	public Evolueur(int tailleCarte, String fichierEntree, String fichierSortie) {
 
 		this.g = new Gestionnaire();
-		this.c = Lecteur.creemapFichier("Carte_2", g);
-		this.c = Lecteur.carteEnDurToutCrame(22, Force.fort, Direction.D);
+		this.c = Lecteur.creemapFichier("Scenario1", g);
+		// Ecrivain e2 = new Ecrivain("Scenario1");
+		// e2.ecrireMap(c);
 		this.e = new Ecrivain(fichierSortie);
 		e.initFichier(this.c);
 
