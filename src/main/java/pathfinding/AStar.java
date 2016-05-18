@@ -3,19 +3,19 @@ package pathfinding;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import main.Carte;
-import terrains.Lac;
 import acteurs.Acteur;
 import acteurs.Canadair;
 import acteurs.Feu;
 import acteurs.Pompier;
+import main.Carte;
+import terrains.Lac;
 
 public class AStar {
 
 	/**
 	 * Détermine le feu vers lequel se déplacer et renvoi la case permettant de
 	 * s'en rapprocher le plus
-	 * 
+	 *
 	 * @param c
 	 *            La carte
 	 * @param depart
@@ -54,13 +54,9 @@ public class AStar {
 			for (Point voisin : c.voisinageCoord(n.x, n.y)) {
 				// Pour chaque voisin de n
 
-				if (voisin.x >= 0 && voisin.y >= 0
-						&& voisin.x < c.getTailleCarte()
-						&& voisin.y < c.getTailleCarte()) {
-					Node v = new Node(voisin.x, voisin.y, +determineCout(n,
-							voisin, c, aPied), n);
-					if (!c.getTabHexagones(voisin.x, voisin.y).isTraversable()
-							&& aPied) {
+				if (voisin.x >= 0 && voisin.y >= 0 && voisin.x < c.getTailleCarte() && voisin.y < c.getTailleCarte()) {
+					Node v = new Node(voisin.x, voisin.y, +determineCout(n, voisin, c, aPied), n);
+					if (!c.getTabHexagones(voisin.x, voisin.y).isTraversable() && aPied) {
 						// Si c'est une case intraversable et qu'on est à pied
 						// on
 						// l'ajoute direct à la closedList
@@ -77,8 +73,7 @@ public class AStar {
 								// été
 								// traité mais on a trouvé mieux, on le
 								// remplace)
-								openList.get(recuperePositionNoeud(openList, v))
-										.remplacer(v);
+								openList.get(recuperePositionNoeud(openList, v)).remplacer(v);
 							}
 							if (traite == 0) {
 								// si on doit le rajouter, on le rajoute
@@ -99,8 +94,9 @@ public class AStar {
 			destination = determineEauPlusProche(closedList, c);
 		else
 			destination = determineFeuPlusProche(closedList, c);
-		if (destination != null)
-			System.out.println("destination :" + destination.toString());
+		if (destination != null) {
+			// System.out.println("destination :" + destination.toString());
+		}
 		if (destination == null)
 			return depart;
 		// On renvoit la case la plus proche du feu où l'on veut aller
@@ -109,7 +105,7 @@ public class AStar {
 
 	/**
 	 * Récupère la position du lac le plus proche de l'acteur
-	 * 
+	 *
 	 * @param list
 	 * @param c
 	 * @return
@@ -135,7 +131,7 @@ public class AStar {
 
 	/**
 	 * Renvoit la case enflammée la moins couteuse en déplacement
-	 * 
+	 *
 	 * @param list
 	 * @param c
 	 * @return
@@ -170,16 +166,14 @@ public class AStar {
 		if (!aPied)
 			return u.cout + 1;
 		else
-			return u.cout
-					+ c.getTabHexagones(voisin.x, voisin.y)
-							.getCoutDeplacement();
+			return u.cout + c.getTabHexagones(voisin.x, voisin.y).getCoutDeplacement();
 	}
 
 	/**
 	 * Renvoit la position dans la liste du noeud possédant les meme coordonnées
 	 * que celui passé en argument (pas possible d'utiliser la fonction
 	 * contains, leur couts/heuristiques parents sont différents)
-	 * 
+	 *
 	 * @param openList
 	 * @param v
 	 * @return
@@ -189,14 +183,13 @@ public class AStar {
 			if (v.x == openList.get(i).x && v.y == openList.get(i).y)
 				return i;
 		}
-		throw new IllegalArgumentException(
-				"Le noeud demandé DOIT etre present dans la liste fournie !");
+		throw new IllegalArgumentException("Le noeud demandé DOIT etre present dans la liste fournie !");
 	}
 
 	/**
 	 * Renvoit les coordonées du noeud le plus éloigné en respectant le coutMax.
 	 * Si rien ne correspond, on renvoit le point de depart
-	 * 
+	 *
 	 * @param n
 	 * @param depart
 	 * @param coutMax
@@ -209,9 +202,9 @@ public class AStar {
 		while (n.x != depart.x || n.y != depart.y) {
 			// System.out.println(nbExec);
 			nbExec++;
-			System.out.println(n.toString());
+			// System.out.println(n.toString());
 			if (n.cout <= coutMax) {
-				System.out.println("cout " + n.cout + " coutMax" + coutMax);
+				// System.out.println("cout " + n.cout + " coutMax" + coutMax);
 				return new Point(n.x, n.y);
 			}
 
@@ -228,7 +221,7 @@ public class AStar {
 	 * <li>0 si n n'est pas dans la liste</li>
 	 * <li>1 si n est dans la la liste avec une valeur plus grande</li>
 	 * </ul>
-	 * 
+	 *
 	 * @param list
 	 * @param n
 	 * @return

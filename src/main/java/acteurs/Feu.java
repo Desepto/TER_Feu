@@ -198,8 +198,8 @@ public class Feu extends Acteur {
 						resultat.set(i, false);
 						// Humidité trop élevée, no way que ça crame.
 					}
-
-					double proba = probaOU(0.1 * (1.0 / humidite), (transmission / 20));
+					probaOU(1.0 / humidite, 0.8);
+					double proba = probaOU(1 * (1.0 / humidite), (transmission / 14));
 					// proba = probaOU(proba, vent.get(i));
 					proba = proba * vent.get(i);
 					if (proba < 0.0) {
@@ -207,8 +207,7 @@ public class Feu extends Acteur {
 					}
 					// System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
 					// vent.get(i));
-					// System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-					// proba);
+					System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + proba);
 					probas.add(proba);
 					/**
 					 * LA PROBAS ICI
@@ -268,21 +267,25 @@ public class Feu extends Acteur {
 		for (int z = 1; z < 7; z++) {
 			if (ventDirection == z) {
 				// Directions égales. Favorable.
-				probasVent.add((vent + 6) / 10);
+				if (vent == 3) {
+					probasVent.add((9.5) / 10);
+				} else {
+					probasVent.add((vent + 6.5) / 10);
+				}
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 							// sont disjoints.
 			}
 
 			if (Math.abs(ventDirection - z) == 3) {
 				// Directions opposées. Défavorable.
-				probasVent.add((4 - vent) / 10);
+				probasVent.add((3.5 - vent) / 10);
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 				// sont disjoints.
 			}
 
 			if (Math.abs(ventDirection - z) == 2 || Math.abs(ventDirection - z) == 4) {
 				// Directions presque opposées. Légèrement défavorable.
-				probasVent.add((5.5 - vent) / 10);
+				probasVent.add((4.5 - vent) / 10);
 				continue; // Inutile d'aller plus loin dans la boucle, les cas
 				// sont disjoints.
 			}
