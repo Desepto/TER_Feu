@@ -40,7 +40,7 @@ public class Evolueur {
 
 		this.g = new Gestionnaire();
 		this.c = Lecteur.creemapFichier("Carte_2", g);
-		this.c = Lecteur.carteEnDurToutCrame(22, Force.faible, Direction.D);
+		this.c = Lecteur.carteEnDurToutCrame(22, Force.fort, Direction.D);
 		this.e = new Ecrivain(fichierSortie);
 		e.initFichier(this.c);
 

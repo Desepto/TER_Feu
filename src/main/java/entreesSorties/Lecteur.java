@@ -136,16 +136,16 @@ public class Lecteur {
 					maCarte.getTabHexagones()[X][Y] = new Foret();
 					break;
 				case 2:
-					maCarte.getTabHexagones()[X][Y] = new Prairie();
+					maCarte.getTabHexagones()[X][Y] = new Foret();
 					break;
 				case 3:
-					maCarte.getTabHexagones()[X][Y] = new Plaine();
+					maCarte.getTabHexagones()[X][Y] = new Foret();
 					break;
 				case 4:
 					maCarte.getTabHexagones()[X][Y] = new Foret();
 					break;
 				case 5:
-					maCarte.getTabHexagones()[X][Y] = new Maison();
+					maCarte.getTabHexagones()[X][Y] = new Foret();
 					break;
 				case 6:
 					maCarte.getTabHexagones()[X][Y] = new Foret();
