@@ -23,7 +23,7 @@ public class Feu extends Acteur {
 	private boolean apparition = true;
 	// Pour savoir si c'est la première fois que cet acteur agi sur sa case.
 
-	private final int intensiteFeu = 5;
+	private final int intensiteFeu = 0;
 
 	// La force du feu : Il assechera l'humidité des cases de intensiteFeu% par
 	// toc sauf au début.
@@ -198,16 +198,12 @@ public class Feu extends Acteur {
 						resultat.set(i, false);
 						// Humidité trop élevée, no way que ça crame.
 					}
-					probaOU(1.0 / humidite, 0.8);
-					double proba = probaOU(1 * (1.0 / humidite), (transmission / 14));
-					// proba = probaOU(proba, vent.get(i));
+
+					double proba = probaOU((1.0 / humidite), (transmission / 14));
 					proba = proba * vent.get(i);
 					if (proba < 0.0) {
 						proba = 0.0;
 					}
-					// System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-					// vent.get(i));
-					System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + proba);
 					probas.add(proba);
 					/**
 					 * LA PROBAS ICI

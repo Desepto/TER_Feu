@@ -18,7 +18,7 @@ public class Pluie extends Acteur {
 
 	// Correspond à l'augmentation de l'humidité sur la case où il pleut et ses
 	// voisines (moitié moins pour les voisines).
-	private final int intensitePluie = 6;
+	private final int intensitePluie = 8;
 
 	private int duree = 4; // Nombre de tocs pendant lesquels il pleut.
 
@@ -41,31 +41,27 @@ public class Pluie extends Acteur {
 				 * de la case dans la Carte.
 				 */
 				maCarte.getModifications().add(new Point(this.X, this.Y));
-				maCarte.getTabHexagones(X, Y).arrose(intensitePluie * 2, X, Y,
-						maCarte);
-				// 12% d'humidité en plus au début sur la case centrale.
+				maCarte.getTabHexagones(X, Y).arrose(intensitePluie * 2, X, Y, maCarte);
+				// 16% d'humidité en plus au début sur la case centrale.
 				apparition = false;
 			} else {
-				maCarte.getTabHexagones(X, Y).arrose(intensitePluie, X, Y,
-						maCarte);
-				// 6% d'humidité en plus ensuite sur la case centrale.
+				maCarte.getTabHexagones(X, Y).arrose(intensitePluie, X, Y, maCarte);
+				// 8% d'humidité en plus ensuite sur la case centrale.
 			}
 			for (Terrain courant : maCarte.superVoisinage(X, Y)) {
 				if (!(courant instanceof TerrainVide))
 					// On arrose pas n'importe quoi.
-					courant.arrose(intensitePluie / 2, X, Y, maCarte);
-				// +3% d'humidité au début et ensuite sur les cases voisines.
+					courant.arrose(intensitePluie, X, Y, maCarte);
+				// +8% d'humidité au début et ensuite sur les cases voisines.
 			}
 
 			/**
 			 * On ajoute les cases modifiées (les voisins arrosés donc) dans la
 			 * Carte, uniquement s'il n'y a pas déjà de la pluie dessus.
 			 */
-			ArrayList<Point> mesCoordsVoisins = maCarte.superVoisinageCoord(X,
-					Y);
+			ArrayList<Point> mesCoordsVoisins = maCarte.superVoisinageCoord(X, Y);
 			for (Point monPoint : mesCoordsVoisins) {
-				if (monPoint.x >= 0
-						&& maCarte.presencePluie(monPoint.x, monPoint.y))
+				if (monPoint.x >= 0 && maCarte.presencePluie(monPoint.x, monPoint.y))
 					maCarte.getModifications().add(monPoint);
 			}
 
@@ -73,8 +69,7 @@ public class Pluie extends Acteur {
 			if (this.duree == 0) {
 				for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
 					if (maCarte.getSesActeurs().get(i) instanceof Pluie) {
-						if (maCarte.getSesActeurs().get(i).X == X
-								&& maCarte.getSesActeurs().get(i).Y == Y) {
+						if (maCarte.getSesActeurs().get(i).X == X && maCarte.getSesActeurs().get(i).Y == Y) {
 							// Suppression de la pluie.
 							maCarte.getSesActeurs().add(i, new Anouar(X, Y));
 							maCarte.getSesActeurs().remove(i + 1);
@@ -93,7 +88,7 @@ public class Pluie extends Acteur {
 
 	/**
 	 * El Constrouctivatooooorrress, SI !
-	 * 
+	 *
 	 * @param X
 	 * @param Y
 	 */
