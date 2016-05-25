@@ -10,7 +10,7 @@ import acteurs.Pompier;
 import main.Carte;
 import terrains.Lac;
 
-public class AStar {
+public class PlusCourtChemin {
 
 	/**
 	 * Détermine le feu vers lequel se déplacer et renvoi la case permettant de
