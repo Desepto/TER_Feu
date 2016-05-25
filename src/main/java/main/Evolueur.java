@@ -28,7 +28,7 @@ public class Evolueur {
 	public Evolueur(int tailleCarte, String fichierEntree, String fichierSortie) {
 
 		this.g = new Gestionnaire();
-		this.c = Lecteur.creemapFichier("Scenario2", g);
+		this.c = Lecteur.creemapFichier("Scenario4", g);
 		// Ecrivain e2 = new Ecrivain("Scenario1");
 		// e2.ecrireMap(c);
 		this.e = new Ecrivain(fichierSortie);
