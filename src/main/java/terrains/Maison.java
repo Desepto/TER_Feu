@@ -4,9 +4,9 @@ import enumerations.NiveauDensite;
 
 /**
  * Une maison !
- * 
+ *
  * @author Nicolas
- * 
+ *
  */
 public class Maison extends Terrain {
 
@@ -18,7 +18,7 @@ public class Maison extends Terrain {
 	public Maison() {
 		super(true); // On rend la maison inflammable.
 		densite = NiveauDensite.un;
-		this.setTrans(5);
+		this.setTrans(8);
 		this.PV = duree;
 		this.coutDeplacement = 10;
 	}

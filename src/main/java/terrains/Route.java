@@ -4,9 +4,9 @@ import enumerations.NiveauDensite;
 
 /**
  * Une route !
- * 
+ *
  * @author Nicolas
- * 
+ *
  */
 public class Route extends Terrain {
 
@@ -20,6 +20,7 @@ public class Route extends Terrain {
 		this.densite = NiveauDensite.un;
 		PV = duree;
 		this.coutDeplacement = 1;
+		this.setTrans(3);
 
 	}
 
