@@ -2,20 +2,20 @@ package main;
 
 import java.awt.Point;
 
-import pathfinding.PlusCourtChemin;
 import acteurs.Acteur;
 import acteurs.Canadair;
 import acteurs.Feu;
 import entreesSorties.Ecrivain;
 import entreesSorties.Lecteur;
+import pathfinding.PlusCourtChemin;
 
 /**
  * Classe principale du bouzin, contient la m�thode main, cr�e tous les trucs et
  * s'occupe de faire avancer le temps. Elle sera p'tet d�coup�e en 2 (une partie
  * main, une partie evolueur)
- * 
+ *
  * @author Thomas
- * 
+ *
  */
 
 public class Evolueur {
@@ -28,7 +28,7 @@ public class Evolueur {
 	public Evolueur(int tailleCarte, String fichierEntree, String fichierSortie) {
 
 		this.g = new Gestionnaire();
-		this.c = Lecteur.creemapFichier("Scenario2", g);
+		this.c = Lecteur.creemapFichier("Aveclesrochers", g);
 		// Ecrivain e2 = new Ecrivain("Scenario1");
 		// e2.ecrireMap(c);
 		this.e = new Ecrivain(fichierSortie);
@@ -95,7 +95,7 @@ public class Evolueur {
 		for (Acteur a : this.c.getSesActeurs())
 			if (a instanceof Feu) {
 				/*
-				 * 
+				 *
 				 * System.out.println(this.c.getSesActeurs().size() + " x :" +
 				 * this.c.getSesActeurs().get(0).getX() + " y :" +
 				 * this.c.getSesActeurs().get(0).getY());
