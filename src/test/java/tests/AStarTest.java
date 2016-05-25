@@ -8,7 +8,7 @@ import main.Carte;
 
 import org.junit.Test;
 
-import pathfinding.AStar;
+import pathfinding.PlusCourtChemin;
 import terrains.Lac;
 import terrains.Plaine;
 import terrains.Terrain;
@@ -39,7 +39,7 @@ public class AStarTest {
 		System.out.println(((Canadair) c.getCanadair().get(0)).isEstCharge());
 
 		System.out.println("eesth");
-		Point p = new Point(AStar.deplacement(c, c.getCanadair().get(0)));
+		Point p = new Point(PlusCourtChemin.deplacement(c, c.getCanadair().get(0)));
 		System.out.println(p.toString());
 
 		// assertEquals(AStar.deplacement(c, c.getPompier().get(0)), new

@@ -2,29 +2,20 @@ package main;
 
 import java.awt.Point;
 
+import pathfinding.PlusCourtChemin;
 import acteurs.Acteur;
 import acteurs.Canadair;
 import acteurs.Feu;
 import entreesSorties.Ecrivain;
 import entreesSorties.Lecteur;
-import pathfinding.AStar;
 
 /**
  * Classe principale du bouzin, contient la m�thode main, cr�e tous les trucs et
  * s'occupe de faire avancer le temps. Elle sera p'tet d�coup�e en 2 (une partie
  * main, une partie evolueur)
- *
+ * 
  * @author Thomas
- *
- */
-
-/**
- * keskejdoifair
- * <ul>
- * <li>prendre en compte args[0]</li>
- * <li>vérifier que le deplacement fonctionne envoyer</li>
- * <li>envoyer les trucs à shouta + faire icone inondé + les autres icones</li>
- * </ul>
+ * 
  */
 
 public class Evolueur {
@@ -60,7 +51,7 @@ public class Evolueur {
 				if (this.c.presenceFeu(a.getX(), a.getY()))
 					a.agi(this.c);
 				else
-					a.setActeur(AStar.deplacement(this.c, a), this.c);
+					a.setActeur(PlusCourtChemin.deplacement(this.c, a), this.c);
 			}
 			for (Acteur a : this.c.getCanadair()) {
 				// Si le canadair est plein et sur une zone de feu ou s'il est
@@ -73,7 +64,7 @@ public class Evolueur {
 				if (((Canadair) a).agi(this.c, 0)) // si le canadair n'a pas
 													// agit il se
 					// déplace
-					a.setActeur(AStar.deplacement(this.c, a), this.c);
+					a.setActeur(PlusCourtChemin.deplacement(this.c, a), this.c);
 			}
 			for (Acteur a : this.c.getPluie())
 				a.agi(this.c);
@@ -104,7 +95,7 @@ public class Evolueur {
 		for (Acteur a : this.c.getSesActeurs())
 			if (a instanceof Feu) {
 				/*
-				 *
+				 * 
 				 * System.out.println(this.c.getSesActeurs().size() + " x :" +
 				 * this.c.getSesActeurs().get(0).getX() + " y :" +
 				 * this.c.getSesActeurs().get(0).getY());
