@@ -4,9 +4,9 @@ import enumerations.NiveauDensite;
 
 /**
  * Une plaine !
- * 
+ *
  * @author Nicolas
- * 
+ *
  */
 public class Plaine extends Terrain {
 
@@ -25,13 +25,13 @@ public class Plaine extends Terrain {
 
 	/**
 	 * El Constrouctor !
-	 * 
+	 *
 	 * @param maDuree
 	 */
 	public Plaine(NiveauDensite maDensite) {
 		super(true);
 		this.densite = maDensite;
-		this.setTrans(5);
+		this.setTrans(3);
 		if (densite == NiveauDensite.un)
 			this.PV = duree;
 		else

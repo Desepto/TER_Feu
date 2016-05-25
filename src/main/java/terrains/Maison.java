@@ -18,7 +18,7 @@ public class Maison extends Terrain {
 	public Maison() {
 		super(true); // On rend la maison inflammable.
 		densite = NiveauDensite.un;
-		this.setTrans(8);
+		this.setTrans(5);
 		this.PV = duree;
 		this.coutDeplacement = 10;
 	}

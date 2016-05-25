@@ -20,12 +20,12 @@ public class Prairie extends Terrain {
 
 	/**
 	 * El Constrouctor !
-	 * 
+	 *
 	 * @param maDuree
 	 */
 	public Prairie(NiveauDensite maDensite) {
 		super(true);
-		this.setTrans(5);
+		this.setTrans(8);
 		this.densite = maDensite;
 		if (densite == NiveauDensite.un)
 			this.PV = duree;

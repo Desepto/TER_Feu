@@ -243,8 +243,7 @@ public class Lecteur {
 						}
 						switch (typeCase) {
 						case "Prairie":
-							Prairie p = new Prairie();
-							p.setDensite(densite);
+							Prairie p = new Prairie(densite);
 							p.setHumidite(humidite);
 							maCarte.transformeTerrain(x, i - 3, p);
 							break;
@@ -267,14 +266,12 @@ public class Lecteur {
 							maCarte.transformeTerrain(x, i - 3, c);
 							break;
 						case "Plaine":
-							Plaine pl = new Plaine();
-							pl.setDensite(densite);
+							Plaine pl = new Plaine(densite);
 							pl.setHumidite(humidite);
 							maCarte.transformeTerrain(x, i - 3, pl);
 							break;
 						case "Foret":
-							Foret f = new Foret();
-							f.setDensite(densite);
+							Foret f = new Foret(densite);
 							f.setHumidite(humidite);
 							maCarte.transformeTerrain(x, i - 3, f);
 							break;
@@ -361,7 +358,6 @@ public class Lecteur {
 										System.out.println("il pleut deja");
 									} else {
 										g.ajoutActeurPosition(temps, pl);
-										System.out.println("marche");
 									}
 									break;
 								default:
