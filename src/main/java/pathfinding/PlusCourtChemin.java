@@ -3,19 +3,19 @@ package pathfinding;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import main.Carte;
+import terrains.Lac;
 import acteurs.Acteur;
 import acteurs.Canadair;
 import acteurs.Feu;
 import acteurs.Pompier;
-import main.Carte;
-import terrains.Lac;
 
 public class PlusCourtChemin {
 
 	/**
 	 * Détermine le feu vers lequel se déplacer et renvoi la case permettant de
 	 * s'en rapprocher le plus
-	 *
+	 * 
 	 * @param c
 	 *            La carte
 	 * @param depart
@@ -54,9 +54,13 @@ public class PlusCourtChemin {
 			for (Point voisin : c.voisinageCoord(n.x, n.y)) {
 				// Pour chaque voisin de n
 
-				if (voisin.x >= 0 && voisin.y >= 0 && voisin.x < c.getTailleCarte() && voisin.y < c.getTailleCarte()) {
-					Node v = new Node(voisin.x, voisin.y, +determineCout(n, voisin, c, aPied), n);
-					if (!c.getTabHexagones(voisin.x, voisin.y).isTraversable() && aPied) {
+				if (voisin.x >= 0 && voisin.y >= 0
+						&& voisin.x < c.getTailleCarte()
+						&& voisin.y < c.getTailleCarte()) {
+					Node v = new Node(voisin.x, voisin.y, +determineCout(n,
+							voisin, c, aPied), n);
+					if (!(c.getTabHexagones(voisin.x, voisin.y).isTraversable() && aPied)
+							|| c.nBPompiers() > 3) {
 						// Si c'est une case intraversable et qu'on est à pied
 						// on
 						// l'ajoute direct à la closedList
@@ -73,7 +77,8 @@ public class PlusCourtChemin {
 								// été
 								// traité mais on a trouvé mieux, on le
 								// remplace)
-								openList.get(recuperePositionNoeud(openList, v)).remplacer(v);
+								openList.get(recuperePositionNoeud(openList, v))
+										.remplacer(v);
 							}
 							if (traite == 0) {
 								// si on doit le rajouter, on le rajoute
@@ -105,7 +110,7 @@ public class PlusCourtChemin {
 
 	/**
 	 * Récupère la position du lac le plus proche de l'acteur
-	 *
+	 * 
 	 * @param list
 	 * @param c
 	 * @return
@@ -131,7 +136,7 @@ public class PlusCourtChemin {
 
 	/**
 	 * Renvoit la case enflammée la moins couteuse en déplacement
-	 *
+	 * 
 	 * @param list
 	 * @param c
 	 * @return
@@ -166,14 +171,16 @@ public class PlusCourtChemin {
 		if (!aPied)
 			return u.cout + 1;
 		else
-			return u.cout + c.getTabHexagones(voisin.x, voisin.y).getCoutDeplacement();
+			return u.cout
+					+ c.getTabHexagones(voisin.x, voisin.y)
+							.getCoutDeplacement();
 	}
 
 	/**
 	 * Renvoit la position dans la liste du noeud possédant les meme coordonnées
 	 * que celui passé en argument (pas possible d'utiliser la fonction
 	 * contains, leur couts/heuristiques parents sont différents)
-	 *
+	 * 
 	 * @param openList
 	 * @param v
 	 * @return
@@ -183,13 +190,14 @@ public class PlusCourtChemin {
 			if (v.x == openList.get(i).x && v.y == openList.get(i).y)
 				return i;
 		}
-		throw new IllegalArgumentException("Le noeud demandé DOIT etre present dans la liste fournie !");
+		throw new IllegalArgumentException(
+				"Le noeud demandé DOIT etre present dans la liste fournie !");
 	}
 
 	/**
 	 * Renvoit les coordonées du noeud le plus éloigné en respectant le coutMax.
 	 * Si rien ne correspond, on renvoit le point de depart
-	 *
+	 * 
 	 * @param n
 	 * @param depart
 	 * @param coutMax
@@ -221,7 +229,7 @@ public class PlusCourtChemin {
 	 * <li>0 si n n'est pas dans la liste</li>
 	 * <li>1 si n est dans la la liste avec une valeur plus grande</li>
 	 * </ul>
-	 *
+	 * 
 	 * @param list
 	 * @param n
 	 * @return
