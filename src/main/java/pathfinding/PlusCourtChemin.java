@@ -59,8 +59,8 @@ public class PlusCourtChemin {
 						&& voisin.y < c.getTailleCarte()) {
 					Node v = new Node(voisin.x, voisin.y, +determineCout(n,
 							voisin, c, aPied), n);
-					if (!(c.getTabHexagones(voisin.x, voisin.y).isTraversable() && aPied)
-							|| c.getNbPompiers(voisin.x, voisin.y) > 3) {
+					if (!c.getTabHexagones(voisin.x, voisin.y).isTraversable()
+							&& aPied) {
 						// Si c'est une case intraversable et qu'on est à pied
 						// on
 						// l'ajoute direct à la closedList
