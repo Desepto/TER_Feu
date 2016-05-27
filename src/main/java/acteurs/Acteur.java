@@ -66,6 +66,14 @@ public abstract class Acteur {
 		this.Y = Y;
 	}
 
+	/**
+	 * Déplace un acteur et l'ajoute à la liste des modifications si la case
+	 * destination est différente de celle de départ
+	 * 
+	 * @param p
+	 *            La destination
+	 * @param c
+	 */
 	public void setActeur(Point p, Carte c) {
 
 		c.getModifications().add(new Point(this.X, this.Y));

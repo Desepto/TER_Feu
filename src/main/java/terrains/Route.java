@@ -4,16 +4,16 @@ import enumerations.NiveauDensite;
 
 /**
  * Une route !
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class Route extends Terrain {
 
 	private final int duree = 8;
 
 	/**
-	 * Constructeur par défaut à modifier.
+	 * Constructeur par défaut
 	 */
 	public Route() {
 		super(true); // On rend la route inflammable.

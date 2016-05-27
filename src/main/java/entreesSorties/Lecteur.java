@@ -6,13 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import acteurs.Canadair;
-import acteurs.Feu;
-import acteurs.Pluie;
-import acteurs.Pompier;
-import enumerations.Direction;
-import enumerations.Force;
-import enumerations.NiveauDensite;
 import main.Carte;
 import main.Gestionnaire;
 import terrains.CoupeFeu;
@@ -24,12 +17,19 @@ import terrains.Prairie;
 import terrains.Rocher;
 import terrains.Route;
 import terrains.TerrainVide;
+import acteurs.Canadair;
+import acteurs.Feu;
+import acteurs.Pluie;
+import acteurs.Pompier;
+import enumerations.Direction;
+import enumerations.Force;
+import enumerations.NiveauDensite;
 
 /**
  * Classe qui lit le fichier de base et le transforme en une map
- *
- * @author Nicolas
- *
+ * 
+ * @author André
+ * 
  */
 
 public class Lecteur {
@@ -38,7 +38,7 @@ public class Lecteur {
 	 * Méthode statique pour générer une carte "en dur" sans passer par la
 	 * lecture d'un fichier. Utile pour faire une carte de base avec des
 	 * terrains aléatoires.
-	 *
+	 * 
 	 * @return la carte remplie.
 	 */
 	public static Carte carteEnDur() {
@@ -102,6 +102,17 @@ public class Lecteur {
 		return maCarte;
 	}
 
+	/**
+	 * Crée une carte en dur mais qui finira totalement brulée
+	 * 
+	 * @param taille
+	 *            taille de la carte
+	 * @param f
+	 *            force du vent
+	 * @param d
+	 *            direction du vent
+	 * @return La carte remplie
+	 */
 	public static Carte carteEnDurToutCrame(int taille, Force f, Direction d) {
 
 		Carte maCarte = new Carte(taille, f, d);
@@ -164,6 +175,9 @@ public class Lecteur {
 	}
 
 	/**
+	 * Subdivise une chaine de caractères en différentes sous-chaines à la
+	 * position des points virgules
+	 * 
 	 * @param chaine
 	 * @return
 	 */
@@ -177,10 +191,12 @@ public class Lecteur {
 	}
 
 	/**
+	 * Subdivise une chaine de caractères en différentes sous-chaines à la
+	 * position des virgules
+	 * 
 	 * @param chaine
 	 * @return
 	 */
-
 	public static ArrayList<String> sanslesVirgules(String chaine) {
 		ArrayList<String> temp = new ArrayList<String>();
 		for (String resultat : chaine.split(",")) {
@@ -190,6 +206,13 @@ public class Lecteur {
 
 	}
 
+	/**
+	 * Subdivise une chaine de caractères en différentes sous-chaines à la
+	 * position des deux points
+	 * 
+	 * @param chaine
+	 * @return
+	 */
 	public static ArrayList<String> sansles2Points(String chaine) {
 		ArrayList<String> temp = new ArrayList<String>();
 		for (String resultat : chaine.split(":")) {
@@ -200,6 +223,8 @@ public class Lecteur {
 	}
 
 	/**
+	 * Crée la carte à partir d'un fichier source
+	 * 
 	 * @param nomFichier
 	 * @return
 	 */
@@ -288,7 +313,7 @@ public class Lecteur {
 							maCarte.transformeTerrain(x, i - 3, ro);
 							break;
 						default:
-							System.out.println("BUGGGGGGGGGGGGGGGGGGG;");
+							System.out.println("WARNING;");
 							break;
 
 						}
@@ -311,17 +336,22 @@ public class Lecteur {
 							if (y % 2 != 0) {
 								x++;
 							}
-							if ((x == maCarte.getTailleCarte() && y % 2 == 0) || (x == 0 && y % 2 != 0) || x < 0
-									|| x > maCarte.getTailleCarte() || y < 0 || y > maCarte.getTailleCarte() - 1) {
-								System.out.println("Dar une case qui existe pas");
+							if ((x == maCarte.getTailleCarte() && y % 2 == 0)
+									|| (x == 0 && y % 2 != 0) || x < 0
+									|| x > maCarte.getTailleCarte() || y < 0
+									|| y > maCarte.getTailleCarte() - 1) {
+								System.out
+										.println("Dar une case qui existe pas");
 							} else {
 								switch (type) {
 								case "Pompier":
 									Pompier p = new Pompier(x, y);
 									if (maCarte.getTabHexagones(x, y) instanceof Lac) {
-										System.out.println("Un Pompier sur un Lac pas possible");
+										System.out
+												.println("Un Pompier sur un Lac pas possible");
 									} else if (maCarte.getTabHexagones(x, y) instanceof Rocher) {
-										System.out.println("Un Pompier sur un Rocher pas possible");
+										System.out
+												.println("Un Pompier sur un Rocher pas possible");
 									} else {
 										g.ajoutActeurPosition(temps, p);
 									}
@@ -338,15 +368,21 @@ public class Lecteur {
 								case "Feu":
 									Feu f = new Feu(x, y);
 									if (maCarte.getTabHexagones(x, y) instanceof Lac) {
-										System.out.println("Un feu sur un Lac pas possible");
+										System.out
+												.println("Un feu sur un Lac pas possible");
 									} else if (maCarte.getTabHexagones(x, y) instanceof Rocher) {
-										System.out.println("Un feu sur un Rocher pas possible");
+										System.out
+												.println("Un feu sur un Rocher pas possible");
 									} else if (maCarte.getTabHexagones(x, y) instanceof CoupeFeu) {
-										System.out.println("Un feu sur un CoupeFeu pas possible");
+										System.out
+												.println("Un feu sur un CoupeFeu pas possible");
 									} else if (g.presenceFeu(x, y)) {
-										System.out.println("Un feu sur un feu pas possible");
-									} else if (maCarte.getTabHexagones(x, y).isInonde()) {
-										System.out.println("On peut pas brulé une piscine");
+										System.out
+												.println("Un feu sur un feu pas possible");
+									} else if (maCarte.getTabHexagones(x, y)
+											.isInonde()) {
+										System.out
+												.println("On peut pas brulé une piscine");
 									} else {
 										g.ajoutActeurPosition(temps, f);
 
@@ -361,7 +397,8 @@ public class Lecteur {
 									}
 									break;
 								default:
-									System.out.println("BUGGGGGGGGGGGGGGGGGGG;");
+									System.out
+											.println("BUGGGGGGGGGGGGGGGGGGG;");
 									break;
 								}
 							}

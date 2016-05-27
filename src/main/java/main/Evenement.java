@@ -2,14 +2,14 @@ package main;
 
 import java.util.ArrayList;
 
-import acteurs.Acteur;;
+import acteurs.Acteur;
 
 /**
  * Un ensemble d'acteurs qui vont apparaitre sur la carte avec leurs coordonnées
  * respectives.
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class Evenement {
 
@@ -18,7 +18,7 @@ public class Evenement {
 	/**
 	 * Déclencher un évènement, c'est ajouter tous les acteurs de cet évènement
 	 * à ceux de la Carte.
-	 *
+	 * 
 	 * @param maCarte
 	 * @return maCarte
 	 */
@@ -31,8 +31,7 @@ public class Evenement {
 	}
 
 	/**
-	 * El Constrouctivoush
-	 *
+	 * 
 	 * @param acteurs
 	 */
 

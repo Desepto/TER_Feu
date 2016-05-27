@@ -2,20 +2,19 @@ package main;
 
 import java.awt.Point;
 
+import pathfinding.PlusCourtChemin;
 import acteurs.Acteur;
 import acteurs.Canadair;
 import acteurs.Feu;
 import entreesSorties.Ecrivain;
 import entreesSorties.Lecteur;
-import pathfinding.PlusCourtChemin;
 
 /**
- * Classe principale du bouzin, contient la m�thode main, cr�e tous les trucs et
- * s'occupe de faire avancer le temps. Elle sera p'tet d�coup�e en 2 (une partie
- * main, une partie evolueur)
- *
+ * Classe principale du programme, contient la méthode main, crée tous les trucs
+ * et s'occupe de faire avancer le temps.
+ * 
  * @author Thomas
- *
+ * 
  */
 
 public class Evolueur {
@@ -29,8 +28,6 @@ public class Evolueur {
 
 		this.g = new Gestionnaire();
 		this.c = Lecteur.creemapFichier("Aveclesrochers", g);
-		// Ecrivain e2 = new Ecrivain("Scenario1");
-		// e2.ecrireMap(c);
 		this.e = new Ecrivain(fichierSortie);
 		e.initFichier(this.c);
 
@@ -38,14 +35,14 @@ public class Evolueur {
 
 	public void deroulement(String nomFichier) {
 
-		// ICI IL FAUDRA CHANGER, METTRE UN GETTER QUI RENVOIE JUSTE LE
-		// FEU/PLUIE/POMPIER/CANADAIR
+		// Boucle générale du programme
 		while (this.tic < 15 || this.presenceFeu()) {
+			// Remise à zéro de la liste des cases modifiées
 			this.c.nettoieModifications();
 
+			// On fait agir tous les acteurs
 			for (Acteur a : this.c.getFeu())
 				a.agi(this.c);
-			// System.out.println(this.c.getModifications().size());
 
 			for (Acteur a : this.c.getPompier()) {
 				if (this.c.presenceFeu(a.getX(), a.getY()))
@@ -56,29 +53,22 @@ public class Evolueur {
 			for (Acteur a : this.c.getCanadair()) {
 				// Si le canadair est plein et sur une zone de feu ou s'il est
 				// vide et sur un lac, il agit
-				// if ((this.c.presenceFeu(a.getX(), a.getY()) && ((Canadair) a)
-				// .isEstCharge())
-				// || (this.c.getTabHexagones(a.getX(), a.getY()) instanceof Lac
-				// && !((Canadair) a)
-				// .isEstCharge()))
-				if (((Canadair) a).agi(this.c, 0)) // si le canadair n'a pas
-													// agit il se
-					// déplace
+				if (((Canadair) a).agi(this.c, 0))
+					// si le canadair n'a pas agi il se déplace
 					a.setActeur(PlusCourtChemin.deplacement(this.c, a), this.c);
 			}
 			for (Acteur a : this.c.getPluie())
 				a.agi(this.c);
 
 			try {
+				// Gestion des evennements (arrivées des nouveaux acteurs)
 				Evenement e = new Evenement();
 				e = g.getUnEvent(tic);
 				if (e != null) {
 					for (Acteur a : e.getActeurs()) {
-
 						this.c.ajoutActeur(a);
 						Point p = new Point(a.getX(), a.getY());
 						this.c.getModifications().add(p);
-
 					}
 				}
 
@@ -90,25 +80,25 @@ public class Evolueur {
 		this.e.printFin(this.c);
 	}
 
-	// Il serait intelligent de mettre cette méthode dans Carte
+	/**
+	 * Méthode indiquant s'il y a du feu dans la carte. Devrait être dans carte
+	 * mais est gardée ici pour des soucis de rétro-compatibilité
+	 * 
+	 * @return
+	 */
 	public boolean presenceFeu() {
 		for (Acteur a : this.c.getSesActeurs())
-			if (a instanceof Feu) {
-				/*
-				 *
-				 * System.out.println(this.c.getSesActeurs().size() + " x :" +
-				 * this.c.getSesActeurs().get(0).getX() + " y :" +
-				 * this.c.getSesActeurs().get(0).getY());
-				 */
+			if (a instanceof Feu)
 				return true;
-			}
-
-		// System.out.println(this.c.getSesActeurs().toString());
-		// System.out.println(" TA MAMAN : " +
-		// this.c.getSesActeurs().toString());
 		return false;
 	}
 
+	/**
+	 * Fonction main, crée l'évolueur à partir du fichier d'entrée et envoit les
+	 * résultats dans le fichier de sortie, respectivement args[0] et args[1]
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		int tailleTemporaire = 5;

@@ -7,7 +7,7 @@ public class Prairie extends Terrain {
 	private final int duree = 8;
 
 	/**
-	 * Constructeur par défaut à modifier.
+	 * Constructeur par défaut
 	 */
 	public Prairie() {
 		super(true); // On rend la prairie non inflammable.
@@ -19,8 +19,8 @@ public class Prairie extends Terrain {
 	}
 
 	/**
-	 * El Constrouctor !
-	 *
+	 * Constructeur prenant en compte la densité
+	 * 
 	 * @param maDuree
 	 */
 	public Prairie(NiveauDensite maDensite) {

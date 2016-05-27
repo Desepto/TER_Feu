@@ -3,7 +3,7 @@ package terrains;
 import enumerations.NiveauDensite;
 
 /**
- * Un caillou !
+ * Un rocher !
  * 
  * @author Nicolas
  * 
@@ -11,7 +11,7 @@ import enumerations.NiveauDensite;
 public class Rocher extends Terrain {
 
 	/**
-	 * Constructeur par défaut à modifier.
+	 * Constructeur par défaut
 	 */
 	public Rocher() {
 		super(false); // On rend le rocher non inflammable.

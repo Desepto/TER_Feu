@@ -7,11 +7,9 @@ import main.Carte;
 
 /**
  * @author Nicolas
- *
- *         "Je n'ai pas fait l'implémentation, mais j'ai participé aux recherches"
- *
- *         Quand un acteur est supprimé, il est remplacé par un acteur Anouar.
- *         Règle une infinité de problèmes.
+ * 
+ *         Il s'agit d'une classe utilisée lors de la suppression d'un acteur
+ *         depuis lui-même. Hack peut-être un peu sale mais fonctionnel..
  */
 public class Anouar extends Acteur {
 
@@ -26,7 +24,7 @@ public class Anouar extends Acteur {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see src.Acteur#agi(src.Carte)
 	 */
 	@Override
@@ -34,8 +32,8 @@ public class Anouar extends Acteur {
 		recherches();
 	}
 
-	/**
-	 * DaaAaar TD2 TD2 TD2
+	/*
+	 * Fonction gardée pour des raisons de rétro-compatibilité
 	 */
 	private static void recherches() {
 		return;

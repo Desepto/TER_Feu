@@ -13,7 +13,7 @@ public class Foret extends Terrain {
 	private final int duree = 12;
 
 	/**
-	 * Constructeur par défaut à modifier.
+	 * Constructeur par défaut
 	 */
 	public Foret() {
 		super(true); // On rend la foret inflammable.
@@ -24,7 +24,7 @@ public class Foret extends Terrain {
 	}
 
 	/**
-	 * El Constrouctor !
+	 * Constructeur prenant en compte la densité
 	 * 
 	 * @param maDensite
 	 */

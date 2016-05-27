@@ -13,7 +13,7 @@ public class TerrainVide extends Terrain {
 	 */
 	public TerrainVide() {
 		super(false); // Un terrain qui n'existe pas est à priori
-						// ininflammable... Bref.
+						// ininflammable..
 		this.traversable = false;
 	}
 

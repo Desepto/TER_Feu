@@ -10,6 +10,13 @@ import acteurs.Canadair;
 import acteurs.Feu;
 import acteurs.Pompier;
 
+/**
+ * Classe utilisée pour déterminer la cible d'un acteur et le plus court chemin
+ * pour y accéder
+ * 
+ * @author Thomas
+ * 
+ */
 public class PlusCourtChemin {
 
 	/**
@@ -46,35 +53,32 @@ public class PlusCourtChemin {
 		ArrayList<Node> openList = new ArrayList<Node>();
 		openList.add(new Node(depart.x, depart.y, 0));
 		Node n;
+		@SuppressWarnings("unused")
 		int compteNombreTraiteTotal = 0;
-		while (!openList.isEmpty()) {// tant que tous les sommets ne sont pas
-										// traités
-
+		while (!openList.isEmpty()) {
+			// tant que tous les sommets ne sont pas traités
 			n = openList.remove(0);// On récupère le haut de la liste
 			for (Point voisin : c.voisinageCoord(n.x, n.y)) {
 				// Pour chaque voisin de n
-
 				if (voisin.x >= 0 && voisin.y >= 0
 						&& voisin.x < c.getTailleCarte()
 						&& voisin.y < c.getTailleCarte()) {
 					Node v = new Node(voisin.x, voisin.y, +determineCout(n,
 							voisin, c, aPied), n);
-					if (!c.getTabHexagones(voisin.x, voisin.y).isTraversable() && aPied) {
+					if (!c.getTabHexagones(voisin.x, voisin.y).isTraversable()
+							&& aPied) {
 						// Si c'est une case intraversable et qu'on est à pied
-						// on
-						// l'ajoute direct à la closedList
+						// on l'ajoute direct à la closedList
 						closedList.add(v);
 
 					} else {
 						if (contient(closedList, v) == 0) {
 							// Si le noeud n'est pas dans la closedList(n'a pas
-							// déjà
-							// été totalement traité)
+							// déjà été totalement traité)
 							int traite = contient(openList, v);
 							if (traite == 1) {
 								// Si le noeud est déjà dans l'openList (a déjà
-								// été
-								// traité mais on a trouvé mieux, on le
+								// été traité mais on a trouvé mieux, on le
 								// remplace)
 								openList.get(recuperePositionNoeud(openList, v))
 										.remplacer(v);
@@ -98,9 +102,6 @@ public class PlusCourtChemin {
 			destination = determineEauPlusProche(closedList, c);
 		else
 			destination = determineFeuPlusProche(closedList, c);
-		if (destination != null) {
-			// System.out.println("destination :" + destination.toString());
-		}
 		if (destination == null)
 			return depart;
 		// On renvoit la case la plus proche du feu où l'on veut aller
@@ -128,6 +129,7 @@ public class PlusCourtChemin {
 				}
 			}
 		}
+		// Si la destination n'est pas accessible
 		if (positionMin == -1)
 			return null;
 		return list.get(positionMin);
@@ -160,11 +162,22 @@ public class PlusCourtChemin {
 					}
 			}
 		}
+		// Si la destination n'est pas accessible
 		if (positionMin == -1)
 			return null;
 		return list.get(positionMin);
 	}
 
+	/**
+	 * Fonction simple déterminant le cout pour passer d'une case à sa voisine
+	 * en fonction de l'acteur
+	 * 
+	 * @param u
+	 * @param voisin
+	 * @param c
+	 * @param aPied
+	 * @return
+	 */
 	public static int determineCout(Node u, Point voisin, Carte c, boolean aPied) {
 
 		if (!aPied)
@@ -178,7 +191,7 @@ public class PlusCourtChemin {
 	/**
 	 * Renvoit la position dans la liste du noeud possédant les meme coordonnées
 	 * que celui passé en argument (pas possible d'utiliser la fonction
-	 * contains, leur couts/heuristiques parents sont différents)
+	 * contains, leurs couts/parents sont différents)
 	 * 
 	 * @param openList
 	 * @param v
@@ -205,19 +218,12 @@ public class PlusCourtChemin {
 	public static Point getPositionPlusAvancee(Node n, Point depart, int coutMax) {
 
 		int nbExec = 0;
-		// System.out.println("depart : " + depart.toString());
 		while (n.x != depart.x || n.y != depart.y) {
-			// System.out.println(nbExec);
 			nbExec++;
-			// System.out.println(n.toString());
-			if (n.cout <= coutMax) {
-				// System.out.println("cout " + n.cout + " coutMax" + coutMax);
+			if (n.cout <= coutMax)
 				return new Point(n.x, n.y);
-			}
-
 			n = n.parent;
 		}
-
 		return depart;
 	}
 
@@ -242,11 +248,6 @@ public class PlusCourtChemin {
 				else if (n2.cout > n.cout)
 					return 1;
 			}
-		return 0;
-	}
-
-	public static int calculDistance(Point p1, Point p2) {
-
 		return 0;
 	}
 }

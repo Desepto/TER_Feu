@@ -9,9 +9,9 @@ public class Pompier extends Acteur {
 
 	/**
 	 * Probabilité de décès d'un pompier sur une case en feu, en pourcentage.
-	 *
+	 * 
 	 * Cet attribut ne peut pas être final car on a besoin de rendre un pompier
-	 * immortel ou débile durant les tests.
+	 * immortel ou fragile durant les tests.
 	 */
 	private int probaMort = 1;
 	private final int efficacitePompier = 40;
@@ -28,15 +28,17 @@ public class Pompier extends Acteur {
 		// Le pompier décède.
 		if (!StillAlive()) {
 			maCarte.setnBpompiersMorts(maCarte.getnBpompiersMorts() + 1);
-			// On enregistre les stats des pompiers crevés.
+			// On enregistre les stats des pompiers morts.
 			for (int i = 0; i < maCarte.getSesActeurs().size(); i++) {
 				if (maCarte.getSesActeurs().get(i) instanceof Pompier) {
-					if (maCarte.getSesActeurs().get(i).X == X && maCarte.getSesActeurs().get(i).Y == Y) {
+					if (maCarte.getSesActeurs().get(i).X == X
+							&& maCarte.getSesActeurs().get(i).Y == Y) {
 						// Suppression du pompier.
 						maCarte.getSesActeurs().add(i, new Anouar(X, Y));
 						maCarte.getSesActeurs().remove(i + 1);
 						maCarte.purifieActeurs();
-						maCarte.getModifications().add(new Point(this.X, this.Y));
+						maCarte.getModifications().add(
+								new Point(this.X, this.Y));
 						// On enregistre les coordonnées de la case modifiée
 						// (pompier qui disparait).
 						return;
@@ -47,12 +49,12 @@ public class Pompier extends Acteur {
 
 		// Le pompier est toujours en vie.
 		maCarte.getTabHexagones(X, Y).arrose(efficacitePompier, X, Y, maCarte);
-		// Il balance sa flotte.
+		// Il arrose.
 	}
 
 	/**
-	 * El Counstrouctativoush
-	 *
+	 * Constructeur de pompier(rien de spécial)
+	 * 
 	 * @param X
 	 * @param Y
 	 */
@@ -62,8 +64,8 @@ public class Pompier extends Acteur {
 
 	/**
 	 * Lance un dé pour savoir si le pompier sur une case en feu décède ou s'il
-	 * sagit d'un SURVIVOR.
-	 *
+	 * continue son travail en toute sérénité
+	 * 
 	 * @return true s'il est encore vivant, false s'il est mort.
 	 */
 	public boolean StillAlive() {

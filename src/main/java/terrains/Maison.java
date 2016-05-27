@@ -4,16 +4,16 @@ import enumerations.NiveauDensite;
 
 /**
  * Une maison !
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class Maison extends Terrain {
 
 	private final int duree = 10;
 
 	/**
-	 * Constructeur par défaut à modifier.
+	 * Constructeur par défaut
 	 */
 	public Maison() {
 		super(true); // On rend la maison inflammable.

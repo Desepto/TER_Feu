@@ -10,12 +10,11 @@ import acteurs.Pluie;
 import acteurs.Pompier;
 
 /**
- * Le gestionnaire des évènements
- *
- * (apparation d'aliens, de pompiers, d'Anouar sur la carte etc).
- *
+ * Le gestionnaire des évènements, s'occupe de l'apparition des différents
+ * acteurs
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class Gestionnaire {
 
@@ -40,6 +39,12 @@ public class Gestionnaire {
 		this.mesEvents.remove(indice);
 	}
 
+	/**
+	 * Fonction utilisée pour rajouter un acteur à une position p
+	 * 
+	 * @param p
+	 * @param a
+	 */
 	public void ajoutActeurPosition(int p, Acteur a) {
 		if (mesEvents.size() <= p) {
 			Evenement e = new Evenement();
@@ -57,7 +62,9 @@ public class Gestionnaire {
 		}
 	}
 
-	// pour les test Ba ui
+	/**
+	 * Fonction utilisée pour les tests
+	 */
 	public void afficher() {
 		for (int i = 0; i < mesEvents.size(); i++) {
 			System.out.print("Emplacement  ");
@@ -78,13 +85,21 @@ public class Gestionnaire {
 
 	}
 
+	/**
+	 * Indique s'il y a du feu dans la liste d'acteurs
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean presenceFeu(int x, int y) {
 		for (int i = 0; i < mesEvents.size(); i++) {
 			if (mesEvents.get(i) != null) {
 				ArrayList<Acteur> liste = mesEvents.get(i).getActeurs();
 				for (int j = 0; j < liste.size(); j++) {
 					if (liste.get(j) instanceof Feu) {
-						if (liste.get(j).getX() == x && liste.get(j).getX() == y) {
+						if (liste.get(j).getX() == x
+								&& liste.get(j).getX() == y) {
 							return true;
 						}
 					}
@@ -94,13 +109,21 @@ public class Gestionnaire {
 		return false;
 	}
 
+	/**
+	 * Indique s'il y a de la pluie dans le gestionnaire
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean presencePluie(int x, int y) {
 		for (int i = 0; i < mesEvents.size(); i++) {
 			if (mesEvents.get(i) != null) {
 				ArrayList<Acteur> liste = mesEvents.get(i).getActeurs();
 				for (int j = 0; j < liste.size(); j++) {
 					if (liste.get(j) instanceof Pluie) {
-						if (liste.get(j).getX() == x && liste.get(j).getX() == y) {
+						if (liste.get(j).getX() == x
+								&& liste.get(j).getX() == y) {
 							return true;
 						}
 					}
@@ -110,6 +133,13 @@ public class Gestionnaire {
 		return false;
 	}
 
+	/**
+	 * Compte le nombre de pompiers dans le gestionnaire
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public int nombrePompier(int x, int y) {
 		int compteur = 0;
 		for (int i = 0; i < mesEvents.size(); i++) {
@@ -117,7 +147,8 @@ public class Gestionnaire {
 				ArrayList<Acteur> liste = mesEvents.get(i).getActeurs();
 				for (int j = 0; j < liste.size(); j++) {
 					if (liste.get(j) instanceof Pompier) {
-						if (liste.get(j).getX() == x && liste.get(j).getX() == y) {
+						if (liste.get(j).getX() == x
+								&& liste.get(j).getX() == y) {
 							compteur++;
 						}
 					}
@@ -127,6 +158,13 @@ public class Gestionnaire {
 		return compteur;
 	}
 
+	/**
+	 * Compte le nombre de canadairs dans le gestionnaire
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public int nombreCanadair(int x, int y) {
 		int compteur = 0;
 		for (int i = 0; i < mesEvents.size(); i++) {
@@ -134,7 +172,8 @@ public class Gestionnaire {
 				ArrayList<Acteur> liste = mesEvents.get(i).getActeurs();
 				for (int j = 0; j < liste.size(); j++) {
 					if (liste.get(j) instanceof Canadair) {
-						if (liste.get(j).getX() == x && liste.get(j).getX() == y) {
+						if (liste.get(j).getX() == x
+								&& liste.get(j).getX() == y) {
 							compteur++;
 						}
 					}

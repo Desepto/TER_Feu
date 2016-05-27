@@ -4,16 +4,16 @@ import enumerations.NiveauDensite;
 
 /**
  * Une plaine !
- *
+ * 
  * @author Nicolas
- *
+ * 
  */
 public class Plaine extends Terrain {
 
 	private final int duree = 10;
 
 	/**
-	 * Constructeur par défaut à modifier.
+	 * Constructeur par défaut
 	 */
 	public Plaine() {
 		super(true); // On rend la plaine non inflammable.
@@ -24,8 +24,8 @@ public class Plaine extends Terrain {
 	}
 
 	/**
-	 * El Constrouctor !
-	 *
+	 * Constructeur prenant en compte la densité
+	 * 
 	 * @param maDuree
 	 */
 	public Plaine(NiveauDensite maDensite) {

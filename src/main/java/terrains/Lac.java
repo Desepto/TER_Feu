@@ -11,7 +11,7 @@ import enumerations.NiveauDensite;
 public class Lac extends Terrain {
 
 	/**
-	 * Constructeur par défaut à modifier.
+	 * Constructeur par défaut
 	 */
 	public Lac() {
 		super(false); // On rend le lac non inflammable.
